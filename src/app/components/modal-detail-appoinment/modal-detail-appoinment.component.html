@@ -1,0 +1,52 @@
+<div class="modal__header">
+    <ion-button color="danger modal__close" shape="round" size="small" (click)="close()"><fa-icon icon="times" ></fa-icon></ion-button>
+
+  <!-- <span class="modal__options">
+      <fa-icon icon="ellipsis-v"></fa-icon>
+    </span> -->
+</div>
+<div #modal__content id="modal__content" class="modal__content">
+  <!-- {{ htmlTemplate ? '' : contentBody || 'contenido modal' }} -->
+  <img src="assets/img/img_dentist.jpg">
+
+  <div class="container__data">
+    <span class="subtitle">Paciente:</span>
+    <span class="information">{{ appoinmentData['nombres'].getFirstWord() | titlecase }} {{
+      appoinmentData['apellidos'].getFirstWord() | titlecase }} </span>
+
+    <span class="subtitle">Sucursal:</span>
+    <span class="information"> {{ appoinmentData['nombreSucursal'] | titlecase }} </span>
+
+    <span class="subtitle">Consultorio:</span>
+    <span class="information">{{ appoinmentData['nombreConsultorio'] | titlecase }}</span>
+
+    <span class="subtitle">Dirección:</span>
+    <span class="information">{{ (appoinmentData['direccionSucursal'] | titlecase) || 'No registra' }}</span>
+
+    <span class="subtitle">Médico:</span>
+    <span class="information">{{ appoinmentData['nombresMedico'].getFirstWord() | titlecase }} {{
+      appoinmentData['apellidosMedico'].getFirstWord() | titlecase }} </span>
+
+    <span class="subtitle">Teléfonos:</span>
+    <span class="information">
+      {{ appoinmentData['telefonoSucursal'] || appoinmentData['celularSucursal'] ? '':'No registra' }}
+      {{ appoinmentData['telefonoSucursal'] ? appoinmentData['telefonoSucursal'] + ' - ': '' }}{{
+      appoinmentData['celularSucursal'] || ''}}
+    </span>
+  </div>
+  <div class="container__buttons">
+    <p> <span style="color: #e74c3c;">*&nbsp;</span>Recuerde estar en el lugar de su cita almenos 15 minutos antes.
+    </p>
+  </div>
+</div>
+
+<div class="modal__footer">
+  <ion-button shape="round" expand="block" fill="outline" type="button" (click)="reprogramAppointment()">
+    <fa-icon icon="history"></fa-icon>
+    &nbsp;&nbsp;Reprogramar
+  </ion-button>
+  <ion-button shape="round" expand="block" fill="outline" type="button" (click)="cancelAppointment()">
+    <fa-icon icon="calendar-times"></fa-icon>
+    &nbsp;&nbsp;Cancelar cita
+  </ion-button>
+</div>

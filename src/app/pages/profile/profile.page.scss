@@ -1,0 +1,111 @@
+.edit__profile__data {
+    margin: 8px 16px 12px 0;
+    text-align: center;
+
+    .title__section {
+        color: #fff;
+        font-weight: bold;
+    }
+
+    ion-list {
+        background: transparent;
+
+        ion-item {
+            color: #fff;
+            display: flex;
+
+            ion-input {
+                --padding-start: 30px;
+                width: calc(100vw - 80px);
+            }
+
+            .data__disabled {
+                width: calc(100vw - 166px);
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                padding-left: 28px;
+                overflow: hidden;
+                color: #a1a0a0;
+            }
+
+            .validate {
+                text-decoration: underline;
+                position: absolute;
+                font-size: 1.1em;
+                color: #55b8f1;
+                right: 0;
+            }
+
+            .birthday {
+                position: absolute;
+                left: 44px;
+
+                &.not__data {
+                    color: #586573;
+                }
+            }
+        }
+
+        ion-icon {
+            position: absolute;
+            color: #fff;
+            margin: 0;
+        }
+
+        fa-icon {
+            position: absolute;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        ion-select {
+            padding-left: 32px;
+            position: relative;
+            width: 100vh;
+
+            // &#genere {
+            //     width: calc(79vh - 3px);
+            // }
+        }
+    }
+
+    ion-button {
+        margin: 24px 48px;
+    }
+
+    span {
+        color: #fff;
+
+        &.required {
+            left: 32px;
+            color: #e74c3c;
+            font-size: 1.3em;
+            position: relative;
+        }
+    }
+}
+
+.input__filter {
+    overflow: visible;
+    position: relative;
+}
+
+.group__filter {
+    width: 94%;
+    overflow: auto;
+    z-index: 20000;
+    margin-left: 4%;
+    color: #000000;
+    max-height: 230px;
+    padding: 8px 12px;
+    position: absolute;
+    background: #ffffff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.95);
+
+    .filter__item {
+        padding: 4px 0;
+        border-bottom: 1px solid #636e72;
+    }
+}

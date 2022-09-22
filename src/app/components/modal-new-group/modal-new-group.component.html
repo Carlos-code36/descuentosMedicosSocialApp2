@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="modal__header">
+    <span class="modal__close" (click)="close()">X</span>
+    <span class="modal__title"><b>NUEVO GRUPO</b></span>
+  </div>
+  <div class="modal__content">
+    <p>Recuerda que puedes agregar hasta 10 beneficiarios a tu grupo, los beneficiarios menores de 18 años y mayores de 65 años, están bajo la tutoría del titular de la cuenta.</p>
+    <br>
+    <ion-item>
+      <ion-icon name="people" slot="start"></ion-icon>
+      <ion-input type="text" placeholder="Nombre del grupo*" name="myform" [formControl]="myform"
+        (ionChange)="detectChangues($event)"></ion-input>
+    </ion-item>
+    <br>
+    <ion-button shape="round" expand="block" type="submit" [disabled]="myform.invalid" (click)="createGroup()">CREAR</ion-button>
+  </div>
+</div>

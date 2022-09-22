@@ -1,0 +1,41 @@
+<div>
+  <div class="modal__header">
+    <ion-button color="danger modal__close" shape="round" size="small" (click)="close()"><fa-icon icon="times" ></fa-icon></ion-button>
+  </div>
+
+  <div #modal__content id="modal__content" class="modal__content">
+    <div class="profile">
+      <img class="profile__avatar" [src]="dataService.imagenes[0].path | imageServices">
+      <img class="profile__coverpage" *ngIf="dataService.imagenes.length >1 ; else portada"[src]="dataService.imagenes[1].path | imageServices">
+      <ng-template #portada>
+        <img class="profile__coverpage"  [src]="dataService.imagenes[0].path | imageServices">
+      </ng-template>
+    </div>
+    
+    <div class="container__data">
+      <span class="subtitle">Servicio:</span>
+      <span class="information">{{ dataService.nombreSubservicio }}</span>
+      <br>
+      <span class="subtitle">Descripcion:</span>
+      <span class="information">{{ dataService.descripcionSubservicio }}</span>
+      <br>
+      <span class="subtitle">Precio del servicio:</span>
+      <span class="information">$ {{ dataService.precioSubservicio | number }}</span>
+      <br>
+      <span class="subtitle">Precio con descuento:</span>
+      <span class="information">{{ dataService.precioSubservicio | percentPrice: dataService.descuentoSubServicio }}</span>
+    </div>
+  </div>
+  
+  <div class="modal__footer">
+    <ion-button shape="round" expand="block" fill="outline" type="button" (click)="close()"
+      [routerLink]="['/appointments/new-appoinment/'+id_municipio+'_'+dataService['idServicios']+'_'+id_empresa+'_'+id_members+'_'+id_especialidad+'/0'+'/0'+'/'+dataService.idSubServicios]">
+      <fa-icon icon="user-md"></fa-icon> &nbsp;&nbsp;Solicitar cita
+    </ion-button>
+  </div>
+
+  <!-- <div class="slide__photos__publication">
+    <slide-publicity [slideData]="dataService.imagenes" [card]="true" [height]="'230px'" [pagination]="false"></slide-publicity>
+  </div> -->
+
+</div>

@@ -1,0 +1,76 @@
+
+<!-- <ion-tabs class="wrapper">
+  <div class='wrapper-inner'>
+    <div class='buble'></div>
+    <div class='box'></div>
+  </div>
+  <ion-tab-bar class="box-fix" slot="bottom">
+    <ion-tab-button class="link__page active" tab="publications" (click)="selectTab()">
+      <fa-icon icon="newspaper"></fa-icon>
+      <ion-label>Servicios</ion-label>
+    </ion-tab-button>
+    <ion-tab-button class="link__page " tab="menu" >
+      <fa-icon icon="th-large"></fa-icon>
+      <ion-label>Menu</ion-label>
+    </ion-tab-button>
+    <ion-tab-button class="link__page" tab="promociones">
+      <fa-icon icon="star"></fa-icon>
+      <ion-label>Promos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button class="link__page" tab="profile">
+      <fa-icon icon="user"></fa-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<svg class='filter' xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <defs>
+    <filter id='goo'>
+      <feGaussianBlur in='SourceGraphic' stdDeviation='10' result='blur' />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -5" result="goo" />
+      <feBlend in='SourceGraphic' in2='goo' operator="atop" />
+    </filter>
+  </defs>
+</svg> -->
+
+
+<ion-tabs class="contain">
+
+  <ion-fab vertical="bottom" horizontal="center" translucent="true">
+    <ion-fab-button routerLink="/home/menu" class="menu">
+      <fa-icon icon="th"></fa-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-tab-bar slot="bottom">
+
+    <ion-tab-button tab="publications" class="pubs link__page active" (click)="selectTab()">
+      <ion-icon [name]="'newspaper-outline'"></ion-icon>
+      <ion-label>Servicios</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button  tab="promociones" class=" link__page search">
+      <ion-icon [name]="'star-outline'"></ion-icon>
+      <ion-label>Promos</ion-label>
+    </ion-tab-button>
+    
+    <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" 
+        fill="red" fill-rule="evenodd">
+      </path>
+    </svg>
+    
+    <ion-tab-button  routerLink="/appointments/my-appointments" class="link__page wishlist">
+      <ion-icon [name]="'time-outline'"></ion-icon>
+      <ion-label>Mis citas</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button class="link__page" tab="profile">
+      <ion-icon [name]="'person-outline'"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

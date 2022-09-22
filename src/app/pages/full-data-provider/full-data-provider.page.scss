@@ -1,0 +1,38 @@
+.profile {
+    object-fit: cover;
+    max-height: 240px;
+    min-height: 240px;
+    width: 100vw;
+}
+
+.view__profile__data {
+    color: #ecf0f1;
+    padding: 24px;
+
+    .item__info {
+        margin-bottom: 16px;
+        
+        ion-label:first-child {
+            padding-bottom: 4px;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: block;
+        }
+
+        .social__networks a {
+            display: inline-block;
+            padding: 8px;
+        
+            .icon {
+                display: inline-block;
+                font-size: 2.5em;
+                color: #BCCEE1;
+            }    
+        }
+    }
+
+    fa-icon {
+        font-size: 1.6em;
+        margin-right: 12px;
+    }
+}

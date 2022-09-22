@@ -1,0 +1,44 @@
+.container {
+    color: #BCCEE1;
+    padding: 32px;
+
+    .contact__title {
+        font-weight: bold;
+        margin: 0;
+    }
+}
+
+.data__duns {
+    font-weight: 400;
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+
+    &.whatsapp {
+        padding-top: 8px;
+
+        a {
+            // padding-bottom: 4px;
+            // position: absolute;
+            // font-size: 1em;
+            margin: 12px 8px;
+        }
+    }
+}
+.social__networks a {
+    display: inline-block;
+    padding: 8px;
+
+    .icon {
+        display: inline-block;
+        font-size: 3em;
+    
+        &.whatsapp {
+            color: #00bfa5;
+        }
+    
+        &.instagram {
+            color: #BCCEE1;
+        }
+    }    
+}

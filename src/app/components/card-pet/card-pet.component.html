@@ -1,0 +1,19 @@
+<div class="container  ion-activatable ripple-parent">
+  <div class="pet__info">
+    <span>{{ pet['nombreMascota'] }}</span>
+
+    <div>
+      <span class="subtitle">Especie:</span>
+      <span class="subtitle">Raza:</span>
+      <span class="data">{{ pet['especie'] }}</span>
+      <span class="data">{{ pet['raza'] }}</span>
+    </div>
+
+    <span class="subtitle">Fecha de nacimiento:</span>
+    <span class="data">{{ pet['fechaNacimiento'].formatDate() }}</span>
+  </div>
+  <div class="pet__photo">
+    <img [src]="this.globals.ruteImageAvatar+pet.avatar" alt="">
+  </div>
+  <ion-ripple-effect></ion-ripple-effect>
+</div>

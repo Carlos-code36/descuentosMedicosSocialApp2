@@ -1,0 +1,72 @@
+<!-- Header -->
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="false" [showEdit]="true" linkEdit="/update-profile" title="Perfíl de usuario"
+    (onEdit)="editProfile()" [defaultBack]="'home/menu'">
+  </app-header>
+</ion-header>
+
+<!-- Body content -->
+<ion-content>
+  <div class="container">
+    <div class="swipe__refresh" [class.show]="toRefresh">
+      <span>Desliza para actualizar</span>
+      <img src="assets/swipe_down.svg">
+    </div>
+    <avatar-user [user]="_globals.USER_OBJECT" [modeEdit]="false" [canEdit]="true" (changedData)="editProfile($event)">
+    </avatar-user>
+    <div class="view__profile__data">
+      <div class="item__info">
+        <ion-label>
+          <fa-icon icon="birthday-cake"></fa-icon> &nbsp;
+          {{ getBirthday() | date:'longDate' }}
+        </ion-label>
+      </div>
+      <div class="item__info">
+        <ion-label>
+          <fa-icon icon="address-card"></fa-icon> &nbsp;
+          {{ getTypeDocumentString(_globals.USER_OBJECT['idtipoDocumentos']) }}. {{
+          _globals.USER_OBJECT['numeroDocumento'] }}
+        </ion-label>
+      </div>
+      <div class="item__info">
+        <ion-label>
+          <fa-icon icon="map-marker-alt"></fa-icon> &nbsp;
+          {{ _globals.USER_OBJECT['direccion'] }}, {{ _globals.USER_OBJECT['barrio'] }} 
+        </ion-label>
+      </div>
+      <div class="item__info">
+        <ion-label>        
+          <fa-icon icon="map-marked"></fa-icon> &nbsp;
+          {{ getDepartmentsAndTownsString(_globals.USER_OBJECT['idmunicipio']) }} 
+        </ion-label>
+      </div>
+      <div class="item__info">
+        <ion-label>
+          <fa-icon icon="hammer"></fa-icon> &nbsp;
+          {{ _globals.USER_OBJECT['ocupacion'] || 'Sin registrar' }} 
+        </ion-label>
+      </div>
+      <div class="item__info">
+        <ion-label>        
+          <fa-icon icon="briefcase-medical"></fa-icon> &nbsp;
+          {{ _globals.USER_OBJECT['eps'] || 'Sin registrar' }} 
+        </ion-label>
+      </div><br>
+      <ion-button class="button__appointments" shape="round" [routerLink]="['/change-password']">
+        Cambiar Contraseña
+      </ion-button>
+      <ion-button class="button__appointments" shape="round" (click)="closeAccount()">
+        Cancelar cuenta&nbsp;&nbsp;
+        <fa-icon icon="user-slash"></fa-icon>
+      </ion-button>
+      <ion-button class="button__appointments" shape="round" (click)="mostrarCarnet()">
+        Generar carnet&nbsp;&nbsp;
+        <fa-icon icon="user"></fa-icon>
+      </ion-button>
+    </div>
+  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+</ion-content>

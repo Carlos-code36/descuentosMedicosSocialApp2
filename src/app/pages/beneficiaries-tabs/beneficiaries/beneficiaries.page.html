@@ -1,0 +1,125 @@
+<!-- Header -->
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="false" [showSettings]="false" [buttonsRight]="false" title="Beneficiarios"
+    defaultBack="/home/menu">
+  </app-header>
+</ion-header>
+
+<!-- Body content -->
+<ion-content class="container">
+  <div class="list__cards" *ngIf="_globals.BENEFICIARIES">
+    <ng-container *ngFor="let person of beneficiaries">
+      <card-beneficiary [person]="person" *ngIf="person.idMembers != _globals.USER_ID"></card-beneficiary>
+    </ng-container>
+  </div>
+
+  <div class="not__items" *ngIf="!(_globals.BENEFICIARIES?.length > 1 || beneficiaries.length >= 1)">
+    <span>Aún no tienes ningun beneficiario agregado a tu cuenta.</span>
+    <br>
+    <span>¡Que esperas para registrar tus beneficiarios y disfrutar nuestros descuentos!</span>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addBeneficiaryToGroup()">
+    <ion-fab-button>
+      <ion-icon name="person-add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- <ion-fab style="position: relative; top: 330px; left: 413px;" (click)="deletBeneficiary()">
+    <ion-fab-button>
+      <ion-icon name="person-remove"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+</ion-content>
+
+<!-- <ion-slides #slideBeneficiaries pager="false" [options]="slideOpts" *ngIf="_globals.BENEFICIARIES"
+    (ionSlideDidChange)="slideBeneficiary()">
+    <ng-container *ngFor="let person of _globals.BENEFICIARIES">
+      <ion-slide class="beneficiary_item" *ngIf="person.idMembers != _globals.USER_ID">
+
+        <ion-fab vertical="bottom" horizontal="start" slot="fixed" vertical="top" horizontal="start" slot="fixed" (click)="editBeneficiary(person)">
+          <ion-fab-button>
+            <fa-icon icon="user-edit"></fa-icon>
+          </ion-fab-button>
+        </ion-fab>
+
+        <div class="profile">
+          <img [src]="person.fotos | image">
+          <h2 class="profile__names">{{ person.nombres }} {{ person.apellidos }}</h2>
+        </div>
+      </ion-slide>
+    </ng-container>
+  </ion-slides>
+
+  <div class="data_container" *ngIf="_globals.BENEFICIARIES.length > 1">
+    <ng-container *ngIf="!loadingData && beneficiarySelected">
+      <div class="item__info">
+        <fa-icon icon="birthday-cake"></fa-icon>
+        <ion-label>{{ beneficiarySelected['fechaNacimiento'] | date: 'longDate' }}</ion-label>
+      </div>
+      <div class="item__info">
+        <fa-icon icon="address-card"></fa-icon>
+        <ion-label>
+          {{ getTypeDocumentString(beneficiarySelected['idtipodocumentos']) }}.{{
+          beneficiarySelected['numerodocumentouser'] }}
+        </ion-label>
+      </div>
+      <div class="item__info">
+        <fa-icon icon="map-marker-alt"></fa-icon>
+        <ion-label *ngIf="beneficiarySelected['direccion'] && beneficiarySelected['barrio']; else elseDirection">{{
+          beneficiarySelected['direccion'] }}, {{ beneficiarySelected['barrio'] }} </ion-label>
+        <ng-template #elseDirection>
+          <ion-label>Dirección sin registrar</ion-label>
+        </ng-template>
+      </div>
+      <div class="item__info">
+        <fa-icon icon="map-marked"></fa-icon>
+        <ion-label *ngIf="beneficiarySelected['idmunicipio']; else elseUbication">
+          {{ getDepartmentsAndTownsString(beneficiarySelected['idmunicipio']) }}
+        </ion-label>
+        <ng-template #elseUbication>
+          <ion-label>Ubicación sin registrar </ion-label>
+        </ng-template>
+      </div>
+      <div class="item__info">
+        <fa-icon icon="hammer"></fa-icon>
+        <ion-label>{{ beneficiarySelected['ocupacion'] || 'Sin registrar' }} </ion-label>
+      </div>
+      <div class="item__info">
+        <fa-icon icon="briefcase-medical"></fa-icon>
+        <ion-label>{{ beneficiarySelected['eps'] || 'Sin registrar' }} </ion-label>
+      </div>
+    </ng-container>
+
+    <div class="skeleton__container" *ngIf="loadingData">
+      <div class="item__info skeleton">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text class="skeleton__box" animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-skeleton-text class="skeleton__text" animated></ion-skeleton-text>
+      </div>
+      <div class="item__info">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text class="skeleton__box" animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-skeleton-text class="skeleton__text" animated></ion-skeleton-text>
+      </div>
+      <div class="item__info">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text class="skeleton__box" animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-skeleton-text class="skeleton__text" animated></ion-skeleton-text>
+      </div>
+      <div class="item__info">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text class="skeleton__box" animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-skeleton-text class="skeleton__text" animated></ion-skeleton-text>
+      </div>
+    </div>
+  </div> -->
+
+
+<!-- <ng-container *ngFor="let person of _globals.BENEFICIARIES">
+  <card-beneficiary [person]="person" *ngIf="person.idMembers != _globals.USER_ID"></card-beneficiary>
+</ng-container> -->

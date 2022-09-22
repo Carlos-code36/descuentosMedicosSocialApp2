@@ -1,0 +1,153 @@
+<ion-header #header>
+  <app-header #headerTemplate title="Publicaciones" [showTitle]="false" [back]="false" [buttonsRight]="false">
+    <finder #finder__te *ngIf="listPublications" id="search" [searchData]="listPublications"
+      (keyup)="autocompletar($event.target)"
+      [filters]="filtersSelected.length > 0 ? filtersSelected : listFilters" (foundData)="setFoundData($event)">
+    </finder>
+    <!-- <div class="autocomplete" *ngIf="palabraCompletada">
+      <div class="autocomplete__item" *ngFor="let frase of Palabras"
+      [attr.data-frase]="frase" (click)="selectPalabra($event.target)">
+        {{frase}}
+      </div>
+    </div> -->
+  </app-header>
+</ion-header>
+
+<!-- <ion-content *ngIf="locationSearch || true" scrollEvents="true" hideHeader [header]="header"> -->
+<ion-content [fullscreen]="true" *ngIf="locationSearch || true">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPublications($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <filter #filter [foundData]="null" [listFilters]="listFilters" (filtersSelected)="filtersSelected=$event"
+    [foundData]="listPublications.length == filteredPublications.length ? null : filteredPublications">
+    <department-selector (departmentSelected)="loadPublications($event);filter.setFilter($event, 'idmunicipio')"
+      [color]="'#fff'" [customClass]="'on__filter'">
+    </department-selector>
+  </filter>
+
+  <div class="result__search not_found" *ngIf="listPublications.length == 0">
+    No existen aún publicaciones para mostrar
+    <img src="assets/img/not_found.png" alt="not found">
+  </div>
+
+  <div class="result__search not_found" *ngIf="listPublications.length != 0 && filteredPublications.length == 0">
+    No existen aún publicaciones que coincidan con <strong> <i>{{ searchValue }}</i></strong>
+    <img src="assets/img/not_found.png" alt="not found">
+    Si no encuentras tu servicio, nosotros lo buscamos por ti.
+    <a
+      [href]="'https://wa.me/573174785093/?text=Hola%20mi%20nombre%20es%20'+User+',%20me%20comunico%20desde%20la%20app%20*Descuentos%20Medicos*%20por%20asesoria'">
+      <span style="color: #bccee1;">Escríbenos!!</span>
+      <ion-icon class="icon whatsapp" name="logo-whatsapp" style="width: 30px; height: 30px; color: #00e676;">
+      </ion-icon>
+    </a>
+  </div>
+
+  <div class="result__search" *ngIf="filteredPublications?.length > 0">
+    <h3 #result class="result__text" *ngIf="onSearch">resultados de <strong>{{ searchValue }}</strong></h3>
+
+    <ng-container *ngFor="let publication of filteredPublications" | slice:0:limite id="listScroll">
+
+      <div class="publication ion-activatable ripple-parent"
+        (click)="detailPublication($event, publication.idServicios, publication.idSubServicios)">
+        <div class="certificado" *ngIf="certificadoActivado()">
+          <img src="assets/img/Habilitación certificada 2-01-01.png" alt="not found">
+        </div>
+        <div class="image__container">
+
+          <img [src]="publication.imagenes[0].path | imageServices">
+          <div class="calification__publication">
+            <individual-rate *ngIf="publication['calificacion']!=0.0" [score]="publication['calificacion']" size="10px"
+              spacing="0px"></individual-rate>
+            <span style="margin: 0;padding: 0;" *ngIf="publication['calificacion']==0.0">
+              <img class="estrella" src="assets/img/Estrella 2-01.png" alt="not found"
+                style="width: 20px; height: 20px;">
+              <img class="estrella" src="assets/img/Estrella 2-01.png" alt="not found"
+                style="width: 20px; height: 20px;">
+              <img class="estrella" src="assets/img/Estrella 2-01.png" alt="not found"
+                style="width: 20px; height: 20px;">
+              <img class="estrella" src="assets/img/Estrella 2-01.png" alt="not found"
+                style="width: 20px; height: 20px;">
+              <img class="estrella" src="assets/img/Estrella 2-01.png" alt="not found"
+                style="width: 20px; height: 20px;">
+            </span>
+          </div>
+        </div>
+
+        <div class="information__container">
+          <div class="speciality__box">
+            <h5 class="title__publication">{{ publication.nombreSubservicio | uppercase }}</h5>
+            <p class="speciality speciality__title">ESPECIALIDAD:</p>
+            <p class="speciality speciality__data">
+              {{ publication.nombreEspecialidad.split('-')[1] | uppercase }}
+            </p>
+            <div class="provider__box">
+              <p class="provider provider__data">
+                {{ publication.nombreProvedor | uppercase }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="specialty__publication">
+          <!-- <h5>
+              <fa-icon class="tag__icon" icon="tag"></fa-icon> {{ publication.descuentoCita }}% descuento en citas
+            </h5> -->
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </ng-container>
+  </div>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando ..">
+    </ion-infinite-scroll-content>
+    <div class="espacio">
+    </div>
+  </ion-infinite-scroll>
+
+</ion-content>
+<div *ngIf="searchValue" class="results_container">
+  <span>{{filteredPublications.length}} resultados.</span> <br>
+</div>
+<div class="total_container">
+  <span *ngIf="total">{{total}} servicios. </span> <br>
+</div>
+
+<!-- <div class="input__filter">
+      <ion-searchbar #inputSearchDeptMun class="search__input depts" placeholder="Buscar ubicación" debounce="300"
+        showCancelButton="focus" (ionFocus)="focusInputSearch('dep_mun')" (ionBlur)="blurDropdownSearch()"
+        (ionChange)="searchDepMun(inputSearchDeptMun)" value="PASTO - NARIÑO"></ion-searchbar>
+      <div class="group__filter" *ngIf="departmentsAndTowns">
+        <div class="filter__item" *ngFor="let depmun of departmentsAndTowns" [attr.data-depmun-id]="depmun.idmunicipio"
+          (click)="selectDeptMun($event.target)">
+          {{ depmun.nombreMunicipio }} - {{ depmun.nombreDepartamento }}</div>
+      </div>
+    </div> -->
+<!-- <span class="current__search" *ngIf="locationSearch || true">
+      <u>
+        Servicios en {{ locationSearch['nombreMunicipio'] }} - {{ locationSearch['nombreDepartamento'] }}
+      </u>
+    </span> -->
+
+
+<!-- <ion-content [fullscreen]="true" *ngIf="!locationSearch">
+    <div class="container">
+      <div class="box__publicity">
+        <slide-publicity [slideData]="slideData"></slide-publicity>
+      </div>
+      <h4>Selecciona tu ubicación para mostrar los servicios activos</h4>
+      <div class="input__filter">
+        <ion-searchbar #inputSearchDeptMun class="search__input depts" placeholder="Buscar ubicación" debounce="300"
+          showCancelButton="focus" (ionFocus)="focusInputSearch('dep_mun')" (ionBlur)="blurDropdownSearch()"
+          (ionChange)="searchDepMun(inputSearchDeptMun)"></ion-searchbar>
+        <div class="group__filter" *ngIf="departmentsAndTowns">
+          <div class="filter__item" *ngFor="let depmun of departmentsAndTowns" [attr.data-depmun-id]="depmun.idmunicipio"
+            (click)="selectDeptMun($event.target)">
+            {{ depmun.nombreMunicipio }} - {{ depmun.nombreDepartamento }}</div>
+        </div>
+      </div>
+    </div>
+  </ion-content> -->
+
+<!-- ************************************************************************ -->
+<!-- ************************ Filtrado publicaciones ************************ -->
+<!-- ************************************************************************ -->

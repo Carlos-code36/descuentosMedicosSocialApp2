@@ -1,0 +1,448 @@
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+:root {
+    --bg-color:   linear-gradient(169.29deg, #262B2F -0.68%, #16191D 74.03%);
+    --bg-color_2: #303b46;
+    --text-color: #ffffff;
+    --ion-color-primary :#00AB78;
+}
+
+.button__appointment {
+    transform: translateX(-50%);
+    border-radius: 25px;
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    font-weight: bold;
+    font-size: 1em;
+    height: 45px;
+    .icons__buttons{
+        margin-left: 12px;
+        font-size: 1.5em;
+    }
+}
+
+// @media (prefers-color-scheme: dark) {
+// }
+
+// @media (prefers-color-scheme: light) {
+//     :root {
+//         --bg-color: #BCCEE1;
+//         --bg-color_2: #e0e0e0;
+//         --text-color: #202C38;
+//     }
+// }
+
+// color-scheme: light dark;
+
+ion-content {
+    --background: var(--bg-color);
+}
+
+ion-header {
+    background: var(--bg-color);
+    border: none;
+
+    ion-toolbar {
+        --background: --bg-color_2;
+        --color: var(--text-color);
+        // --background: rgb(236 240 241 / 0.3);
+
+        //     backdrop-filter: blur(6px);
+        //     // --background: rgb(32 44 56 / 0.2);
+        //     // box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+
+        //     ion-title {
+        //         font-size: 1.3em;
+        //         --color: #ffffff;
+        //     }
+    }
+}
+
+ion-modal,
+ion-alert {
+    backdrop-filter: blur(6px);
+    --backdrop-opacity: 0.6 !important;
+
+    &.custom__alert.alert__input {
+        --min-width: 84%;
+    }
+
+    &.custom__alert .alert-wrapper {
+        background: linear-gradient(210.55deg, #353A40 -3.02%, #121416 93.08%);
+    box-shadow: 36px 12px 64px rgba(2, 3, 3, 0.7), -12px -20px 56px rgba(232, 237, 243, 0.05), inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+    border-radius: 30px;
+
+        .alert-head .alert-title {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .alert-message {
+            color: #fff;
+            text-align: justify;
+            // text-transform: uppercase;
+        }
+
+        .alert-button {
+            color: #fff;
+
+            &.confirm {
+                border: 1px solid #fff;
+            }
+        }
+    }
+
+    &.modal__template .modal-wrapper {
+        background: linear-gradient(210.55deg, #353A40 -3.02%, #121416 93.08%);
+        box-shadow: 36px 12px 64px rgba(2, 3, 3, 0.7), -12px -20px 56px rgba(232, 237, 243, 0.05), inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+        border-radius: 30px;
+        overflow: visible;
+        height: 385px;
+        width: 85%;
+    }
+
+    // &.modal__template .modal-wrapper {
+    //     width: 84%;
+    //     height: 25vh;
+    //     border-radius: 4px;
+    //     background: #303b46;
+    // }
+
+    &.modal__data .modal-wrapper {
+        width: 92%;
+        height: 450px;
+        overflow: visible;
+        background: linear-gradient(210.55deg, #353A40 -3.02%, #121416 93.08%);
+        box-shadow: 36px 12px 64px rgba(2, 3, 3, 0.7), -12px -20px 56px rgba(232, 237, 243, 0.05), inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+        border-radius: 40px;
+    }
+
+    &.modal__validate .modal-wrapper {
+        width: 94%;
+        height: 480px;
+        overflow: visible;
+        background: linear-gradient(210.55deg, #353A40 -3.02%, #121416 93.08%);
+        box-shadow: 36px 12px 64px rgba(2, 3, 3, 0.7), -12px -20px 56px rgba(232, 237, 243, 0.05), inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+        border-radius: 40px;
+    }
+
+    &.modal__verify .modal-wrapper {
+        width: 87%;
+        height: 460px;
+        overflow: visible;
+        background: linear-gradient(210.55deg, #353A40 -3.02%, #121416 93.08%);
+        box-shadow: 36px 12px 64px rgba(2, 3, 3, 0.7), -12px -20px 56px rgba(232, 237, 243, 0.05), inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+        border-radius: 40px;
+    }
+
+    &.modal__new__group>.modal-wrapper {
+        border-radius: 24px;
+        min-height: 300px;
+        max-height: 40%;
+        width: 94%;
+        // position: absolute;
+        // top: 250px;
+    }
+
+    &.modal__confirmation .modal-wrapper {
+        width: 80%;
+        height: 30%;
+        border-radius: 10px;
+    }
+
+    &.modal__terms .modal-wrapper {
+        margin-top: 24vh;
+        border-top-left-radius: 32px;
+        border-top-right-radius: 32px;
+    }
+
+    &.modal__detail .modal-wrapper {
+        width: 92%;
+        max-height: 84%;
+        border-radius: 8px;
+        background: linear-gradient(210.55deg, #353A40 -3.02%, #121416 93.08%);
+        box-shadow: 36px 12px 64px rgba(2, 3, 3, 0.7), -12px -20px 56px rgba(232, 237, 243, 0.05), inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+        border-radius: 40px;
+    }
+
+    &.modal__detail.doctor__detail .modal-wrapper {
+        background: linear-gradient(210.55deg, #353A40 -3.02%, #121416 93.08%);
+        box-shadow: 36px 12px 64px rgba(2, 3, 3, 0.7), -12px -20px 56px rgba(232, 237, 243, 0.05), inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+        border-radius: 40px;
+        min-height: 470px;
+        max-width: 330px;
+        height: 78vh;
+        width: 86vw;
+    }
+
+    &.modal__carnet.carnet__detail .modal-wrapper {
+        background: transparent;
+    }
+}
+
+.back__arrow.only {
+    margin-top: 8px;
+    z-index: 100000;
+    color: #fff;
+    position: absolute;
+}
+
+.ripple-parent {
+    position: relative;
+    overflow: hidden;
+}
+
+ion-list,
+ion-input {
+    background: transparent;
+    color: #fff;
+}
+
+ion-item {
+    overflow: visible;
+    --background: transparent;
+
+    &.line {
+        border-bottom: 1px solid #fff;
+    }
+}
+
+.wrapper div:first-child.tabs-inner {
+    position: initial;
+    contain: initial;
+    // height: 80%;
+}
+
+.text__white {
+    color: #fff;
+}
+
+div.refresher-refreshing {
+    position: absolute !important;
+    top: 80px !important;
+    color: #00AB78;
+}
+
+/*
+* ----------------------------------------------------------------
+* VALIDATION CLASSES
+* ----------------------------------------------------------------
+*/
+.item-highlight,
+.item-inner-highlight {
+    height: 5px !important;
+}
+
+.item__validation {
+    border: none;
+
+    p {
+        color: red;
+        font-size: 13px;
+        text-transform: capitalize;
+
+        span {
+            color: #e74c3c;
+            font-size: 1.2em;
+        }
+    }
+}
+
+#error-container,
+.error-container {
+    background: #c0392b;
+    padding: 0 16px 14px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 100000;
+    padding: 8px;
+    top: 8px;
+
+    span {
+        color: #fefefe;
+        font-size: 1em;
+        display: block;
+
+        strong {
+            color: #c0392b;
+        }
+    }
+}
+
+p.error {
+    font-size: 1em;
+    color: #fff;
+    display: inline-block;
+}
+
+p.error::first-letter {
+    font-size: 5em;
+    color: red;
+}
+
+/*
+ * Global loader styles
+ * ----------------------------------------------------------------------------
+ */
+.loader {
+    --backdrop-opacity: 0.7;
+    backdrop-filter: blur(8px);
+
+    .loading-wrapper {
+        width: 0;
+        height: 0;
+        padding: 0;
+    }
+
+    .message {
+        top: 60px;
+        color: #fff;
+        font-size: 1.5em;
+        width: max-content;
+        position: relative;
+    }
+
+    .pulse {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 200px;
+        margin: auto;
+        height: 100px;
+        overflow: hidden;
+        position: absolute;
+        transform: translateX(-50%);
+
+        &:after {
+            content: "";
+            display: block;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200px 100px" enable-background="new 0 0 200px 100px" xml:space="preserve"><polyline fill="none" stroke-width="3px" stroke="white" points="2.4,58.7 70.8,58.7 76.1,46.2 81.1,58.7 89.9,58.7 93.8,66.5 102.8,22.7 110.6,78.7 115.3,58.7 126.4,58.7 134.4,54.7 142.4,58.7 197.8,58.7 "/></svg>') 0 0 no-repeat;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            animation: 2s pulse linear infinite;
+            clip: rect(0, 0, 100px, 0);
+        }
+
+        &:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 2px;
+            right: 2px;
+            bottom: 0;
+            top: 16px;
+            margin: auto;
+            height: 3px;
+        }
+    }
+}
+
+@keyframes pulse {
+    0% {
+        clip: rect(0, 0, 100px, 0);
+    }
+
+    4% {
+        clip: rect(0, 66.66667px, 100px, 0);
+    }
+
+    15% {
+        clip: rect(0, 133.33333px, 100px, 0);
+    }
+
+    20% {
+        clip: rect(0, 300px, 100px, 0);
+        opacity: 1;
+    }
+
+    80% {
+        clip: rect(0, 300px, 100px, 0);
+        opacity: 1;
+    }
+
+    90% {
+        clip: rect(0, 300px, 100px, 0);
+        opacity: 1;
+    }
+
+    100% {
+        clip: rect(0, 300px, 100px, 0);
+        opacity: 1;
+    }
+}
+
+/*
+ * Input loader styles
+ * ----------------------------------------------------------------------------
+ */
+.loading_container {
+    height: 32px;
+    width: 32px;
+
+    .loading__input {
+        width: 24px;
+        height: 24px;
+        display: none;
+        border-radius: 50%;
+        transition: all 0.5s;
+        border: 3px solid #fff;
+        border-left-color: transparent;
+
+        &.load {
+            display: block;
+            animation: 1s load_round linear infinite;
+        }
+    }
+
+    ion-icon.checking {
+        margin: 0;
+        font-size: 1.9em !important;
+        color: #27ae60 !important;
+
+        &.fail {
+            color: #c0392b !important;
+        }
+    }
+}
+
+@keyframes load_round {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+.searchbar-has-focus {
+    div>ion-icon {
+        margin-left: 0 !important;
+    }
+}
+
+$sizes: (10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
+
+@each $i in $sizes {
+    .vw-#{$i} {
+        width: #{$i}vw;
+    }
+}

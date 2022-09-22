@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="form__container">
+    <form [formGroup]="loginForm" (keyup.enter)="onLogin()" (ngSubmit)="onLogin()">
+      <ion-list>
+        <ion-item>
+          <ion-icon name="mail" slot="start"></ion-icon>
+          <ion-input placeholder="ejemplo@gmail.com" formControlName="email" type="email" validate></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="key" slot="start"></ion-icon>
+          <ion-input #passwordInput class="input" [type]="passwordTypeInput" formControlName="pass" placeholder="Contraseña" validate></ion-input>
+          <ion-icon class="toggle__password__icon" [name]="(passwordTypeInput === 'text')?'eye-off':'eye'" slot="end" (click)="togglePassword()"></ion-icon>
+        </ion-item>
+      </ion-list>
+
+      <a class="recover__pass" routerLink="/recover-password">Olvidé mi contraseña</a>
+
+      <br>
+      <div class="group__buttons center">
+        <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">Ingresar</ion-button>
+      </div>
+    </form>
+    <!-- <h5 class="center">¿No tienes cuenta? <a routerLink="/register">Registrate</a></h5> -->
+  </div>
+</div>
+<div class="logos center">
+  <p>Redes Sociales</p>
+
+  <div class="social__networks">
+    <a href="https://wa.me/message/UO54YYGANAZLG1">
+      <ion-icon class="icon whatsapp" name="logo-whatsapp"></ion-icon>
+    </a>
+    <a href="https://es-la.facebook.com/prevenirexpress/">
+      <ion-icon class="icon facebook" name="logo-facebook"></ion-icon>
+    </a>
+    <a href="https://www.instagram.com/prevenir_descuentos_medicos">
+      <ion-icon class="icon instagram" name="logo-instagram"></ion-icon>
+    </a>
+    <a href="http://citas.prevenirexpress.com/#/info-noticias">
+      <img class="prevenir" src="assets/img/svg/logo_outline_web.svg">
+    </a>
+  </div>
+</div>

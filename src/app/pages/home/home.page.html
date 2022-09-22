@@ -1,0 +1,83 @@
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <div class="box__publicity">
+      <slide-publicity [slideData]="slideData"></slide-publicity>
+    </div>
+    <div class="box__menu">
+      <ng-container *ngFor="let item of itemsMenu">
+        <div class="menu__item item__link" [attr.data-path]="item.path">
+          <fa-icon [icon]="item.icon" [style.color]="item.color"></fa-icon>
+          <span>{{ item.label }}</span>
+        </div>
+      </ng-container>
+      <!-- <div class="menu__item" (click)="showProducts()">
+        <fa-icon icon="address-card"></fa-icon>
+        <span>Generar carnet</span>
+      </div> -->
+      <!-- <div class="menu__item" (click)="showProducts()">
+        <fa-icon icon="box-open"></fa-icon>
+        <img src="assets/icon/box_icon.svg">
+        <span>nuestros productos</span>
+      </div> -->
+      <div class="menu__item item__link" [attr.data-path]="'/terms-and-conditions'">
+        <fa-icon style="color: #FFD6D6;" icon="hands-helping"></fa-icon>
+        <span>términos y condiciones</span>
+      </div>
+      <div class="menu__item" (click)="logout()">
+        <fa-icon icon="sign-out-alt"></fa-icon>
+        <span>Cerrar sesión</span>
+      </div>
+    </div>
+    <hr>
+    <br>
+    <span style="color: #ffffff; margin-left: 33%; font-size: 18px; font-weight: bold;">Otros productos</span>
+    <br>
+    <div class="productos">
+      <div class="menu__item">
+        <a href="https://saybot.prevenirexpress.com/login">
+          <img src="assets/img/icono_saybot.png" style="width: 80px; height: 80px;">
+        </a>
+      </div>
+      <div class="menu__item">
+        <a href="http://optica.prevenirexpress.com/">
+          <img src="assets/logo_fill.png" style="width: 75px; height: 75px;">
+        </a>
+        <span>Centro Óptico</span>
+      </div>
+      <div class="menu__item">
+        <a href="http://www.prevenirexpress.com/inicio">
+          <img src="assets/logo_fill.png" style="width: 75px; height: 75px;">
+        </a>
+        <span>Prevision Exequial</span>
+      </div>
+    </div>
+
+    <!-- <div class="phone-frame">
+      <div class="phone-screen">
+        <svg class="button-menu button-menu1" id="menu" height="24" width="24" onclick="document.querySelector('.phone-screen').classList.toggle('active')">
+          <circle class="bg" r="12" cx="12" cy="12" />
+          <path class="line line1" d="M 6,8 H 18" />
+          <path class="line line2" d="M 6,12 H 18" />
+          <path class="line line3" d="M 6,16 H 18" />
+        </svg>
+        <div class="menu" onclick="document.querySelector('.phone-screen').classList.remove('active')">
+          <div class="option" [routerLink]="'/contact'">
+            <fa-icon icon="headset" style="color: #bccee1; font-size: 3em;"></fa-icon>
+            <div class="roman">contacto prevenir</div>
+          </div>
+          <div class="option" [routerLink]="'/terms-and-conditions'">
+            <fa-icon icon="hands-helping" style="color: #bccee1; font-size: 3em;"></fa-icon>
+            <div class="roman">terminos y condiciones</div>
+          </div>
+          <div class="option" (click)="logout()">
+            <fa-icon icon="sign-out-alt" style="color: #bccee1; font-size: 3em;"></fa-icon>
+            <div class="roman">Cerrar Sesión</div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <ion-toggle #toggle (ionChange)="changeThemeMode($event)">toggle theme</ion-toggle> -->
+  </div>
+
+</ion-content>

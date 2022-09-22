@@ -1,0 +1,86 @@
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="false" [buttonsRight]="false" title="Editar Mascota"
+    defaultBack="beneficiaries-tabs/beneficiaries"
+    [noBack]="(formEditPet?.touched || !modified || !!avatarFile || !!coverpageFile) && formEditPet?.valid"
+    (onBack)="goToBack()"></app-header>
+</ion-header>
+
+<ion-content>
+  <avatar-user [user]="idPet" [pet]="true" [doctor]="false" [admin]="true" [modeEdit]="true"
+    (loadAvatar)="setAvatarFile($event)" (loadCoverpage)="setCoverpageFile($event)"></avatar-user>
+  <div class="edit__profile__data">
+    <span>Campos requeridos (<span class="required">*</span>)</span>
+
+    <form [formGroup]="formEditPet" *ngIf="formEditPet" (ngSubmit)="updatePet()">
+      <ion-list>
+        <ion-item (click)="showDatePicker()">
+          <fa-icon icon="birthday-cake"></fa-icon>&nbsp;<span class="required">*&nbsp;</span>
+          <label *ngIf="formEditPet.get('fechaNacimiento').value">
+            {{ formEditPet.get('fechaNacimiento').value | date:'longDate' }}
+          </label>
+          <label class="not__data" *ngIf="!formEditPet.get('fechaNacimiento').value">
+            &nbsp;Fecha de nacimiento
+          </label>
+          <ion-input type="hidden" formControlName="fechaNacimiento" placeholder="fecha nacimiento"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="paw" slot="start"></ion-icon><span class="required">*&nbsp;</span>
+          <ion-input value="un dato" type="text" placeholder="Nombres de mascota" formControlName="nombreMascota"
+            validate>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="paw" slot="start"></ion-icon><span class="required">*&nbsp;</span>
+          <ion-input type="text" placeholder="Apellidos de mascota" formControlName="apellidosMascota" validate>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <fa-icon icon="dog"></fa-icon><span class="required">*&nbsp;</span>
+          <ion-input type="text" placeholder="Especie Ej: Perro" formControlName="especie" validate></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <fa-icon icon="dna"></fa-icon><span class="required">&nbsp;*&nbsp;</span>
+          <ion-input type="text" placeholder="Raza Ej: Chihuahua" formControlName="raza" validate></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="color-fill"></ion-icon><span class="required">*&nbsp;</span>
+          <ion-input type="text" placeholder="Color" formControlName="color" validate></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="male-female"></ion-icon><span class="required">*&nbsp;</span>
+          <ion-label>Sexo</ion-label>
+          <ion-select placeholder="Selecciona uno" formControlName="sexo">
+            <ion-select-option value="Macho">Macho</ion-select-option>
+            <ion-select-option value="Hembra">Hembra</ion-select-option>
+          </ion-select>
+          <!-- <ion-label>{{ formEditPet.controls['sexo'].value?'Macho':'Hembra' }}</ion-label>
+          <ion-toggle formControlName="sexo"></ion-toggle> -->
+        </ion-item>
+
+        <ion-item>
+          <fa-icon icon="syringe"></fa-icon><span class="required">*&nbsp;</span>
+          <ion-label>Esterilizado</ion-label>
+          <ion-select placeholder="Selecciona uno" formControlName="esterilizado">
+            <ion-select-option value="si">si</ion-select-option>
+            <ion-select-option value="no">no</ion-select-option>
+          </ion-select>
+          <!-- <ion-label>{{ formEditPet.controls['esterilizado'].value?'Esterilizado':'Sin esterilizar' }}</ion-label>
+          <ion-toggle formControlName="esterilizado"></ion-toggle> -->
+        </ion-item>
+
+
+      </ion-list>
+
+      <ion-button shape="round" expand="block" type="submit"
+        [disabled]="!(!!avatarFile || !!coverpageFile || formEditPet.touched || !modified) || formEditPet.invalid">
+        Actualizar peludito
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

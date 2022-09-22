@@ -1,0 +1,355 @@
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="false" [buttonsRight]="false" title="Solicitud cita" > 
+
+  </app-header>
+</ion-header>
+
+<ion-content>
+  <ion-slides #slides class="slides" pager="false" (ionSlideDidChange)="swipeSlide()"
+    [options]="{allowTouchMove:false}">
+
+    <ion-slide class="slides__item">
+
+      <fa-icon class="icons__butt" icon="heartbeat"></fa-icon> 
+      <h2 class="title__slide">Mótivo de cita</h2>
+      <p>Con el proposito de tener informado al personal de la salud y dispuesto a tu servicio queremos saber el motivo  de la cita.</p>
+      <br>
+
+      <div class="survey__list">
+        <ion-list>
+          <ion-item >
+            <textarea name="motivo" id="motivo" cols="30" rows="10" maxlength="160" placeholder="Ingrese el motivo de su cita"></textarea>
+          </ion-item>
+          <!-- <ion-item>
+            <ion-label (click)="noneSymptom = !noneSymptom">Guardar motivos</ion-label>
+            <ion-toggle [(ngModel)]="noneSymptom" [disabled]="personSick" (ionChange)="setSurvey()"></ion-toggle>
+          </ion-item> -->
+        </ion-list>
+        <!-- <ion-button (click)="verOrdenDescuento()">ver recibo</ion-button> -->
+      </div>
+    </ion-slide>
+
+    <!-- ############################################### -->
+    <!--             Slide selección sucursal            -->
+    <!-- ############################################### -->
+    
+    <ion-slide class="slides__item">
+      <h2 class="title__slide">Selección de sucursal</h2>
+      <div class="branch__medical">
+        <div *ngFor="let branch of branchsMedical" class="branch__medical__item ion-activatable ripple-parent"
+          [class.selected]="branch?.idSucursales == branchSelected?.idSucursales" (click)="selectBranch(branch)">
+          <h3 class="title__item">{{ branch['nombreSucursal'] }}</h3>
+          <span>{{ branch['direccionSucursal'] | titlecase }}</span><br>
+          <span *ngIf="branch['barrioSucursal']">{{ branch['barrioSucursal'] | titlecase}}<br></span>
+          <span class="infu">
+            <strong> Tel.</strong>
+            {{ branch['telefonoSucursal'] || branch['celularSucursal'] ? '':'No registra' }}
+            {{ branch['telefonoSucursal'] ? branch['telefonoSucursal'] + ' - ': '' }}{{ branch['celularSucursal'] || ''}}
+          </span>
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+      </div>
+    </ion-slide>
+
+    <!-- ############################################### -->
+    <!--              Slide selección medico              -->
+    <!-- ############################################### -->
+    <ion-slide class="slides__item">
+      <h2 class="title__slide">Selección de doctor</h2>
+      <div class="doctors">
+        <ion-label class="not__item" *ngIf="doctors.length==0">
+          La sucursal seleccionada no tiene doctores disponibles. Por favor seleccione una sucursal diferente.
+        </ion-label>
+
+        <div *ngFor="let doctor of doctors" class="doctors__item ion-activatable ripple-parent"
+          [class.selected]="doctor.idMedico == doctorSelected?.idMedico" (click)="selectDoctor(doctor)">
+          <img class="image__item" [src]="doctor.avatar | image">
+          <div class="data__doctor">
+            <div class="certificado"style="width: 70px; height: 70px; position: absolute; right: 3px; bottom: 1px;">
+              <img src="assets/img/CERTI-02.png" alt="not found" >
+            </div>
+            <h4 class="title__item">Dr. {{ doctor['nombres'].getFirstWord() | titlecase }} {{
+              doctor['apellidos'].getFirstWord() | titlecase }}
+            </h4>
+            <span> Especialista en {{ doctor['nombreEspecialidad'].slice(4) | lowercase }}</span><br><br>
+            <!-- <div class="view__more">
+              <span>ver perfíl&nbsp;</span>
+              <fa-icon icon="eye"></fa-icon>
+            </div> -->
+          </div>
+          <ion-button class="button__profile" size="small" (click)="viewProfileDoctor(doctor)">Ver Perfíl
+          </ion-button>
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+      </div>
+    </ion-slide>
+
+    <!-- ############################################### -->
+    <!--                   Slide fecha                   -->
+    <!-- ############################################### -->
+    <ion-slide class="slides__item calendar">
+      <h2 class="title__slide">Selección de fecha</h2><br>
+      <div class="calendar">
+        <calendar (date)="setDate($event)"></calendar>
+      </div>
+    </ion-slide>
+
+    <!-- ############################################### -->
+    <!--            Slide horario de atención            -->
+    <!-- ############################################### -->
+    <ion-slide class="slides__item calendar">
+      <h2 class="title__slide">Selección de horario</h2>
+      <div class="schedules">
+        <div *ngIf="schedules.length == 0">
+          <span class="no_data_schedules">
+            No hay horario disponible para el día seleccionado
+          </span>
+        </div>
+
+        <div class="schedules__item" *ngFor="let schedule of schedules; let i = index">
+          <ng-container>
+            <div class="container schedule" *ngIf="schedule['horario']['horas'].length > 0">
+
+              <div class="calendar dark">
+                <h3 class="schedules__item__subtitle"
+                *ngIf="schedule['horario']['horas'].length != 0">
+                <strong>Consultorio<br></strong>
+                {{ schedule['consultorio']['nombreConsultorio'] | titlecase }}
+                </h3>
+                <h4 class="message">Recuerda que las citas deben ser solicitadas con dos (2) horas de antelación.</h4>
+
+                <div class="calendar_plan">
+                  <div class="cl_plan">
+                    <div class="cl_title" style="font-weight: bolder;">Cita para el día:</div>
+                    <div class="cl_copy"> {{ dateSelected }} </div>
+                    <div class="cl_add">
+                      <fa-icon icon="user-clock" style="color: #263544;"></fa-icon>
+                    </div>
+                  </div>
+                </div>
+                <div class="calendar_events">
+                    <p class="ce_title">En que hora desea su cita</p>
+                    <div class="event_item" *ngFor="let hour of schedule['horario']['horas']">
+                      <div [class.not_available]="!hour['numeroCitas'] || selectableHour(hour['hora']) && !hour['disponible']"
+                      class="hour ion-activatable ripple-parent" [class.selected]="scheduleSelected == i+'_'+hour['hora'] && hour['disponible']"
+                      (click)="selectHour(hour['hora'], i)">
+                        <div class="ei_Title"> {{ hour['hora'] <= 11 ? hour['hora'] + ' a.m': hour['hora'] + ' p.m' | horas }} </div>
+                        <div class="ei_Copy">Citas disponibles para esta hora: {{hour['numeroCitas']}}</div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <section class="schedule" *ngIf="schedule['horario']['horas'].length > 0">
+              <h2>Horas</h2>
+              <details *ngFor="let hour of schedule['horario']['horas']">
+                <summary [class.not_available]="!hour['numeroCitas'] || selectableHour(hour['hora'])"
+                class="hour ion-activatable ripple-parent" [class.selected]="scheduleSelected == i+'_'+hour['hora']"
+                (click)="selectHour(hour['hora'], 'manana', i)">
+                  <div>
+                    <span style="background-color: #bccee1;">
+                      <fa-icon icon="user-clock" style="font-size: xx-large;"></fa-icon>
+                    </span>
+                    <strong>Hora cita</strong>
+                    <span> {{ hour['hora'] <= 11 ? hour['hora'] + ' a.m': hour['hora'] + ' p.m' | horas }} </span>
+                  </div>
+                </summary>
+                <div>
+                  <dl>
+                    <div>
+                      <dt style="color: #bccee1;">Citas disponibles</dt>
+                      <dd style="color: #bccee1;"> {{ hour['numeroCitas'] }} </dd>
+                    </div>
+                    <div>
+                      <dt style="color: #bccee1;">Duración aproximada</dt>
+                      <dd style="color: #bccee1;"> {{60/citas}} min </dd>
+                    </div>
+                    <div>
+                      <dt style="color: #bccee1;">Médico</dt>
+                      <dd style="color: #bccee1;"> {{ dataAppoinment['toShow']['nameDoctor'] | titlecase }} </dd>
+                    </div>
+                  </dl>
+                </div>
+              </details>
+          </section> -->
+            <!-- <div class="schedule" *ngIf="schedule['horario']['horas'].length > 0">
+              <h4>Horas</h4>
+              <ng-container *ngFor="let hour of schedule['horario']['horas']">
+                <div [class.not_available]="!hour['numeroCitas'] || selectableHour(hour['hora'])"
+                  class="hour ion-activatable ripple-parent" [class.selected]="scheduleSelected == i+'_'+hour['hora']"
+                  (click)="selectHour(hour['hora'], 'manana', i)">
+                  {{ hour['hora'] <= 11 ? hour['hora'] + ' a.m': hour['hora'] + ' p.m' }}
+                  <ion-ripple-effect></ion-ripple-effect>
+                </div>
+              </ng-container>
+            </div> -->
+            <!-- <div class="schedule" *ngIf="schedule['horario']['tarde']['horas'].length > 0 ">
+              <h4>Tarde</h4>
+              <ng-container *ngFor="let hour of schedule['horario']['tarde']['horas']">
+                <div class="hour ion-activatable ripple-parent"
+                  [class.not_available]="!hour['numeroCitas'] || selectableHour(hour['hora'])"
+                  [class.selected]="scheduleSelected == i+'_'+hour['hora']"
+                  (click)="selectHour(hour['hora'], 'tarde', i)">
+                  {{ hour['hora'].getNormalHour() }}
+                  <ion-ripple-effect></ion-ripple-effect>
+                </div>
+              </ng-container>
+            </div> -->
+          </ng-container>
+        </div>
+      </div>
+    </ion-slide>
+
+    <!-- ############################################### -->
+    <!--          Slide beneficiario o paciente          -->
+    <!-- ############################################### -->
+    <ion-slide class="slides__item">
+      <h2 class="title__slide">Selecciona el paciente</h2>
+      <p>Selecciona el paciente para quien deseas solicitar la cita médica.</p>
+
+      <!-- <div class="groups">
+        <div class="groups__item" [class.selected]="groupSelected == 'all'" (click)="selectGroupBeneficiaries('all')">
+          <div class="image all  ion-activatable ripple-parent">
+            <fa-icon icon="users"></fa-icon>
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
+          <span class="name__group">Todos</span>
+        </div>
+        <div class="groups__item" *ngFor="let group of groupsBeneficiaries; let i = index"
+          [class.selected]="groupSelected== group['grupo']['idGrupos']" (click)="selectGroupBeneficiaries(group)">
+          <div class="image ion-activatable ripple-parent">
+            <img [src]="group['grupo']['avatar'] | image">
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
+          <span class="name__group">{{ group['grupo']['nombreGrupo'] }}</span>
+        </div>
+      </div> -->
+
+      <div class="beneficiaries" *ngIf="speciality != 20">
+        <div class="beneficiaries__item" *ngFor="let beneficiary of beneficiaries" (click)="selectPatient(beneficiary)"
+          [class.selected]="patientSelected && patientSelected['idusuarios'] == beneficiary['idusuarios']">
+          <img class="image__item" [src]="beneficiary['fotos'] | image">
+          <div>
+            <h3 class="title__item">{{ beneficiary['nombres'] }} {{ beneficiary['apellidos'] }}</h3>
+            <span> <strong>Eps: </strong>{{ beneficiary['eps'] || 'No registra' }} </span>
+          </div>
+        </div>
+      </div>
+      <div class="beneficiaries" *ngIf="speciality == 20">
+        <div class="beneficiaries__item" *ngFor="let pet of pets" (click)="selectPetPatient(pet)"
+          [class.selected]="petPatientSelected && petPatientSelected['idMascotas'] == pet['idMascotas']">
+          <img class="image__item" [src]="pet['avatar'] | image">
+          <div>
+            <h3 class="title__item">{{ pet['nombreMascota'] }} {{ pet['apellidosMascota'] }}</h3>
+            <span> <strong>Especie: </strong>{{ pet['especie'] }} </span>
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+
+    <!-- ############################################### -->
+    <!--                Slide resumen cita                -->
+    <!-- ############################################### -->
+    <ion-slide class="slides__item">
+      <h2 class="title__slide">Resumen cita</h2>
+
+      <p>Este es el resumen de su cita, verifique que todos los datos sean correctos.</p>
+      <br>
+      <div class="summary__date">
+        <h4>
+          <strong>Sucursal:</strong>
+          <span>{{ dataAppoinment['toShow']['nameBranch'] | titlecase }}</span>
+        </h4>
+
+        <h4>
+          <strong>Consultorio:</strong>
+          <span>{{ dataAppoinment['toShow']['nameConsultingRoom'] | titlecase }}</span>
+        </h4>
+
+        <h4 *ngIf="dataAppoinment['toShow']['addressBranch']">
+          <strong>Dirección:</strong>
+          <span>{{ dataAppoinment['toShow']['addressBranch'] | titlecase }}</span>
+        </h4>
+
+        <h4 *ngIf="dataAppoinment['toShow']['neighborhoodBranch']">
+          <strong>Barrio:</strong>
+          <span>{{ dataAppoinment['toShow']['neighborhoodBranch'] | titlecase }}</span>
+        </h4>
+
+        <h4 *ngIf="dataAppoinment['toShow']['phoneBranch'] || dataAppoinment['toShow']['mobileBranch']">
+          <strong>Teléfonos:</strong>
+          <span *ngIf="dataAppoinment['toShow']['phoneBranch']">
+            {{ dataAppoinment['toShow']['phoneBranch'] ? dataAppoinment['toShow']['phoneBranch'] + ' - ' : '' }}
+            {{ dataAppoinment['toShow']['mobileBranch'] || '' }}
+          </span>
+        </h4>
+
+        <h4>
+          <strong>Fecha:</strong>
+          <span>{{ dataAppoinment['toSend']['fecha'] }}</span>
+        </h4>
+
+        <h4>
+          <strong>Hora:</strong>
+          <span>{{ dataAppoinment['toSend']['hora'] }}</span>
+        </h4>
+
+        <h4>
+          <strong>Duración aproximada:</strong>
+          <span>{{60/citas}} min</span>
+        </h4>
+
+        <h4>
+          <strong>Médico:</strong>
+          <span>{{ dataAppoinment['toShow']['nameDoctor'] | titlecase }}</span>
+        </h4>
+
+        <h4>
+          <strong>Paciente:</strong>
+          <span>{{ dataAppoinment['toShow']['namePatient'] | titlecase }}</span>
+        </h4>
+      </div>
+      <!-- <ion-button (click)="verOrdenDescuento()">ver recibo</ion-button> -->
+    </ion-slide>
+
+    <ion-slide class="slides__item">
+      <h2 class="title__slide">Información</h2>
+      <p>Le invitamos a comunicarse a los siguientes contactos para solicitar su cita como posible paciente Covid 19.
+      </p>
+      <p>Agradecemos por su paciencia y le pedimos disculpas por cualquier inconveniente que esto le pueda causar.</p>
+
+      <div class="contact__covid" *ngIf="provider">
+        <h4>
+          <strong>Proveedor de servicio</strong>
+          <span>{{ provider?.nombre }}</span>
+        </h4>
+
+        <h4>
+          <strong>Dirección</strong>
+          <span>{{ provider?.direccion }}</span>
+          <span *ngIf="provider?.barrio">{{ provider?.barrio }}</span>
+        </h4>
+
+        <h4>
+          <strong>Teléfonos</strong>
+          <span>{{ provider?.telefonoFijo ? provider?.telefonoFijo + ' - ' : '' }}{{ provider?.telefono || '' }}</span>
+        </h4>
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+  <!-- ############################################### -->
+  <!--              Botones de navegación              -->
+  <!-- ############################################### -->
+  <div class="navigation__buttons">
+    <ion-button class="button__control" expand="full" shape="round" [disabled]="disabledPrevButton"
+      (click)="prevSlide()">
+      {{ textPrevButton }}
+    </ion-button>
+    <ion-button class="button__control" expand="full" shape="round" [disabled]="disabledNextButton"
+       (click)="nextSlide()">
+      {{ textNextButton }}
+    </ion-button>
+  </div>
+</ion-content>

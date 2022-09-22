@@ -1,0 +1,70 @@
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="false" [showSettings]="false" [buttonsRight]="false" title="Agenda"
+    defaultBack="/home/menu">
+  </app-header>
+</ion-header>
+
+ <ion-content> 
+  <div class="services"> 
+    <ng-container *ngFor="let service of services">
+      <div class="service__card">
+        <h2 class="title">{{ service.nombreSubservicio }}</h2>
+        <h4 class="provider">{{ service.nombreSucursal }}</h4>
+        <span *ngIf="service.schedules?.length">Citas activas: {{ service.schedules.length }}</span>
+        <span *ngIf="!service.schedules?.length">Sin citas pendientes</span>
+        <ion-icon #buttonRef class="collapsed__icon" [name]="openSchedules ? 'chevron-down':'chevron-up'"
+          (click)="showSchedules(service.idServicios, cardRef, buttonRef)"></ion-icon>
+      </div>
+      <div #cardRef class="schedules__container">
+        <ng-container *ngIf="service?.schedules?.length == 0; else withData">
+          No hay citas pendientes
+        </ng-container>
+        <ng-template #withoutData>
+          No hay citas pendientes
+        </ng-template>
+        <ng-container #withData *ngFor="let schedule of service.schedules">
+          <div class="schedule__card">
+            <h2 class="title">{{ schedule.nombres }}  {{schedule.apellidos}} </h2>
+            <h6>
+              <strong> Servicio:  </strong>{{schedule.nombreSubservicio}}
+            </h6>
+            <h6>
+              <strong>Fecha cita: </strong>{{ schedule.fecha | date }}
+            </h6>
+            <h6>
+              <strong>Hora cita: </strong>{{ schedule.hora }}
+            </h6>
+            <div class="action__buttons" style="text-align: center;">
+              <!-- <fa-icon class="icon history ion-activatable ripple-parent" icon="history"
+              (click)="reprogramAppointment(schedule)">
+                  <ion-ripple-effect></ion-ripple-effect>
+              </fa-icon> -->
+              <ion-button shape="round" color="danger" style="font-weight: bold;" (click)="cancelAppointment(schedule)">Cancelar</ion-button>
+              <!-- <fa-icon class="icon calendar ion-activatable ripple-parent" icon="calendar-times">
+                  <ion-ripple-effect></ion-ripple-effect>
+              </fa-icon> -->
+          </div >         
+          </div>
+          
+        </ng-container>
+        <hr class="separator">
+      </div>
+    </ng-container>
+  </div>
+  <div class="espacio">
+
+  </div>
+  
+</ion-content>
+  <!-- <div class="services">
+    <div class="service-card ion-activatable ripple-parent" *ngFor="let service of services"
+      [routerLink]="['/appointments-doctor/',service.idServicios]">
+      <h2 class="title">{{ service.nombreServicio }}</h2>
+      <h4 class="provider">{{ service.nombreProvedor }}</h4>
+      <span *ngIf="service.schedules?.length">Citas activas: {{ service.schedules.length }}</span>
+      <span *ngIf="!service.schedules?.length">Sin citas pendientes</span>
+
+      <ion-icon class="collapsed__icon" name="chevron-down-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </div> -->

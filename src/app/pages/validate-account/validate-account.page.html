@@ -1,0 +1,75 @@
+<!-- Header -->
+<app-header [onlyBack]="true">
+   
+</app-header>
+
+<!-- Body content -->
+<ion-content>
+  <div class="logo__app">
+    <img class="logo__img" src="assets/img/logo_img.png" alt="Logo Prevenir Express">
+    <img class="logo__img__text" src="assets/img/logo_text.png" alt="Texto Logo Prevenir Express">
+  </div>
+
+  <div class="container">
+    <h2 class="center title"><strong>Validación de cuenta requerida</strong></h2>
+
+    <h4 class="welcome">Bienvenido <strong class="name__user"> {{ this._globals.USERNAME | uppercase }}</strong></h4>
+
+    <p class="welcome">Tu correo aún no ha sido validado, por favor realiza la validación con el código enviado al
+      correo registrado.
+    </p>
+
+    <!-- <div class="box__verification"></div> -->
+
+    <form [formGroup]="formValidation" (ngSubmit)="validateAccount('telefono')">
+      <ion-list>
+        <ion-item lines="none">
+          <!-- <div class="box__validation">
+            <input #inp_1 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+            <input #inp_2 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+            <input #inp_3 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+            <input #inp_4 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+            <input #inp_5 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+            <input #inp_6 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+            <input #inp_7 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+          </div> -->
+          <ion-label position="floating">
+            <fa-icon icon="hashtag"></fa-icon>
+            Código de validación
+          </ion-label>
+          <ion-input class="input" formControlName="validationCode" type="text" maxlength="7">
+          </ion-input>
+        </ion-item>
+        
+        <ng-container
+          *ngIf="formValidation.get('validationCode').errors && formValidation.get('validationCode').touched">
+          <div tyle="display: flex;">
+            <p style="color: red; font-size: 13px;" class="ion-text-capitalize"
+              *ngIf="formValidation.get('validationCode').hasError('required')">* Este campo es requerido</p>
+            <p style="color: red; font-size: 13px;" class="ion-text-capitalize"
+              *ngIf="formValidation.get('validationCode').hasError('minlength')">Cantidad minima de caracteres (7)</p>
+          </div>
+        </ng-container>
+        <br>
+        <ion-button fill="outline" shape="round" type="submit" [disabled]="formValidation.invalid">Validar</ion-button>
+      </ion-list>
+    </form>
+
+    <h5 class="center">
+      <a class="resend__code" href="javascript:void(0)" (click)="resendCode('mail')">
+        Reenviar codigo a {{ _globals.USERMAIL }}
+      </a>
+    </h5>
+
+    <h5 class="center">
+      <a class="resend__code" href="javascript:void(0)" (click)="resendCode('phone')">
+        Enviar codigo a {{ _globals.USERTEL }}
+      </a>
+    </h5>
+    <!-- <h5 class="center">
+      <a class="resend__code" href="javascript:void(0)" [routerLink]="['/routePath']">
+        Enviar código a teléfono {{ _globals.USERTEL }}
+      </a>
+    </h5> -->
+  </div>
+</ion-content>

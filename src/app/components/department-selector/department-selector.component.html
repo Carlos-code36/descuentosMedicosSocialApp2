@@ -1,0 +1,17 @@
+<ng-container>
+  <div class="filter__departments" [class]="customClass">
+    <div class="input__filter" [style.color]="color" [style.border-bottom-color]="color">
+      <fa-icon icon="map-marked-alt"></fa-icon>
+      <ion-input #selectorDepartment type="text" placeholder="Departamento o municipio"
+        (ionFocus)="focusDropdownSearch()" (ionBlur)="blurDropdownSearch()" (keyup)="searchDeptMun()"></ion-input>
+    </div>
+
+    <div class="group__filter" *ngIf="departmentsAndTowns">
+      <div class="filter__item" *ngFor="let depmun of departmentsAndTowns"
+        [attr.data-depmun-name]="depmun.nombreMunicipio + ' - ' + depmun.nombreDepartamento"
+        [attr.data-depmun-id]="depmun.idmunicipio" (click)="selectDeptMun($event.target)">
+        {{ depmun.nombreMunicipio }} - {{ depmun.nombreDepartamento }}
+      </div>
+    </div>
+  </div>
+</ng-container>

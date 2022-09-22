@@ -1,0 +1,5 @@
+<div class="qualify" [style.columnGap]="spacing">
+  <ng-container *ngFor="let score of stars_score; let i = index">
+    <img [src]="selectStar(score)" class="rate" icon="star" [style.width]="size" />
+  </ng-container>
+</div>

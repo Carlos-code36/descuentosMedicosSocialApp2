@@ -1,0 +1,130 @@
+<ion-header class="ion-no-border" *ngIf="providerData">
+  <app-header #headerTemplate [showMenu]="false" [buttonsRight]="false"></app-header>
+</ion-header>
+
+<ion-content class="page-bg" *ngIf="providerData">
+
+  <h1 class="shine"> {{providerData.titulo}} </h1>
+
+  <!-- <div class="slide__photos__publication">
+    <slide-publicity [slideData]="providerData.fotos" [card]="true" [height]="'230px'" [pagination]="false"></slide-publicity>
+  </div> -->
+
+  <div class="section over-hide">
+    <div class="container">
+      <div class="row full-height justify-content-center">
+        <div class="col-12 text-center align-self-center py-5">
+          <div class="section text-center py-5 py-md-0">
+              <input class="pricing" type="checkbox" id="pricing" name="pricing"/>
+              <label for="pricing"><span class="block-diff">informacion<span class="float-right">descripcion</span></span></label>
+            <div class="card-3d-wrap mx-auto">
+              <div class="card-3d-wrapper">
+                <div class="card-front">
+                  <div class="pricing-wrap">
+                    <h4 class="mb-5"> {{providerData.nombreServicio}} </h4>
+                    <h2 class="mb-2"><sup>$</sup>39 / 4<sup>hrs</sup></h2>
+                    <p class="mb-4">per person</p>
+                    <p class="mb-1"><i class="uil uil-location-pin-alt size-22"></i></p>
+                    <p class="mb-4">Drina, Serbia</p>
+                    <!-- <div class="img-wrap img-2">
+                      <img src="https://assets.codepen.io/1462889/sea.png" alt="">
+                    </div> -->
+                    <div class="img-wrap img-1">
+                      <img [src]="providerData.fotos[0].path | imageServices" alt="">
+                    </div>
+                    <!-- <div class="img-wrap img-3">
+                      <img src="https://assets.codepen.io/1462889/water.png" alt="">
+                    </div> -->
+                    <div class="img-wrap img-6">
+                      <img src="assets/logo_colorfull.png" alt="">
+                    </div>
+                  </div>
+                  </div>
+                <div class="card-back">
+                  <div class="pricing-wrap">
+                    <h4 class="mb-5">Descripcion</h4>
+                    <h2 class="mb-2"> {{providerData.descripcion}} </h2>
+                    <p class="mb-1"><i class="uil uil-location-pin-alt size-22"></i></p>
+                    <!-- <div class="img-wrap img-2">
+                      <img src="https://assets.codepen.io/1462889/grass.png" alt="">
+                    </div> -->
+                    <!-- <div class="img-wrap img-4">
+                      <img src="https://assets.codepen.io/1462889/camp.png" alt="">
+                    </div> -->
+                    <div class="img-wrap img-5">
+                      <img [src]="providerData.fotos[1].path | imageServices" alt="">
+                    </div>
+                    <div class="img-wrap img-7">
+                      <img src="assets/logo_colorfull.png" alt="">
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>  
+
+  <!-- <div class="container__publication">
+    <div class="box__provider  ion-activatable ripple-parent"
+      [routerLink]="['/home/detail-provider/'+providerData['idMembers']]">
+      <h5 class="name__provider">{{ providerData['nombreEmpresa'] }}</h5>
+      <fa-icon icon="angle-right"></fa-icon>
+      <span>Información Proveedor</span>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <div class="info__publication">
+      
+      <h4 class="label__data__publication">Calificación</h4>
+      <div class="calification__publication">
+        
+        <individual-rate [score]="2.0"></individual-rate>
+      </div>
+
+      <h4 class="label__data__publication">Descuento cita</h4>
+      <span class="data__publication">{{ providerData['descuentoCita'] }} %</span>
+
+      <h4 class="label__data__publication">Tarifa particular</h4>
+      <span class="data__publication">{{ providerData['precioCita'] | percentPrice:0 }} </span>
+
+      <h4 class="label__data__publication">Tarifa con descuento</h4>
+      <span class="data__publication">
+        {{ providerData['precioCita'] | percentPrice:providerData['descuentoCita'] }}
+      </span>
+
+      <h4 class="label__data__publication" *ngIf="providerData['precioControl']">Controles</h4>
+      <span class="data__publication">{{ providerData['precioControl'] | currency:'$ ':true:'1.0' }}</span>
+
+      <h4 class="label__data__publication" *ngIf="providerData['precioProcedimiento']">Procedimientos</h4>
+      <span class="data__publication">{{ providerData['precioProcedimiento'] | currency:'$ ':true:'1.0' }}</span>
+    </div>
+
+    <hr style="background: #ECF0F1">
+
+    <h3 [style.color]="'#bccee1'">Descripción</h3>
+    <p class="description__publication">{{ providerData['descripcion'] | titlecase }}</p>
+  </div> -->
+
+  <!-- <div class="comentary" *ngIf="providerData['comentarios'].length">
+    <h3 [style.color]="'#bccee1'">Comentarios</h3>
+    <br>
+    <ng-container *ngFor="let comentary of providerData['comentarios']">
+      <div class="comentary__item">
+        <img [src]="comentary.avatar | image" class="avatar">
+        <span class="names">{{ comentary.nombres }}</span>
+        <span class="date">{{ comentary.updated_at | date:'longDate' }}</span>
+        <p class="comentary__publication">
+          {{ comentary.comentario }}</p>
+      </div>
+    </ng-container>
+  </div> -->
+
+  <ion-button class="button__appointment" shape="round"
+    [routerLink]="['/appointments/new-appoinment/'+providerData['idmunicipio']+'_'+providerData['idServicios']+'_'+providerData['idEmpresa']+'_'+providerData['idMembers']+'/0'+'/0']">
+    SOLICITAR CITA</ion-button>
+  <br>
+
+</ion-content>

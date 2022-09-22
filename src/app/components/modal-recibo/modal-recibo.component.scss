@@ -1,0 +1,217 @@
+.close{
+    position: absolute;
+    right: 2%;
+    top: 4%;
+    font-size: 24px;
+    z-index: 1;
+    color: #000000;
+}
+
+.descargar{
+    position: absolute;
+    right: 10%;
+    font-size: 24px;
+    z-index: 1;
+}
+
+.pdf{
+    height: 100%;
+}
+
+.container {
+    position: relative;
+    margin-top: 30px;
+    padding: 8px 8px 32px 8px;
+    background: #dddccf;
+    height: 90%;
+}
+
+
+.container2 {
+    position: relative;
+    padding: 8px 8px 32px 8px;
+    background: #dddccf;
+}
+
+.container::before {
+    background: linear-gradient(-45deg, #ebebeb 16px, transparent 0), linear-gradient(45deg, #ededed 16px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+    content: " ";
+    display: block;
+    position: absolute;
+    top: -30px;
+    left: 0px;
+    width: 100%;
+    height: 32px;
+}
+
+.container::after {
+    background: linear-gradient(-229deg, #ebebeb 16px, transparent 0), linear-gradient(-135deg, #ededed 16px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: -31px;
+    left: 0px;
+    width: 100%;
+    height: 32px;
+}
+
+.Orden{
+    //background-image: linear-gradient(145deg, #ffffff, #9d9d9d);
+    background: #ebebeb;
+    position: relative;
+    height: 105%;
+    margin-top: -6px;
+    margin-left: -2%;
+    width: 104%;
+    //box-shadow: -20px 24px 8px 14px rgb(0 0 0 / 40%);
+
+    .logo{
+        position: absolute; 
+        width: 90px; 
+        top: 1%; 
+        left: 16%;
+    }
+
+    .grupo{
+        position: absolute; 
+        top: 3%; 
+        left: 39%; 
+        font-weight: bold; 
+        font-size: 20px;
+    }
+
+    .preve{
+        position: absolute; 
+        top: 6%; 
+        left: 39%; 
+        font-weight: bold; 
+        font-size: 18px;
+    }
+
+    .nit{
+        position: absolute; 
+        top: 11%; 
+        right: 6%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .separador{
+        position: absolute; 
+        top: 14%; 
+        left: 42%; 
+        font-size: 47px; 
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .cita{
+        position: absolute;
+        top: 15%;
+        left: 28%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+    }
+    
+    .fecha{
+        position: absolute;
+        top: 19%;
+        left: 30%;
+    }
+
+    .orden{
+        position: absolute;
+        top: 15%;
+        left: 14%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+
+    .cilindro{
+        position: absolute;
+        background-color: #636362;
+        opacity: 0.39;
+        width: 80%;
+        height: 24px;
+        top: 19%;
+        left: 11%;
+        border-radius: 17px;   
+    }
+
+    .separador2{
+        position: absolute; 
+        top: 23%; 
+        left: 5%; 
+        font-size: 26px; 
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 1px;
+    }
+
+    .infoPaciente{
+        background-color: #00a8e4;
+        position: absolute;
+        top: 27%;
+        left: 10%;
+        width: 50%;
+        height: 3%;
+        border-radius: 20px;
+        z-index: 1;
+    }
+
+    .cuadroPaciente{
+        background-color: #00a8e4;
+        opacity: 0.16;
+        position: absolute;
+        top: 28%;
+        left: 5%;
+        width: 90%;
+        height: 31%;
+        border-radius: 20px;
+    }
+
+    .infoCita{
+        background-color: #005a85;
+        position: absolute;
+        bottom: 36%;
+        left: 10%;
+        width: 50%;
+        height: 3%;
+        border-radius: 20px;
+        z-index: 1;
+    }
+
+    .cuadroCita{
+        background-color: #005a85;
+        opacity: 0.16;
+        position: absolute;
+        bottom: 1%;
+        left: 5%;
+        width: 90%;
+        height: 36%;
+        border-radius: 20px;
+    }
+
+    .cuadroSello{
+        background-color: #000000;
+        opacity: 0.17;
+        position: absolute;
+        bottom: 2%;
+        left: 17%;
+        width: 60%;
+        height: 15%;
+        border-radius: 20px;
+    }
+
+    .sello{
+        position: absolute;
+        bottom: 3%;
+        left: 20%;
+        font-size: 13px;
+    }
+}

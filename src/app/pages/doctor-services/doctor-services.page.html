@@ -1,0 +1,98 @@
+<!-- <ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="true" [buttonsRight]="false" title="Servicios activos"></app-header>
+</ion-header> -->
+
+<ion-content>
+
+   <ion-tabs class="wrapper">
+    <div class='wrapper-inner'>
+      <div class='buble'></div>
+      <div class='box'></div>
+    </div>
+      <ion-tab-bar class="box-fix" slot="bottom">
+        <ion-tab-button class="link__page active" tab="agendadoc" >
+          <ion-icon name="albums"></ion-icon>
+          <ion-label>Citas Paciente</ion-label>
+        </ion-tab-button>
+  
+        <ion-tab-button class="link__page" tab="miappointments" >
+          <ion-icon class="link__page" name="calendar"></ion-icon>
+          <ion-label>Mis citas</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+
+   </ion-tabs>
+<svg class='filter' xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <defs>
+    <filter id='goo'>
+      <feGaussianBlur in='SourceGraphic' stdDeviation='10' result='blur' />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -5" result="goo" />
+      <feBlend in='SourceGraphic' in2='goo' operator="atop" />
+    </filter>
+  </defs>
+</svg> 
+
+ <!-- <ion-content> 
+  <div class="services"> 
+    <ng-container *ngFor="let service of services">
+      <div class="service__card">
+        <h2 class="title">{{ service.nombreSubservicio }}</h2>
+        <h4 class="provider">{{ service.nombreSucursal }}</h4>
+        <span *ngIf="service.schedules?.length">Citas activas: {{ service.schedules.length }}</span>
+        <span *ngIf="!service.schedules?.length">Sin citas pendientes</span>
+
+        <ion-icon #buttonRef class="collapsed__icon" [name]="openSchedules ? 'chevron-down':'chevron-up'"
+          (click)="showSchedules(service.idServicios, cardRef, buttonRef)"></ion-icon>
+      </div>
+
+      <div #cardRef class="schedules__container">
+        <ng-container *ngIf="service?.schedules?.length == 0; else withData">
+          No hay citas pendientes
+        </ng-container>
+        <ng-template #withoutData>
+          No hay citas pendientes
+        </ng-template>
+        <ng-container #withData *ngFor="let schedule of service.schedules">
+          <div class="schedule__card">
+            <h2 class="title">{{ schedule.nombres }}  {{schedule.apellidos}} </h2>
+            <h4>
+              <strong> Servicio:  </strong>{{schedule.nombreSubservicio}}
+            </h4>
+            <h4>
+              <strong>Fecha cita: </strong>{{ schedule.fecha | date }}
+            </h4>
+            <h4>
+              <strong>Hora cita: </strong>{{ schedule.hora }}
+            </h4>
+            <div class="action__buttons">
+              <fa-icon class="icon history ion-activatable ripple-parent" icon="history"
+              (click)="reprogramAppointment(schedule)">
+                  <ion-ripple-effect></ion-ripple-effect>
+              </fa-icon>
+              <fa-icon class="icon calendar ion-activatable ripple-parent" icon="calendar-times"
+              (click)="cancelAppointment(schedule)">
+                  <ion-ripple-effect></ion-ripple-effect>
+              </fa-icon>
+          </div >         
+          </div>
+          
+        </ng-container>
+        <hr class="separator">
+      </div>
+    </ng-container>
+  </div>
+  
+</ion-content> -->
+  <!-- <div class="services">
+    <div class="service-card ion-activatable ripple-parent" *ngFor="let service of services"
+      [routerLink]="['/appointments-doctor/',service.idServicios]">
+      <h2 class="title">{{ service.nombreServicio }}</h2>
+      <h4 class="provider">{{ service.nombreProvedor }}</h4>
+      <span *ngIf="service.schedules?.length">Citas activas: {{ service.schedules.length }}</span>
+      <span *ngIf="!service.schedules?.length">Sin citas pendientes</span>
+
+      <ion-icon class="collapsed__icon" name="chevron-down-outline"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </div> -->
+</ion-content>

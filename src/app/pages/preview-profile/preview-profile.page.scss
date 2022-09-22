@@ -1,0 +1,100 @@
+.container {
+    height: calc(100vh - 124px);
+    position: absolute;
+    width: 100vw;
+    top: 0;
+}
+
+avatar-user {
+    position: absolute;
+    top: 0;
+}
+
+.view__profile__data {
+    width: 90%;
+    position: absolute;
+    color: #ecf0f1;
+    top: 310px;
+    left: 15px;
+    background: linear-gradient(168deg, #353a409c -3.02%, #121416 93.08%);
+    box-shadow: 36px 12px 64px rgb(2 3 3 / 70%), -12px -20px 56px rgb(232 237 243 / 5%), inset -16px -6px 80px rgb(248 249 249 / 3%);
+    border-radius: 30px;
+    padding: 25px 0px 40%;
+
+    .item__info {
+        // grid-template-columns: 40px auto;
+        margin-bottom: 12px;
+        display: grid;
+
+        fa-icon {
+            font-size: 1.3em;
+            margin: 0 auto;
+        }
+
+        ion-label {
+            padding-left: 10%;
+            position: relative;
+            font-size: 1.1em;
+            left: 8px;
+            top: 10px;
+        }
+    }
+
+}
+
+.button__appointments {
+    transform: translateX(-50%);
+    margin: 8px 50%;
+    font-weight: bold;
+}
+
+ion-refresher {
+    z-index: 100;
+}
+
+.swipe__refresh {
+    transition: all 0.3s ease-out;
+    text-align: center;
+    position: relative;
+    width: 100vw;
+    z-index: 10;
+    opacity: 0;
+    top: 0;
+    
+    &.show {
+        height: calc(100vh - 56px);
+        opacity: 1;
+    }
+
+    span {
+        transform: translateX(-50%);
+        position: absolute;
+        font-weight: bold;
+        font-size: 1.5em;
+        color: #bccee1;
+        display: block;
+        width: 100vh;
+        top: 24px;
+        left: 50%;
+    }
+
+    img {
+        animation: 1s infinite alternate slide_down;
+        transform: translateX(-50%);
+        position: absolute;
+        width: 70px;
+        top: 90px;
+        left: 50%;
+    }
+}
+
+@keyframes slide_down {
+    from {
+        top: 90px;
+    }
+
+    to {
+        top: 120px;
+    }
+}
+

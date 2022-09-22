@@ -1,0 +1,98 @@
+.calendar.container {
+    // background: #1a2631;
+    // margin-bottom: 48px;
+    padding: 10px 16px 16px;
+    background: linear-gradient(175deg, #353A40 -3.02%, #121416 93.08%);
+    box-shadow: 36px 12px 64px rgb(2 3 3 / 70%), -12px -20px 56px rgb(232 237 243 / 5%), inset -16px -6px 80px rgb(248 249 249 / 3%);
+    border-radius: 30px;
+    margin: 0px 16px 0;
+    position: relative;
+}
+
+.month__select {
+    grid-template-columns: 8% auto 8%;
+    align-content: space-between;
+    margin-bottom: 16px;
+    display: grid;
+
+    ion-button.month__button {
+        --padding-start: 0;
+        --padding-end: 0;
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .month__name {
+        text-transform: capitalize;
+        justify-self: center;
+        align-self: center;
+        font-weight: bold;
+        font-size: 1.3em;
+        color: #fff;
+    }
+}
+
+.cal-month-view .cal-days {
+    border: 0px solid #fff !important;
+}
+
+.holiday {
+}
+
+.holiday::after {
+    transform: translate(-32%, 47px);
+    position: absolute;
+    background: red;
+    height: 1px;
+    width: 24px;
+    content: "";
+}
+
+// ion-content {
+//     --background: #303B46 !important;
+//     --padding-top: 24px;
+//     --padding-bottom: 24px;
+//     --padding-start: 16px;
+//     --padding-end: 24px;
+// }
+
+// .slide {
+//     // width: 140px;
+//     // overflow: visible;
+
+//     &__item {
+//         opacity: 0.4;
+//         // padding: 0 16px;
+//         color: #BCCEE1;
+//         width: auto !important;
+
+//         &.swiper-slide-active {
+//             color: #BCCEE1;
+//             opacity: 1;
+
+//             //   &::after {
+//             //     content: '';
+//             //     width: 10px;
+//             //     height: 10px;
+//             //     border-radius: 50%;
+//             //   }
+//         }
+//     }
+// }
+
+// .month__button {
+//     margin-top: 3px !important;
+
+//     &.left {
+//         margin-left: 20px !important;
+//     }
+
+//     &.right {
+//         margin-right: 20px !important;
+//     }
+// }
+
+// .month__name {
+//     margin-top: 12px;
+//     text-align: center;
+// }

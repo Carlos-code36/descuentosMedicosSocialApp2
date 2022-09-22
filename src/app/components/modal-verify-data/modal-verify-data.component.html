@@ -1,0 +1,52 @@
+<div class="header">
+  <span>Registro de usuario</span>
+</div>
+
+<div class="message__container">
+  Se realizará el registro con los siguientes datos, por favor verifica antes de continuar con el registro.
+</div>
+
+<div class="data__container">
+  <div class="list">
+    <div class="item">
+      <span class="item__title">Tipo cuenta: </span>
+      <span class="item__data">{{ register.tipoCuenta }}</span>
+    </div>
+    <!-- <div class="item">
+      <span class="item__title">Número documento: </span>
+      <span class="item__data">{{ register.numeroDocumentoUser }}</span>
+    </div> -->
+    <div class="item">
+      <span class="item__title">Nombres: </span>
+      <span class="item__data">{{ register.nombres }} {{ register.apellidos }}</span>
+    </div>
+    <div class="item">
+      <span class="item__title">Email: </span>
+      <span class="item__data">{{ register.correo }}</span>
+    </div>
+    <div class="item">
+      <span class="item__title">Teléfono: </span>
+      <span class="item__data">{{ register.telefono }}</span>
+    </div>
+    <div class="item" *ngIf="register.idEspecialidad">
+      <span class="item__title">Especialidad médica: </span>
+      <span class="item__data">{{ register.idEspecialidad | speciality }}</span>
+    </div>
+    <div class="item" *ngIf="register.tarjetaProfecional">
+      <span class="item__title">Tarjeta profesional: </span>
+      <span class="item__data">{{ register.tarjetaProfecional }}</span>
+    </div>
+    
+  </div>
+</div>
+<div class="butttons__send">
+  <ion-button fill="clear" (click)="close()">
+    Cancelar
+  </ion-button>
+  <ion-button fill="clear" (click)="confirm()" [disabled]="conteo > 1">
+    Aceptar({{conteo}})
+  </ion-button>
+  <!-- <ion-button fill="clear" id="hab" [disabled]="conteo > 1">
+    prueba({{conteo}})
+  </ion-button> -->
+</div>

@@ -1,0 +1,19 @@
+<div class="finder">
+  <ion-searchbar #searchbar class="search__input" placeholder="Buscar servicios..." debounce="1000"
+    showCancelButton="focus" spellcheck="true" enterkeyhint="search" animated="true" mode="ios"
+    (keyup)="changeValueSearch()" (ionCancel)="resetSearch()" (ionFocus)="focusSearch(true)"
+    (ionBlur)="focusSearch(false)"  (ionClear)="resetSearch()" (click)="focusSearch(true)" (keyup)="searchOnHistory($event)">
+  </ion-searchbar>
+
+  <div class="box__history show" [class.show]="showBoxFinder && _globals.HISTORYSEARCH">
+    <span class="placeholder">Historial de Búsqueda
+      <fa-icon icon="trash" (click)="clearHistorySearch()"></fa-icon>
+    </span>
+
+    <li class="box__history__item ion-activatable" *ngFor="let item of historySearch || _globals.HISTORYSEARCH"
+      (click)="changeValueSearch(item)">
+      {{ item }}
+      <ion-ripple-effect></ion-ripple-effect>
+    </li>
+  </div>
+</div>

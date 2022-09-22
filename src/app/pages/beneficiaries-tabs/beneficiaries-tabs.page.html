@@ -1,0 +1,27 @@
+<ion-tabs class="wrapper">
+  <div class='wrapper-inner'>
+    <!-- <div class='bubles'></div> -->
+    <div class='boxes'></div>
+  </div>
+  <ion-tab-bar class="box-fix" slot="bottom">
+    <ion-tab-button class="link__pages active" tab="beneficiaries" (click)="selectTab()">
+      <fa-icon icon="heartbeat"></fa-icon>
+      <ion-label>Personas</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button class="link__pages" tab="pets">
+      <fa-icon icon="paw"></fa-icon>
+      <ion-label>Peluditos</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<svg class='filter' xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <defs>
+    <filter id='goo'>
+      <feGaussianBlur in='SourceGraphic' stdDeviation='10' result='blur' />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -5" result="goo" />
+      <feBlend in='SourceGraphic' in2='goo' operator="atop" />
+    </filter>
+  </defs>
+</svg>

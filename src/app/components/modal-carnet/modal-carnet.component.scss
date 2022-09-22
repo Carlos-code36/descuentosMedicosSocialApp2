@@ -1,0 +1,163 @@
+.container{
+    backdrop-filter: blur(6px);
+    --backdrop-opacity: 0.6 !important;
+    background: #ffffff;
+    border-radius: 8px;
+    height: 32vh;
+    min-height: 230px;
+    max-width: 406px;
+    border-radius: 4px;
+    overflow: visible;
+    //height: 385px;
+    //width: 85%;
+
+    .poligonoD1{
+        position: absolute;
+        width: 40%;
+        bottom: 29%;
+        right: 0;
+        border-top: 40px solid #00AEEF;
+        border-left: 40px solid transparent;
+    }
+    .poligonoD1A{
+        position: absolute;
+        width: 43%;
+        bottom: 29%;
+        left: 0;
+        border-top: 40px solid #00AEEF;
+        border-right: 40px solid transparent;
+    }
+    .poligonoD2{
+        position: absolute;
+        bottom: 10%;
+        right: 0;
+        width: 80%;
+        border-top: 40px solid #00AEEF;
+        border-left: 55px solid transparent;
+    }
+    .poligonoD2A{
+        position: absolute;
+        bottom: 14%;
+        left: 0;
+        width: 80%;
+        border-top: 44px solid #00AEEF;
+        border-right: 55px solid transparent;
+    }
+    .cuadrado{
+        width: 100%;
+        position: absolute;
+        height: 35px;
+        bottom: -1%;
+        background: #0D0D0D;
+    }
+    .cuadradoA{
+        width: 100%;
+        position: absolute;
+        height: 35px;
+        bottom: -1%;
+        background: #0D0D0D;
+    }
+    .cuadrado2{
+        width: 30px;
+        height: 30px;
+        background: #00AEEF;
+        position: absolute;
+        right: 5%;
+        top: 39%;
+    }
+    .triaD1{
+        width: 0; 
+        height: 0; 
+        position: absolute;
+        bottom: -1%;
+        border-bottom: 100px solid #0095DA; 
+        border-right: 100px solid transparent;
+    }
+    .triaD1A{
+        width: 0; 
+        height: 0; 
+        position: absolute;
+        bottom: -1%;
+        right: 0;
+        border-bottom: 100px solid #0095DA; 
+        border-left: 100px solid transparent;
+    }
+    .triaD2{
+        width: 0; 
+        height: 0; 
+        position: absolute;
+        bottom: -1%;
+        border-bottom: 70px solid #00AEEF; 
+        border-right: 70px solid transparent;
+    }
+    .triaD2A{
+        width: 0; 
+        height: 0; 
+        position: absolute;
+        bottom: -1%;
+        right: 0;
+        border-bottom: 70px solid #00AEEF; 
+        border-left: 70px solid transparent;
+    }
+    .triaD3{
+        width: 0; 
+        height: 0; 
+        position: absolute;
+        bottom: -1%;
+        z-index: -1;
+        border-bottom: 110px solid #D1D3D4        ; 
+        border-right: 110px solid transparent;
+    }
+    .triaD3A{
+        width: 0; 
+        height: 0; 
+        position: absolute;
+        bottom: -1%;
+        right: 0;
+        z-index: -1;
+        border-bottom: 110px solid #D1D3D4        ; 
+        border-left: 110px solid transparent;
+    }
+    .paralelo{
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        bottom: 11%;
+        left: 12%;
+        background: #0D0D0D;
+        /* Skew */
+        -webkit-transform: skew(46deg); 
+        -moz-transform: skew(46deg); 
+        -o-transform: skew(46deg);
+        transform: skew(46deg);
+    }
+    .paraleloA{
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        bottom: 11%;
+        right: 12%;
+        background: #0D0D0D;
+        /* Skew */
+        -webkit-transform: skew(-46deg); 
+        -moz-transform: skew(-46deg); 
+        -o-transform: skew(-46deg);
+        transform: skew(-46deg);
+    }
+}
+
+.close {
+    position: absolute;
+    font-size: 1.2em;
+    right: 10px;
+    top: 5px;
+    z-index: 10000;
+}
+.descargar{
+    position: absolute;
+    font-size: 1.6em;
+    right: 15%;
+    top: 1%;
+    z-index: 2;
+}
+    

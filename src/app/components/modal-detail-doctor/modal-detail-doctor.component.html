@@ -1,0 +1,31 @@
+<div>
+  <div class="modal__header">
+    <ion-button color="danger modal__close" shape="round" size="small" (click)="close()"><fa-icon icon="times" ></fa-icon></ion-button>
+    <!-- <span class="modal__close" (click)="close()">X</span> -->
+  </div>
+  <div #modal__content id="modal__content" class="modal__content">
+    <!-- {{ htmlTemplate ? '' : contentBody || 'contenido modal' }} -->
+    <div class="profile">
+      <img class="profile__avatar" [src]="dataDoctor.fotos | image:'doctor'">
+      <img class="profile__coverpage" [src]="dataDoctor.fotos | coverPageImage:'doctor'">
+    </div>
+
+    <div class="container__data">
+      <span class="subtitle">Doctor:</span>
+      <span class="information">{{ dataDoctor?.nombres | uppercase }} {{ dataDoctor?.apellidos | uppercase }} </span>
+
+      <span class="subtitle">Especialidad:</span>
+      <span class="information"> {{ dataDoctor?.nombreEspecialidad }} </span>
+
+      <span class="subtitle">Tarjeta profesional:</span>
+      <span class="information">{{ dataDoctor?.tarjetaProfecional }}</span>
+    </div>
+  </div>
+
+  <div class="modal__footer">
+    <ion-button style="color:#fff; font-weight: bold;" shape="round" expand="block"  type="button" (click)="close()"
+      [routerLink]="['/doctor-profile/'+dataDoctor?.idMembers]">
+      <fa-icon icon="user-md"></fa-icon> &nbsp;&nbsp;Perfil completo
+    </ion-button>
+  </div>
+</div>

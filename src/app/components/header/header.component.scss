@@ -1,0 +1,44 @@
+// ion-toolbar {
+//     --background: #303b46; // Background of the toolbar;
+//     --color: #BCCEE1; // Color of the toolbar text
+//     // --min-height: ;         // Minimum height of the toolbar
+//     // --opacity: ;            // Opacity of the toolbar background
+//     // --padding-bottom: ;     // Bottom padding of the toolbar
+//     // --padding-end: ;        // Right padding if direction is left-to-right, and left padding if direction is right-to-left of the toolbar
+//     // --padding-start: ;      // Left padding if direction is left-to-right, and right padding if direction is right-to-left of the toolbar
+//     // --padding-top:
+// }
+
+fa-icon {
+    font-size: 1.4em;
+    margin: 12px;
+}
+
+ion-icon.iconRight {
+    margin-right: 8px;
+    transition: width 0.5s;
+
+    &.hideSearch {
+        width: 0;
+    }
+}
+
+ion-title {
+    transition: width 0.5s;
+    text-align: center;
+    position: relative;
+    font-size: 1.3em;
+    width: 100%;
+    left: -48px;
+
+    &.hideTitle {
+        width: 0%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    ion-title {
+        font-size: 0.9em;
+        left: auto;
+    }
+}

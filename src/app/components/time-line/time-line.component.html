@@ -1,0 +1,48 @@
+<ion-content>
+  <div class="container">
+    <div class="linetime"></div>
+    <div class="year__container" *ngFor="let year of dataTime">
+      <!-- <label>{{ year['year'] }}</label> -->
+
+      <div class="month__container" *ngFor="let month of year['months']">
+        <div class="month__year">
+          <label class="month__label">{{ year['year'] }} &nbsp;&nbsp; {{ month['month'] }} </label>
+        </div>
+
+        <div class="day__container" *ngFor="let day of month['days']">
+          <span class="day__label">
+            <strong>{{ (day['date'] | dateDay)['numberDay'] }}<br></strong>
+            {{ (day['date'] | dateDay)['labelDay'] }}
+          </span>
+
+          <ng-container *ngFor="let appointment of day['appointments']">
+
+            <div class="appointment__container comming" *ngIf="!isBeneficiary">
+              <span class="appointment__place  block bold">{{ appointment['nombreServicio'] }}</span>
+              <span class="appointment__place block">
+                <strong>Sucursal:</strong> {{ appointment['nombreSucursal'] }}
+              </span>
+              <span class="appointment__place block">
+                <strong>Médico:</strong> {{ appointment['nombresMedico'] }} {{ appointment['apellidosMedico'] }}
+              </span>
+              <span class="appointment__hour block">
+                <strong>Fecha:</strong> {{ appointment['fechaCita'] | date }}
+              </span>
+              <span class="appointment__hour block">
+                <strong>Hora:</strong> {{ appointment['horaCita'].getNormalHour() }}
+              </span>
+            </div>
+
+            <div class="appointment__container comming" *ngIf="isBeneficiary">
+              <span class="appointment__user" *ngIf="isBeneficiary">
+                {{ appointment['nombres'] }} {{ appointment['apellidos'] }}
+              </span>
+              <span class="appointment__place">{{ appointment['nombreSucursal'] }}</span>
+              <span class="appointment__hour">{{ appointment['horaCita'].getNormalHour() }} </span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

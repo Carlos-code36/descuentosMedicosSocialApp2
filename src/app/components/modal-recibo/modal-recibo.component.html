@@ -1,0 +1,108 @@
+<fa-icon class="close" icon="times" (click)="close()"></fa-icon>
+<!-- <fa-icon class="descargar" icon="download" (click)="screenShot()"></fa-icon> -->
+
+<ion-content>
+    <div class="pdf" #ticketRef>
+        <div class="container">
+            <div class="Orden">
+                <img src="assets/logo_colorfull.png" alt="not found" class="logo">
+                <h1 class="grupo">PREVENIR</h1>
+                <h1 class="preve">DESCUENTOS MEDICOS</h1>
+                <span class="nit">Aplicación móvil</span>
+                <span class="orden">ORDEN DE DESCUENTO Nº: </span>
+                <div class="cilindro"></div>
+                <strong style="position: absolute; top: 19%; left: 32%; letter-spacing: 2px; margin-top: 3px;"> {{dataCita.toSend?.numeroRecibo || datosCitaGenereda?.numeroRecibo || dataUsuario?.numeroRecibo}} </strong>
+                <span class="separador2">************************</span>
+                <div class="infoPaciente">
+                    <span class="infoP" style="color: #ffffff; font-size: 13.27px; letter-spacing: 0.01em; font-family: Arial, Helvetica, sans-serif; font-weight: 700; padding-left: 2%;">INFORMACION PACIENTE</span>
+                </div>
+                <div class="cuadroPaciente"></div>
+                <div class="linea" style="position: absolute; top: 32%; margin-top: 9px; left: 8%; background: #000000; height: 1px; width: 65%;">
+                    <span style="position: absolute; top: -15px; font-size: 14px; font-family: Arial, Helvetica, sans-serif; letter-spacing: 1px;"> {{dataUsuario?.nombres || datosCitaGenereda?.nombres | titlecase }} {{dataUsuario?.apellidos || datosCitaGenereda?.apellidos | titlecase}} </span>
+                </div>
+                <strong style="position: absolute; top: 33%; margin-top: 1%; left: 8%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Nombre</strong>
+                <div class="linea" style="position: absolute; top: 37%; margin-top: 9px; left: 8%; background: #000000; height: 1px; width: 24%;">
+                    <span style="position: absolute; top: -15px; font-size: 14px; font-family: fantasy;"> {{dataUsuario?.numerodocumentouser || dataUsuario?.numeroDocumento || datosCitaGenereda?.numeroDocumento}} </span>
+                </div>
+                <strong style="position: absolute; top: 38%; margin-top: 1%; left: 8%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Cedula</strong>
+                <div class="linea" style="position: absolute; top: 37%; margin-top: 9px; right: 34%; background: #000000; height: 1px; width: 22%;">
+                    <span style="position: absolute; top: -15px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;"> {{dataUsuario?.genero || datosCitaGenereda?.genero | titlecase}} </span>
+                </div>
+                <strong style="position: absolute; top: 38%; margin-top: 1%; right: 42%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Genero</strong>
+                <div class="linea" style="position: absolute; top: 42%; margin-top: 9px; left: 8%; background: #000000; height: 1px; width: 26%;">
+                    <span style="position: absolute; top: -15px; font-size: 14px; font-family: Arial, Helvetica, sans-serif; letter-spacing: 1px;"> {{dataUsuario?.fechaNacimiento.substring(0,10) || datosCitaGenereda?.fechaNacimiento.substring(0,10)}} </span>
+                </div>
+                <strong style="position: absolute; top: 43%; margin-top: 1%; left: 8%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Fecha de Nacimiento</strong>
+                <div class="linea" style="position: absolute; top: 37%; margin-top: 9px; right: 17%; background: #000000; height: 1px; width: 8%;">
+                    <span style="position: absolute; top: -15px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;"> {{ edadUsuario }} </span>
+                </div>
+                <strong style="position: absolute; top: 38%; margin-top: 1%; right: 16%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Edad</strong>
+                <div class="linea" style="position: absolute; top: 42%; margin-top: 11px; right: 16%; background: #000000; height: 1px; width: 24%;">
+                    <span style="position: absolute; top: -15px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;"> {{dataUsuario?.telefono || datosCitaGenereda?.telefono}} </span>
+                </div>
+                <strong style="position: absolute; top: 43%; margin-top: 1%; right: 26%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Celular</strong>
+                <div style="position: absolute; top: 49%; left: 8%; width: 85%;">
+                    <span style="font-family: Arial, Helvetica, sans-serif; font-size: 14.32px;"> {{dataCita.toSend?.motivoCita || datosCitaGenereda?.motivoCita }} </span>
+                </div>
+                <strong style="position: absolute; top: 45%; margin-top: 4%; left: 8%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Motivo de la cita</strong>
+                <div class="infoCita">
+                    <span class="infoP" style="color: #ffffff; font-size: 13.27px; letter-spacing: 0.01em; font-family: Arial, Helvetica, sans-serif; font-weight: 700; padding-left: 13%;">INFORMACION CITA</span>
+                </div>
+                <div class="cuadroCita"></div>
+                <strong style="position: absolute; bottom: 31%; margin-bottom: -3px; left: 8%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Entidad prestadora</strong>
+                <div class="linea" style="position: absolute; bottom: 33%; margin-top: 9px; left: 8%; background: #000000; height: 1px; width: 75%;">
+                    <span style="position: absolute; top: -15px; left: 1%; font-size: 14px; font-family: fantasy;"> {{dataCita.toShow?.nameBranch || dataUsuario?.nombreSucursal || datosCitaGenereda?.nombreSucursal | titlecase}} </span>
+                </div>
+                <strong style="position: absolute; bottom: 25%; margin-bottom: -3px; left: 8%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Direccion</strong>
+                <div class="linea" style="position: absolute; bottom: 27%; margin-top: 1px; left: 8%; background: #000000; height: 1px; width:40%;">
+                    <span style="position: absolute; top: -15px; left: 1%; font-size: 14px; font-family: fantasy;"> {{dataCita.toShow?.addressBranch || dataUsuario?.direccionSucursal ||  datosCitaGenereda?.direccionSucursal}} </span>
+                </div>
+                <strong style="position: absolute; bottom: 25%; margin-bottom: -3px; left: 52%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Barrio</strong>
+                <div class="linea" style="position: absolute; bottom: 27%; margin-top: 1px; right: 13%; background: #000000; height: 1px; width: 35%;">
+                    <span style="position: absolute; top: -15px; left: 1%; font-size: 14px; font-family: fantasy;"> {{dataCita.toShow?.neighborhoodBranch || dataUsuario?.barrioSucursal || datosCitaGenereda?.barrioSucursal}} </span>
+                </div>
+                <strong style="position: absolute; bottom: 20%; margin-bottom: -3px; left: 8%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Ciudad</strong>
+                <div class="linea" style="position: absolute; bottom: 22%; margin-top: 1px; left: 8%; background: #000000; height: 1px; width: 40%;">
+                    <span style="position: absolute; top: -15px; left: 1%; font-size: 14px; font-family: fantasy;"> {{dataCita.toShow?.department || dataUsuario?.municipio || datosCitaGenereda?.municipio | uppercase}} </span>
+                </div>
+                <strong style="position: absolute; bottom: 20%; margin-bottom: -3px; left: 52%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Celular</strong>
+                <div class="linea" style="position: absolute; bottom: 22%; margin-top: 1px; right: 13%; background: #000000; height: 1px; width: 35%;">
+                    <span style="position: absolute; top: -15px; left: 1%; font-size: 14px; font-family: fantasy;"> {{dataCita.toShow?.mobileBranch || dataUsuario?.celularSucursal || datosCitaGenereda?.celularSucursal}} </span>
+                </div>
+                <strong style="position: absolute; bottom: 15%; margin-bottom: -3px; left: 8%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Doctor</strong>
+                <div class="linea" style="position: absolute; bottom: 17%; margin-top: 1px; left: 8%; background: #000000; height: 1px; width: 40%;">
+                    <span style="position: absolute; top: -15px; left: 1%; font-size: 10px; font-family: fantasy; white-space: nowrap;"> {{dataCita.toShow?.nameDoctor || (dataUsuario?.nombresMedico+dataUsuario?.apellidosMedico | titlecase) || datosCitaGenereda?.nombresMedico+datosCitaGenereda?.apellidosMedico | titlecase}} </span>
+                </div>
+                <strong style="position: absolute; bottom: 15%; margin-bottom: -3px; left: 52%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Servicio</strong>
+                <div class="linea" style="position: absolute; bottom: 17%; margin-top: 1px; right: 13%; background: #000000; height: 1px; width: 35%;">
+                    <span style="position: absolute; top: -15px; left: 1%; font-size: 10px; font-family: fantasy;"> {{dataServicio?.nombreSubservicio || dataUsuario?.nombreSubservicio || datosCitaGenereda?.nombreSubservicio}} </span>
+                </div>
+                <strong style="position: absolute; bottom: 9%; margin-bottom: -3px; left: 8%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Precio</strong>
+                <div class="linea" style="position: absolute; bottom: 11%; margin-top: 1px; left: 8%; background: #000000; height: 1px; width: 35%;">
+                    <span style="position: absolute; top: -15px; left: 1%; font-size: 14px; font-family: fantasy;"> {{dataServicio?.precioSubservicio || dataUsuario?.precioSubservicio || datosCitaGenereda?.precioSubservicio | percentPrice:0}} </span>
+                </div>
+                <strong style="position: absolute; bottom: 9%; margin-bottom: -3px; left: 52%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Precio descuento</strong>
+                <div class="linea" style="position: absolute; bottom: 11%; margin-top: 1px; right: 13%; background: #000000; height: 1px; width: 35%;">
+                    <span style="position: absolute; top: -15px; left: 1%; font-size: 14px; font-family: fantasy;"> {{ precioDescuento | percentPrice:0 }} </span>
+                </div>
+                <strong style="position: absolute; bottom: 4%; margin-bottom: -3px; left: 8%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Fecha</strong>
+                <div class="linea" style="position: absolute; bottom: 6%; margin-top: 1px; left: 8%; background: #000000; height: 1px; width: 24%;">
+                    <span style="position: absolute; top: -15px; left: 4%; font-size: 14px; font-family: fantasy;"> {{dataCita.toSend?.fecha.substring(0,10) || dataUsuario?.fechaCita.substring(0,10) || datosCitaGenereda?.fechaCita.substring(0,10)}} </span>
+                </div>
+                <strong style="position: absolute; bottom: 4%; margin-bottom: -3px; left: 44%; font-size: 14.32px; font-family: Arial, Helvetica, sans-serif;">Hora</strong>
+                <div class="linea" style="position: absolute; bottom: 6%; margin-top: 1px; right: 42%; background: #000000; height: 1px; width: 14%;">
+                    <span style="position: absolute; top: -15px; left: 1%; font-size: 14px; font-family: fantasy;"> {{dataCita.toSend?.hora || (dataUsuario?.horaCita | horas) || datosCitaGenereda?.hora | horas}} </span>
+                </div>
+                <!-- <strong style="position: absolute; bottom: 4%; margin-bottom: -3px; right: 14%; font-size: 14.32px; font-family: fantasy;">Duracion</strong>
+                <div class="linea" style="position: absolute; bottom: 6%; margin-top: 1px; right: 18%; background: #000000; height: 1px; width: 14%;">
+                    <span style="position: absolute; top: -15px; left: 1%; font-size: 14px; font-family: fantasy;"> {{60/dataServicio?.numeroCitas}} min</span>
+                </div> -->
+            </div>
+        </div>
+        <!-- <div class="container2"></div> -->
+    </div>
+</ion-content>
+<!-- <ion-button (click)="gerenerarPDF()" style="position: absolute; bottom: 0%; left: 33%;">Descargar</ion-button> -->
+<!-- <ion-button (click)="generatePDF()" style="position: absolute; bottom: 0%; left: 33%;">Descargar</ion-button> -->
+<!-- <ion-button (click)="generateImage()" style="position: absolute; bottom: 0%; left: 9%;">Imagen</ion-button> -->
+<ion-button (click)="generateTicket(ticketRef)" style="position: absolute; bottom: 0%; left: 33%;">Descargar</ion-button>

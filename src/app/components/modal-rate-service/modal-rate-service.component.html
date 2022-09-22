@@ -1,0 +1,35 @@
+<div class="modal__header">
+  <span class="title">Ayúdanos a mejorar </span>
+  <!-- <fa-icon class="close" icon="times" (click)="close()"></fa-icon> -->
+</div>
+<div class="modal__body">
+  <ion-slides #slideRate (ionSlideDidChange)="changeSlide()">
+    <ion-slide>
+      <p>1. ¿Como calificas la atención recibida en tu cita?</p>
+      <rate (rateOut)="setRate($event, 'attention')"></rate>
+    </ion-slide>
+    <ion-slide>
+      <p>2. ¿Como calificas la puntualidad del profesional de la salud?</p>
+      <rate (rateOut)="setRate($event, 'puntuality')"></rate>
+    </ion-slide>
+    <ion-slide>
+      <p>3. ¿Recomendarias el servicio a tus contactos?</p>
+      <rate (rateOut)="setRate($event, 'recomendation')"></rate>
+    </ion-slide>
+    <ion-slide>
+      <p>4. ¿Tienes algún comentario o recomendación?</p>
+      <ion-item>
+        <ion-label position="floating">Comentario o descripción</ion-label>
+        <ion-textarea #areaComentary placeholder="Recomendación o comentario..." maxlength="350" (ionChange)="countLetters(areaComentary)">
+        </ion-textarea>
+      </ion-item>
+      <span class="counter__letters">{{countText}}/350</span>
+    </ion-slide>
+  </ion-slides>
+</div>
+<div class="modal__footer">
+  <ion-button expand="full" [disabled]="currentSlide == 0" *ngIf="!rateAlready || currentSlide != 3" (click)="backToRate()">
+    atras</ion-button>
+  <ion-button expand="full" *ngIf="rateAlready && currentSlide == 3" (click)="sendRate()">calificar</ion-button>
+  <ion-button expand="full" fill="clear" (click)="close()">mas tarde</ion-button>
+</div>

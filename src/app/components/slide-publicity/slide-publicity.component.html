@@ -1,0 +1,10 @@
+<ion-icon class="control__buttons left" name="chevron-back-outline" (click)="prevSlide()" *ngIf="slideData.length > 1"></ion-icon>
+
+<ion-slides #slidesPublicity [options]="slideOptsOne" [pager]="pagination">
+  <ion-slide *ngFor="let slide of slideData">
+    <img *ngIf="!card" src="{{slide.rute}}" [style.height]="height ? height : 'auto'" />
+    <img *ngIf="card" [src]="slide.rute | imageServices" [style.height]="height ? height : 'auto'" />
+  </ion-slide>
+</ion-slides>
+
+<ion-icon class="control__buttons right" name="chevron-forward-outline" (click)="nextSlide()" *ngIf="slideData.length > 1"></ion-icon>

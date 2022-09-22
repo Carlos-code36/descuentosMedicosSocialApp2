@@ -1,0 +1,52 @@
+.filter__departments {
+    // position: fixed;
+    width: 100vw;
+
+    &.on__filter {
+        width: 100%;
+        
+        .input__filter {
+            margin: 12px 0;
+            width: 100%;
+        }
+    }
+
+    .input__filter {
+        border-bottom: 1px solid #fff;
+        margin: 12px auto 0;
+        position: relative;
+        overflow: visible;
+        color: #fff;
+        width: 80%;
+
+        fa-icon {
+            font-size: 1.3em;
+        }
+
+        ion-input {
+            display: inline-block;
+            text-align: center;
+            width: 85%;
+        }
+    }
+
+    .group__filter {
+        box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.95);
+        transform: translateX(-50%);
+        border-radius: 0 0 5px 5px;
+        background: #fff;
+        position: absolute;
+        max-height: 230px;
+        padding: 8px 12px;
+        color: #000000;
+        overflow: auto;
+        z-index: 9000;
+        width: 80%;
+        left: 50%;
+
+        .filter__item {
+            padding: 4px 0;
+            border-bottom: 1px solid #636e72;
+        }
+    }
+}

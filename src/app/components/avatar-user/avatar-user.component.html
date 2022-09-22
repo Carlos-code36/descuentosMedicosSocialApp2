@@ -1,0 +1,43 @@
+<div class="background__photo">
+  <img [src]="(user||beneficiary).fotos | coverPageImage:doctor?'doctor':'person'" *ngIf="!imageViewerCoverpage && !pet"
+  (click)="showPhotoCoverPage()">
+  <img [src]="petCoverpage| coverPageImage:doctor?'doctor':'person'" *ngIf="!imageViewerCoverpage && pet"
+  (click)="showPhotoCoverPage()">
+  <img [src]="imageViewerCoverpage" *ngIf="imageViewerCoverpage" (click)="showPhotoCoverPage(imageFileCoverpage)">
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="loadImage('cover')" *ngIf="modeEdit && !pet">
+    <ion-fab-button class="change__photo__button">
+      <fa-icon icon="camera"></fa-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>
+
+<div class="profile__photo">
+  <img [src]="(pet?user.avatar:(user||beneficiary).fotos) | image:doctor?'doctor':'person'" *ngIf="!imageViewerProfile && !pet"
+    (click)="showPhotoAvatar()">
+    <img [src]="petProfile | image:doctor?'doctor':'person'" *ngIf="!imageViewerProfile && pet"
+    (click)="showPhotoAvatar()">
+    <img [src]="imageViewerProfile" *ngIf="imageViewerProfile" (click)="showPhotoAvatar(imageFileProfile)">
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="loadImage('profile')" *ngIf="modeEdit">
+    <ion-fab-button class="change__photo__button">
+      <fa-icon icon="camera"></fa-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>
+
+<div class="profile__info" *ngIf="!modeEdit">
+  <span class="names">
+    {{ ((user||beneficiary)['nombres']+"").getFirstWord() }}
+    {{ ((user||beneficiary)['apellidos']+"").getFirstWord() }}
+  </span>
+  <!-- <span class="names doctor" *ngIf="doctor">
+    T.P. N° {{ (user||beneficiary)['tarjetaProfecional']}}
+  </span> -->
+  <span class="data" style="text-transform: lowercase;" *ngIf="(user||beneficiary)['correo'] && !doctor">
+    {{ (user||beneficiary)['correo'] }}
+  </span>
+  <span class="data" style="text-transform: lowercase;" *ngIf="(user||beneficiary)['telefono'] && !doctor">
+    Cel. {{ (user||beneficiary)['telefono'] }}
+  </span>
+</div>

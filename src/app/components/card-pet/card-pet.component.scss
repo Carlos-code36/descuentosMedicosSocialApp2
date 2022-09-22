@@ -1,0 +1,52 @@
+:host {
+    overflow: visible;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    bottom: 0;
+}
+
+.container {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 2px solid #2AA5DC;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.pet__info {
+    margin: 12px;
+    
+    display: grid;
+    grid-template-rows: 36px 44px 1fr;
+
+    div {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    span:nth-child(1) {
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    span.subtitle {
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    span.data {
+        font-size: 1em;
+    }
+}
+
+.pet__photo {
+    margin: auto 16px;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 50%;
+}

@@ -1,0 +1,17 @@
+<div #background__photo class="background__photo">
+  <img [src]="coverPage | image" *ngIf="!imageViewerCoverpage" alt="coverpage_photo" (click)="showPhotoCoverPage()">
+  <img [src]="imageViewerCoverpage" *ngIf="imageViewerCoverpage" alt="coverpage_photo"
+    (click)="showPhotoCoverPage(imageFileCoverpage)">
+</div>
+
+<div #profile__photo class="profile__photo">
+  <img [src]="profile | image" *ngIf="!imageViewerProfile" alt="profile_photo" (click)="showPhotoAvatar()">
+  <img [src]="imageViewerProfile" *ngIf="imageViewerProfile" alt="profile_photo"
+    (click)="showPhotoAvatar(imageFileProfile)">
+</div>
+<div #profile__info class="profile__info">
+  <span class="names">{{ provider.nombre || provider.nombres+' '+ provider.apellidos}}</span>
+  <span style="text-transform: lowercase; font-size: 0.9rem;text-align: center">{{ provider.direccion }} {{ provider.barrio ? provider.barrio:'' }}
+  </span>
+  <span style="text-transform: lowercase; font-size: 0.9rem;text-align: center;">Tel. {{ provider.telefono }}</span>
+</div>

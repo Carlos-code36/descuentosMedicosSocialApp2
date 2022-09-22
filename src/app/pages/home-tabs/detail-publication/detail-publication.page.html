@@ -1,0 +1,120 @@
+<ion-header class="ion-no-border" *ngIf="providerData">
+  <app-header #headerTemplate [showMenu]="false" [buttonsRight]="false" [title]="subServicios['nombreSubservicio']">
+  </app-header>
+</ion-header>
+
+<ion-content *ngIf="providerData">
+
+  <div class="slide__photos__publication">
+    <slide-publicity [slideData]="subServicios.imagenes" [card]="true" [height]="'230px'" [pagination]="false">
+    </slide-publicity>
+  </div>
+
+  <div class="container__publication">
+    <div class="box__provider  ion-activatable ripple-parent"
+      [routerLink]="['/home/detail-provider/'+providerData['idMembers']+'/'+idMunicipio+'/'+publicationId]">
+      <h5 class="name__provider">{{ providerData['nombreEmpresa'] }}</h5>
+
+      <ion-button class="button__perfil"  shape="round">
+         Perfil 
+        <fa-icon class="icons__buttons" icon="angle-right"></fa-icon> 
+      </ion-button>
+      <!-- <span style="font-size: large; font-weight: bold; margin-top: 5px; margin-left: 10px;">PORTAFOLIO DE SERVICOS</span> -->
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <h4 style="color: #ffffff; font-weight: bold;">Servicio:
+      <span style="position: relative; margin-left: calc(8% - 6px);"> {{providerData['nombreServicio'].split('-')[1]}} </span> </h4>
+    <hr style="background: #ffffff">
+    <br>
+
+    <div class="certificado">
+      <img src="assets/img/Empresa_Cert.png" (click)="mostrarCertificado()" alt="not found">
+    </div>
+    
+    <div class="info__publication">
+      <!-- <h3 class="label__data__publication">Especialidad</h3>
+        <span class="data__publication">{{ providerData['nombreEspecialidad'] }}</span> -->
+      <h4 class="label__data__publication">Calificación</h4>
+      <div class="calification__publication">
+        <!-- <fa-icon icon="star"></fa-icon>
+        <fa-icon icon="star"></fa-icon>
+        <fa-icon icon="star"></fa-icon>
+        <fa-icon icon="star"></fa-icon>
+        <fa-icon icon="star"></fa-icon> -->
+        <h5 style="margin: 0;padding: 0;" *ngIf="providerData['calificacion']==0.0">Sin calificar</h5>
+        <individual-rate *ngIf="providerData['calificacion']!=0.0" [score]="providerData['calificacion']"> </individual-rate>
+      </div>
+
+      <h4 class="label__data__publication">Descuento cita</h4>
+      <span class="data__publication">{{ subServicios.descuentoSubServicio }} %</span>
+
+      <!-- <h4 class="label__data__publication">Duración promedio cita</h4>
+      <span class="data__publication">{{ providerData['duracionAproximada'] }} min</span> -->
+      <h4 class="label__data__publication">Tarifa particular</h4>
+      <span class="data__publication">{{ subServicios.precioSubservicio | percentPrice:0 }} </span>
+
+      <h4 class="label__data__publication">Tarifa con descuento</h4>
+      <span class="data__publication">
+        {{ subServicios.precioSubservicio | percentPrice:subServicios.descuentoSubServicio }}
+      </span>
+
+      <h4 class="label__data__publication">Duración cita</h4>
+      <span class="data__publication">{{ 60/subServicios.numeroCitas }} min</span>
+
+      <h4 class="label__data__publication" *ngIf="providerData['precioProcedimiento']">Procedimientos</h4>
+      <span class="data__publication">{{ providerData['precioProcedimiento'] | currency:'$ ':true:'1.0' }}</span>
+    </div>
+
+    <hr style="background: #ffffff">
+
+    <h3 style="color:#ffffff; font-weight: bold;">Descripción:</h3>
+    <span class="description__publication">{{ subServicios.descripcionSubservicio }}</span><br><br>
+    <!-- <hr style="background: #ECF0F1"> -->
+  </div>
+  <ion-button class="button__appointment" shape="round" (click)="cambiarVista()" >
+    Solicitar cita <fa-icon class="icons__buttons" icon="angle-right"></fa-icon> 
+  </ion-button>
+  <div class="comentary" *ngIf="providerData['comentarios'].length">
+    <h3 [style.color]="'#bccee1'">Comentarios</h3>
+    <br>
+    <ng-container *ngFor="let comentary of providerData['comentarios']">
+      <div class="comentary__item">
+        <img [src]="comentary.avatar | image" class="avatar">
+        <span class="names">{{ comentary.nombres }}</span>
+        <span class="date">{{ comentary.updated_at | date:'longDate' }}</span>
+        <p class="comentary__publication">
+          {{ comentary.comentario }}</p>
+      </div>
+
+    </ng-container>
+
+  </div>
+
+  <!-- <ng-container *ngFor="let servicios of filteredPublications; let i = index">
+    <div class="publication ion-activatable" (click)="detailPublication($event, servicios.idSubServicios)">
+      <h5 class="title__publication">{{ servicios.nombreSubservicio | uppercase }}</h5>
+      <div class="image__container">
+        <img [src]="servicios.imagenes[0].path | imageServices">
+        <div class="calification__publication">
+          <individual-rate *ngIf="servicios['calificacion']!=0.0" [score]="servicios['calificacion']" size="16px" spacing="0px"></individual-rate>
+          <span style="margin: 0;padding: 0;" *ngIf="servicios['calificacion']==0.0">Sin calificar</span>
+        </div>
+        <div class="information__container">
+          <div class="provider__box">
+            <p class="provider provider__title">Descripcion</p>
+            <p class="provider provider__data">
+              {{ 'servicios[i].descripcionSubservicio' | uppercase }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container> -->
+
+  <!-- <h2 class="title" >Comentarios</h2> -->
+
+  <!-- TODO -->
+  <!-- Comentarios de la publicacion -->
+
+</ion-content>

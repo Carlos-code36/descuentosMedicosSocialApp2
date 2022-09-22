@@ -1,0 +1,30 @@
+<!-- Header -->
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="false" [showSettings]="false" [buttonsRight]="false" title="Peluditos"
+    defaultBack="/home/menu">
+  </app-header>
+</ion-header>
+
+<ion-content class="container">
+
+  <div class="list__cards" *ngIf="_globals.PETS">
+    <ng-container *ngFor="let pet of mascotas">
+      <card-beneficiary [pet]="pet" (click)="editPet(pet)"></card-beneficiary>
+    </ng-container>
+  </div>
+
+  <div class="not__items" *ngIf="!(mascotas.length >= 1)">
+    <img src="assets/img/pet_3.png" alt="pet">
+    <span>Aún no tienes ningun peludito agregado a tu cuenta.</span>
+    <br>
+    <span>¡Que esperas para registrarlos y disfrutar todos nuestros descuentos!</span>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" vertical="bottom" horizontal="end" slot="fixed"
+    (click)="addPetToGroup()">
+    <ion-fab-button>
+      <!-- <ion-icon name="person-add-outline"></ion-icon> -->
+      <img src="assets/icon/add_pet_2.svg" alt="">
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

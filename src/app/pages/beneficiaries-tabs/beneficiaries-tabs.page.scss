@@ -1,0 +1,87 @@
+ion-tab-bar {
+    --background: #272B30;
+    --color: #272B30;
+    border: none;
+    
+}
+
+.wrapper .box-fix {
+    position: absolute;
+    width: 100%;
+    height: 70px;
+    background-color: #272B30;
+    bottom: 0;
+}
+
+.wrapper .wrapper-inner {
+    filter: url("#goo");
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    bottom: 10px;
+}
+
+.wrapper .boxes {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #272B30;
+}
+
+
+
+.wrapper .bubles {
+    position: absolute;
+    width: 110px;
+    height: 40px;
+    background: #272B30;
+    bottom: 0px;
+    border-radius: 100%;
+    left: 11%;
+    transition: 0.3s cubic-bezier(0.44, -0.35, 0.48, 1.5) all;
+}
+
+.box-fix {
+    display: flex;
+}
+
+.box-fix ion-tab-button {
+    -webkit-tap-highlight-color: transparent;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    list-style: none;
+    color: #303B46;
+    cursor: pointer;
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+
+    ion-label {
+        display: none;
+    }
+    fa-icon {
+        font-size: 0.8rem;
+
+        color: #00AB78;
+    }
+}
+
+.box-fix ion-tab-button.active {
+    cursor: initial;
+    color: #00AB78;
+
+    fa-icon {
+        position: relative;
+        top: -3px;
+        transform: scale(2.0);
+        color: #00AB78;
+        z-index: 10000;
+    }
+
+    ion-label {
+        display: initial;
+        color: #fff;
+    }
+}

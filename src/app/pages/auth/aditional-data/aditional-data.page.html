@@ -1,0 +1,85 @@
+<div class="header">
+  <span>
+    <ng-container *ngIf="!modalType">
+      Datos Adicionales
+    </ng-container>
+    <ng-container *ngIf="modalType">
+      Tipo cuenta
+    </ng-container>
+  </span>
+</div>
+
+<div class="message__container">
+  <ng-container *ngIf="!modalType">
+    Como profesional de la salud, necesitamos que nos brindes algunos datos adicionales necesarios para continuar,
+    agradecemos su colaboración
+  </ng-container>
+  <ng-container *ngIf="modalType">
+    Que tipo de cuenta deseas crear?
+  </ng-container>
+</div>
+
+<div class="inputs__container">
+  <div class="selectorAccount" *ngIf="modalType">
+    <div class="buttonSelector" [class.selected]="typeAccount == 'user'" (click)="typeAccount = 'user'">
+      <fa-icon icon="user"></fa-icon>
+      <span>Usuario</span>
+    </div>
+
+    <div class="buttonSelector" [class.selected]="typeAccount == 'doctor'" (click)="typeAccount = 'doctor'">
+      <fa-icon icon="user-md"></fa-icon>
+      <span>Médico</span>
+    </div>
+  </div>
+
+  <form [formGroup]="formAditionalData">
+    <ion-list *ngIf="!modalType">
+      <!-- ----------------------------------------------------------------------------------------------------- -->
+      <!-- ---------------------------------------- INPUT TARJETA PROFESIONAL ---------------------------------- -->
+      <!-- ----------------------------------------------------------------------------------------------------- -->
+      <ion-item>
+        <ion-icon name="card-outline" slot="start"></ion-icon>
+        <ion-input type="tel" placeholder="Tarjeta profesional" formControlName="profetionalCard" minlength="2" maxlength="10" validate>
+        </ion-input>
+      </ion-item>
+
+      <br>
+
+      <!-- ----------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------- SELECTOR RETHUS --------------------------------------- -->
+      <!-- ----------------------------------------------------------------------------------------------------- -->
+
+      <ion-item class="input__filter">
+        <ion-icon name="school-outline" slot="start"></ion-icon>
+        <ion-input #inputDrop type="text" formControlName="rethusDataName" placeholder="Titulo Rethus" (ionFocus)="focusDropdownSearch(inputDrop)" (keyup)="searchRethus($event.target)" (ionBlur)="blurDropdownSearch()"></ion-input>
+        <ion-input type="hidden" formControlName="rethus"></ion-input>
+      </ion-item>
+
+      <div class="group__filter" *ngIf="filteredRethusList">
+        <ng-container *ngFor="let rethus of filteredRethusList">
+          <span class="filter__item" [attr.data-rethus-id]="rethus.idEspecialidad" (click)="selectRethusItem($event.target)">
+            {{ rethus.nombreEspecialidad.split('-')[1] }}
+          </span>
+        </ng-container>
+      </div>
+    </ion-list>
+  </form>
+
+  <div class="buttons__send" *ngIf="!modalType">
+    <ion-button fill="clear" (click)="close()" [disabled]="filteredRethusList">
+      Cancelar
+    </ion-button>
+    <ion-button fill="clear" (click)="confirm()" [disabled]="formAditionalData.invalid">
+      Enviar
+    </ion-button>
+  </div>
+
+  <div class="buttons__send" *ngIf="modalType">
+    <ion-button fill="clear" (click)="close()">
+      Volver
+    </ion-button>
+    <ion-button fill="clear" (click)="confirm()">
+      Aceptar
+    </ion-button>
+  </div>
+</div>

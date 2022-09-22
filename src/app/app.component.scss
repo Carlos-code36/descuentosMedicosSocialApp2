@@ -1,0 +1,44 @@
+.menu__list__item {
+    fa-icon {
+        width: 32px;
+        font-size: 1.7em;
+        text-align: center;
+    }
+
+    span {
+        left: 48px;
+        position: absolute;
+    }
+}
+
+
+// .box-tabs {
+//     background: #121212;
+//     width: 90% !important;
+//     max-width: 400px !important;
+//     border-radius: 30px;
+//     margin: 0px 0px 10px 5% !important;
+//     max-height: 56px;
+//     height: 56px;
+
+//     .button-tab {
+//         color: #BCCEE1;
+//         background: #23272a;
+//         box-shadow: 5px 5px 15px -15px rgba(0, 0, 0, 0.4);
+
+//         fa-icon {
+//             color: #BCCEE1;
+//             padding-bottom: 3px;
+//         }
+
+//         &[aria-selected="true"] {
+//             // width: 24px;
+//             // background: purple;
+
+//             fa-icon {
+//                 color: #6089d6;
+//                 transform: translate3d(0, -5px, 0) scale(1.3);
+//             }
+//         }
+//     }
+// }

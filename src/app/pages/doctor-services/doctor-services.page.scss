@@ -1,0 +1,140 @@
+ion-tab-bar {
+    --background: #353A40;
+    --color: #353A40;
+    border: none;
+}
+
+.wrapper .box-fix {
+    position: absolute;
+    width: 100%;
+    height: 52px;
+    bottom: 0;
+    left: 0;
+    background-color: #353A40;
+}
+
+.wrapper .wrapper-inner {
+    filter: url("#goo");
+    position: relative;
+    width: 100%;
+    height: 75px;
+}
+
+.wrapper .box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 42px;
+    background-color: #353A40;
+}
+
+
+
+.wrapper .buble {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    background: #353A40;
+    bottom: 24px;
+    left: 80px;
+    border-radius: 50%;
+    transition: 0.3s cubic-bezier(0.44, -0.35, 0.48, 1.5) all;
+}
+
+.box-fix {
+    display: flex;
+}
+
+.box-fix ion-tab-button {
+    -webkit-tap-highlight-color: transparent;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    list-style: none;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+
+    ion-label {
+        display: none;
+    }
+}
+
+.box-fix ion-tab-button.active {
+    cursor: initial;
+    color: #00AB78;
+
+    fa-icon {
+        position: relative;
+        top: -10px;
+        transform: scale(1.8);
+        color: #00AB78;
+    }
+
+    ion-label {
+        display: initial;
+        color: #ffffff;
+        font-size: 1rem;
+
+    }
+}
+.filter {
+    transition: right 200ms cubic-bezier(0.65, 0.05, 0.36, 1);
+    align-items: flex-start;
+    flex-direction: column;
+    background: #303b46;
+    margin-bottom: 24px;
+    border-radius: 6px;
+    padding: 8px 16px;
+    position: fixed;
+    display: flex;
+    right: -240px;
+    width: 220px;
+    z-index: 30;
+    top: 60px;
+
+    &.active {
+        right: 12px;
+    }
+
+    &::before {
+        transform: rotateZ(45deg);
+        background: #303b46;
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        content: "";
+        right: 12px;
+        top: -10px;
+        
+    }
+
+    &__title {
+        text-transform: uppercase;
+        color: #00AB78;
+        margin: 8px auto 24px;
+        white-space: nowrap;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    &__item {
+        justify-content: space-between;
+        color: #00AB78;
+        padding-bottom: 8px;
+        display: flex;
+        width: 100%;
+
+        .item__label {
+            padding-right: 12px;
+            
+        }
+    }
+
+    .btn {
+        margin: 16px auto 8px;
+    }
+}

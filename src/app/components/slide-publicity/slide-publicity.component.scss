@@ -1,0 +1,24 @@
+img {
+    object-fit: cover;
+    height: 230px;
+    width: 100vw;
+}
+
+.control__buttons {
+    background: #202c388c;
+    border-radius: 50%;
+    position: absolute;
+    font-weight: bold;
+    color: #BCCEE1;
+    padding: 12px;
+    z-index: 100;
+    top: 90px;
+
+    &.left {
+        left: 12px;
+    }
+
+    &.right {
+        right: 12px;
+    }
+}

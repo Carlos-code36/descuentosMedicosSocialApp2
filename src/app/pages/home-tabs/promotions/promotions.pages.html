@@ -1,0 +1,104 @@
+
+<ion-header #header>
+  <app-header #headerTemplate title="Promociones" [showTitle]="false" [back]="false" [buttonsRight]="false">
+    <finder #finder__te *ngIf="listPromotions" [searchData]="listPromotions"
+      [filters]="filtersSelected.length > 0 ? filtersSelected : listFilters" (foundData)="setFoundData($event)">
+    </finder>
+  </app-header>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="locationSearch || true">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPublications($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <filter #filter [foundData]="null" [listFilters]="listFilters" (filtersSelected)="filtersSelected=$event"
+    [foundData]="listPromotions.length == filteredPromotions.length ? null : filteredPromotions">
+    <department-selector (departmentSelected)="loadPublications($event);filter.setFilter($event, 'idmunicipio')"
+      [color]="'#bccee1'" [customClass]="'on__filter'">
+    </department-selector>
+  </filter>
+
+  <div class="result__search not_found" *ngIf="listPromotions.length == 0">
+    Próximamente aquí las mejores promociones para tus servicios.
+    <img src="assets/img/not_found.png" alt="not found">
+  </div>
+
+  <div class="result__search not_found" *ngIf="listPromotions.length != 0 && filteredPromotions.length == 0">
+    No existen aún publicaciones que coincidan con <strong> <i>{{ searchValue }}</i></strong>
+    <img src="assets/img/not_found.png" alt="not found">
+  </div>
+
+  <div class="result__search" *ngIf="filteredPromotions?.length > 0">
+    <h3 #result class="result__text" *ngIf="onSearch">resultados de <strong>{{ searchValue }}</strong></h3>
+    
+    <!-- <ng-container *ngFor="let promotion of filteredPromotions">
+      <div class="promotion ion-activatable ripple-parent" (click)="detailPromotion($event, promotion.idServicios)">
+        <h5 class="title__publication">{{ promotion.nombreServicio | uppercase }}</h5>
+      </div>
+    </ng-container> -->
+    <ng-container *ngFor="let promotion of filteredPromotions">
+
+      <div class='container'>
+
+        <div class='flip_box'>
+    
+          <div class='front'>
+            <p class='f_title'> {{promotion.nombreSucursal}} </p>
+            <p class='f_subline'>Servicio</p>
+            <h1 class='f_headline'> {{promotion.nombreSubservicio}} </h1>
+          </div>
+
+          <img [src]="promotion.fotos[0].path | imageServices" style="position: absolute; width: 320px; height: 230px; margin-top: 18%; margin-left: 10%;">
+
+          <!-- <div class="slide__photos__publication">
+            <slide-publicity [slideData]="promotion.fotos" [card]="true" [height]="'200px'" [pagination]="false"></slide-publicity>
+          </div> -->
+            
+          <div class='back'>
+            <h1 class='b_headline'>Descripcion</h1>
+            <p class='b_text'> {{promotion.descripcion}} </p>
+            <button class='b_button' (click)="detailPromotion($event, promotion.idPromociones)"><span style="color: #202c38;">Detalle Promocion</span></button>
+          </div>
+    
+        </div>
+    
+        <div class='r_wrap'>
+    
+          <div class='b_round'></div>
+          <div class='s_round' (click)="click1($event)" (transitionend)="click2($event)">
+            <div class='s_arrow'></div>
+          </div>
+    
+        </div>
+      
+    </div>
+
+      <!-- <div class="publication ion-activatable ripple-parent"
+        (click)="detailPromotion($event, promotion.idServicios)">
+        <h5 class="title__publication">{{ promotion.nombreSubservicio | uppercase }}</h5>
+        <div class="slide__photos__publication">
+          <slide-publicity [slideData]="promotion.fotos" [card]="true" [height]="'270px'" [pagination]="false"></slide-publicity>
+        </div>
+        <div class="poligonoD2"></div>
+        <div class="poligonoD"></div>
+        <img src="assets/img/liston-promo.png" alt="not found" class="liston">
+        <div class="information__container">
+          <div class="speciality__box">
+            <p class="speciality speciality__title">Descripcion</p>
+            <p class="speciality speciality__data">
+              {{ promotion.descripcion }}
+            </p>
+            <div class="provider__box">
+              <p class="provider provider__data" style="padding-top: 28px; position: absolute; font-size: 15px; font-weight: bold;">
+                {{ promotion.nombreSucursal | uppercase }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div> -->
+    </ng-container>
+  </div>
+  
+</ion-content>

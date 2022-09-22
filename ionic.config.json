@@ -1,0 +1,8 @@
+{
+  "name": "descuentosMedicosSocialApp",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

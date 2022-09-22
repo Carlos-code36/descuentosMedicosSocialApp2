@@ -1,0 +1,37 @@
+.container {
+    .modal__header {
+        padding: 12px 16px;
+        border-bottom: 1px solid #7f8c8d;
+
+        .modal__close {
+            position: absolute;
+            font-size: 1.2em;
+            right: 5px;
+            top: 5px;
+            z-index: 10000;
+
+        }
+
+        .modal__title {
+            display: block;
+            text-align: center;
+        }
+    }
+
+    .modal__content {
+        box-sizing: border-box;
+        margin-bottom: 16px;
+        text-align: justify;
+        overflow-y: scroll;
+        margin-top: 4px;
+        padding: 12px;
+
+        p {
+            font-size: 14px;
+        }
+    }
+
+    .modal__footer {
+        margin: 0 80px;
+    }
+}

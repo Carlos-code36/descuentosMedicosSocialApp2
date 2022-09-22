@@ -1,0 +1,105 @@
+ion-content {
+    // --background: #0A1147;
+    // --background: linear-gradient(130deg, rgba(6,11,49,1) 21%, rgba(31,39,96,1) 53%, rgba(65,74,137,1) 83%);
+    background: linear-gradient(210.55deg, #353A40 -3.02%, #121416 93.08%);
+    .particle {
+        position: absolute;
+        border-radius: 50%;
+    }
+}
+
+.logo__app {
+    margin: 40px 0 32px;
+    display: block;
+
+    img {
+        display: block;
+        margin: 8px auto;
+        width: 80%;
+    }
+}
+
+.tabs__content {
+    height: calc(100vh - 155px);
+    min-height: 500px;
+    display: block;
+}
+
+ion-tabs {
+    position: relative;
+
+    ion-tab-bar {
+        --background: transparent;
+        position: relative;
+        border-width: 0;
+        height: 40px;
+        width: 84vw;
+        left: 8vw;
+        top: 22px;
+
+        ion-tab-button {
+            border: 0.5px solid #fff;
+            background: linear-gradient(210.55deg, #353A40 -3.02%, #121416 93.08%);
+            color: #fff;
+            border-radius: 30px;
+            &:nth-child(1) {
+                margin-right: 12px;
+            }
+
+            &.tab-selected {
+                background: #00AB78;
+            }
+
+            ion-label {
+                font-weight: bold;
+                font-size: 1rem;
+            }
+        }
+    }
+
+}
+
+.version {
+    display: inline-block;
+    position: relative;
+    text-align: right;
+    font-size: 0.8em;
+    color: #fff;
+    bottom: 16px;
+    width: 100vw;
+    right: 8px;
+}
+
+@supports (-webkit-touch-callout: none) {
+    ion-tab-bar {
+        height: 38px !important;
+        width: 80vw !important;
+        left: 10vw !important;
+    }
+
+    ion-label {
+        font-weight: bold;
+        font-size: 1em;
+    }
+}
+
+@for $i from 1 through 90 {
+    @keyframes particle-animation-#{$i} {
+        100% {
+            transform: translate3d((random(90) * 1vw), (random(90) * 1vh), (random(100) * 1px));
+        }
+    }
+
+    .particle:nth-child(#{$i}) {
+        animation: particle-animation-#{$i} 20s infinite;
+        $size: random(2) + 5 + px;
+        opacity: random(100)/100;
+        height: $size;
+        width: $size;
+        animation-delay: -$i * .2s;
+        transform: translate3d((random(90) * 1vw), (random(90) * 1vh), (random(100) * 1px));
+        background: #00AB78;
+
+        // gradient(129deg, rgba(10,17,71,1) 35%, rgb(52 60 115) 100%);
+    }
+}

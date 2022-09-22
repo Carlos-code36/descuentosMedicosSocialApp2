@@ -1,0 +1,203 @@
+<ion-header class="ion-no-border" *ngIf="providerData">
+  <app-header #headerTemplate [showMenu]="false" [buttonsRight]="false" title="Información proveedor"></app-header>
+</ion-header>
+
+<ion-content *ngIf="providerData">
+  <div class="container" (scroll)="onScroll($event)">
+    <avatar-provider *ngIf="providerData" [provider]="providerData" [scrollPosition]="scrollPosition"></avatar-provider>
+    <div #data__provider class="data__provider">
+      <div class="tabs">
+        <ion-segment class="segments" scrollable value="galeria" [(ngModel)]="selectedTab" mode="ios">
+          <ion-segment-button class="segments__button" *ngFor="let segmentTab of segmentsTabsList; index as i" [value]="segmentTab['label']" (click)="selectSegmentTab(segmentTab['label'], i)">
+                        <ion-label class="segments__label">
+                          <fa-icon style="font-size: 1.3rem; padding: 3px;" [icon]="segmentTab.icon" [style.color]="segmentTab.color"></fa-icon>
+                          <p style="font-size: 0.6rem; color: #fff;">{{segmentTab ['label']| uppercase}}</p>
+                        </ion-label>
+          </ion-segment-button>
+        </ion-segment>
+        <ion-slides #slideTabs (ionSlideDidChange)="swipeSlide($event)">
+
+
+                    <!-- Slider info -->
+                    <ion-slide>
+                      <div class="slide__content info+">
+                        <div class="data">
+                          <h3 class="subtitle">Misión</h3>
+                          <p>{{ providerData.misionEmpresa }}</p>
+                          <br>
+                          <h3 class="subtitle">Visión</h3>
+                          <p>{{ providerData.visionEmpresa }}</p>
+                          <br>
+                          <h3 class="subtitle">Objetivos</h3>
+                          <p>{{ providerData.obetivosEmpresa }}</p>
+                          <h4 class="subtitle link" [routerLink]="['/full-data-provider/'+providerData.idMembers]">
+                            Ver perfil
+                          </h4>
+                          <div class="item__info" *ngIf="(providerData.linkFacebook || providerData.linkInstagram || providerData.linkLinkedin || providerData.linkPaginaWeb || providerData.linkWhatsapp || providerData.linkYouTube ) != null">
+                            <ion-label>Redes sociales</ion-label>
+                            <div class="social__networks">
+                              <a *ngIf="providerData.linkWhatsapp" [href]="providerData.linkWhatsapp">
+                                <ion-icon class="icon whatsapp" name="logo-whatsapp"></ion-icon>
+                              </a>
+                              <a *ngIf="providerData.linkFacebook" [href]="providerData.linkFacebook">
+                                <ion-icon class="icon facebook" name="logo-facebook"></ion-icon>
+                              </a>
+                              <a *ngIf="providerData.linkInstagram" [href]="providerData.linkInstagram">
+                                <ion-icon class="icon instagram" name="logo-instagram"></ion-icon>
+                              </a>
+                              <a *ngIf="providerData.linkLinkedin" [href]="providerData.linkLinkedin">
+                                <ion-icon class="icon linkedin" name="logo-linkedin"></ion-icon>
+                              </a>
+                              <a *ngIf="providerData.linkYouTube" [href]="providerData.linkYouTube">
+                                <ion-icon class="icon youTube" name="logo-youTube"></ion-icon>
+                              </a>
+                              <a *ngIf="providerData.linkPaginaWeb" [href]="providerData.linkPaginaWeb">
+                                <ion-icon class="icon web" name="globe-outline"></ion-icon>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ion-slide>
+
+          <!-- Slider Photos -->
+          <ion-slide >
+            <div class="slide__content images">
+
+              <ng-container *ngFor="let foto of fotos; index as j">
+                <div>
+                  <strong>{{foto.nombreSubservicio}}</strong>
+                  <ion-slides #slidersI pager="true" spaceBetween="5" [options]="slideOpts">
+                    <ion-slide *ngFor='let imgItem of foto.imagenes; index as i;'>
+                      <div>
+                        <ion-icon class="control__buttons left" name="chevron-back-outline" (click)="prevSlide(foto.imagenes,slidersI)" 
+                          *ngIf=" foto.imagenes.length > 1"></ion-icon>
+                        <!-- <img [src]="imgItem.path | imageServices" (click)="showSubServicio(foto)"> -->
+                        <img [src]="imgItem.path | imageServices">
+
+                        <ion-icon class="control__buttons right" name="chevron-forward-outline" (click)="nextSlide(foto.imagenes,slidersI)"
+                          *ngIf="foto.imagenes.length> 1"></ion-icon>
+                      </div>
+                    </ion-slide>
+                  </ion-slides>
+                </div>
+              </ng-container>
+            </div>
+          </ion-slide>
+
+                 <!-- Slider Services -->
+                 <ion-slide>
+                  <div class="slide__content servicesInfo">
+                    <ng-container *ngFor="let servicio of filteredPublications; let i = index">
+                      <div class="" (click)="cargarSubServicios(i, servicio.idServicios)" >
+                        <section class="sections">
+                            <ion-icon name="caret-forward-outline"></ion-icon>
+                            <strong>{{servicio.nombreServicio.split('-')[1] | uppercase}}</strong>
+                            <div class="" *ngFor="let subservicio of listPublications; let j = index" >      
+                              <div  *ngIf="servicio.idServicios==subservicio.idServicios && subservicio" class="servicesInfo__items ion-activatable ripple-parent"
+                              (click)="viewInfoService(subservicio.idSubServicios)">
+                                <img class="image__items" [src]="subservicio.imagenes[0].path | imageServices" >
+                                <div class="data__services" >
+                                  <h6 class="title__items">{{ subservicio.nombreSubservicio | uppercase }}
+                                  </h6>
+                                  <ion-button class="button__profile" size="small">Info+
+                                  </ion-button>
+                                </div>
+                                <ion-ripple-effect></ion-ripple-effect>
+                              </div>
+                            </div>
+                        </section>
+                      </div>
+                    </ng-container>
+                  </div>
+                </ion-slide>
+
+
+          <!-- Slider Doctors -->
+
+
+
+          <ion-slide>
+            <div class="slide__content doctors">
+              <div *ngFor="let doctor of doctorsProvider" class="doctors__item ion-activatable ripple-parent doctors">
+                <img class="image__item" [src]="doctor.fotos | image:'doctor'">
+                <div class="data__doctor">
+                  <h5 class="info_name">{{ doctor.nombres | uppercase }} {{ doctor.apellidos | uppercase }}</h5>
+                  <!-- <h6 class="info profetional_card"><strong>Tarjeta Profesional:</strong> <br> {{ doctor.tarjetaProfecional }}</h6> -->
+                  <h6 class="info_speciality"><strong>ESPECIALIDAD</strong> <br> {{ doctor.idEspecialidad | speciality }}</h6>
+                </div>
+                <ion-button class="button__profile" size="small" (click)="viewProfileDoctor(doctor.idMembers)">Ver Perfíl
+                </ion-button>
+                <ion-ripple-effect></ion-ripple-effect>
+              </div>
+            </div>
+          </ion-slide>
+
+          
+<!-- 
+          <ion-slide>
+            <div class="slide__content doctors">
+              <ng-container *ngFor="let doctor of doctorsProvider">
+                <div class="doctorItem" (click)="viewProfileDoctor(doctor.idMembers)">
+                  <img [src]="doctor.fotos | image:'doctor'">
+                  <h5 class="info name">{{ doctor.nombres | uppercase }} {{ doctor.apellidos | uppercase }}</h5>
+                  <h6 class="info profetional_card"><strong>Tarjeta Profesional:</strong> <br> {{ doctor.tarjetaProfecional }}</h6>
+                  <h6 class="info speciality"><strong>ESPECIALIDAD</strong> <br> {{ doctor.idEspecialidad | speciality }}</h6>
+                </div>
+              </ng-container>
+            </div>
+          </ion-slide> -->
+
+          <!-- <ion-slide *ngIf="segmentsTabsList.includes('videos')">
+            <div class="slide__content videos">
+              <h1>Esperalos...</h1>
+               <iframe [src]="'6rnhoUHFWbY' | youtube" allowfullscreen></iframe>
+
+                <iframe [src]="'FLPEESNhN0U' | youtube" allowfullscreen></iframe>
+                <iframe [src]="'-BVcB0cQ880' | youtube" allowfullscreen></iframe>
+                <iframe [src]="'xO0jaStFHpQ' | youtube" allowfullscreen></iframe>
+                <iframe [src]="'16ZA9KmqHJI' | youtube" allowfullscreen></iframe>
+                <iframe [src]="'k_c2zGGFQak' | youtube" allowfullscreen></iframe>
+            </div>
+          </ion-slide> -->
+
+          <!-- Slider Branchs -->
+          
+          <!-- <ion-slide>
+            <div class="slide__content branchs">
+              <ng-container *ngFor="let branch of branchsProvider">
+                <div class="branchItem">
+                  <img [src]="branch.avatar | image">
+                  <h5 class="info name">{{ branch.nombreSucursal | uppercase }}</h5>
+                  <h6 class="info">{{ branch.municipio }}</h6>
+                  <h6 class="info">Tel. {{ branch.celularSucursal || 'No registra' }}</h6>
+                </div>
+              </ng-container>
+            </div>
+          </ion-slide> -->
+
+          <ion-slide class="slides__item">
+            <div class="branch__medical">
+              <div *ngFor="let branch of branchsProvider" class="branch__medical__item ion-activatable ripple-parent">
+
+                <h3 class="title__item">{{ branch['nombreSucursal'] }}</h3>
+                <span>{{ branch['direccionSucursal'] | titlecase }}</span><br>
+                <span *ngIf="branch['barrioSucursal']">{{ branch['barrioSucursal'] | titlecase}}<br></span>
+                <span>
+                  <strong> Tel.</strong>
+                  {{ branch['telefonoSucursal'] || branch['celularSucursal'] ? '':'No registra' }}
+                  {{ branch['telefonoSucursal'] ? branch['telefonoSucursal'] + ' - ': '' }}{{ branch['celularSucursal'] || ''}}
+                </span>
+                <ion-ripple-effect></ion-ripple-effect>
+              </div>
+            </div>
+          </ion-slide>
+
+
+
+
+        </ion-slides>
+      </div>
+    </div>
+  </div>
+</ion-content>

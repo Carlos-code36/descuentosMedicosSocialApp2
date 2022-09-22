@@ -1,0 +1,59 @@
+<ion-content class="container">
+  <div class="logo">
+    <img src="assets/img/logo_light_prevenir_express.png" alt="">
+    <span class="skip__sliders" [routerLink]="['/home']">Omitir</span>
+  </div>
+  <ion-slides pager="true">
+    <ion-slide>
+      <img style="width: 210px;" src="assets/img/slides/prevenir_express_slideshow_1.png" alt="">
+      <h3>La única aplicación que te permite tener descuentos con médicos especialistas.
+        <br>
+        <br>
+        Recibe descuentos desde el 10% hasta el 90% en citas, tratamientos o procedimientos.
+      </h3>
+    </ion-slide>
+    <ion-slide>
+      <h2>CUENTA DE USUARIO</h2>
+      <img style="width: 260px;" src="assets/img/slides/prevenir_express_slideshow_2.png" alt="">
+      <h3>
+        Teniendo una cuenta de <strong>usuario</strong> puedes conseguir tus citas médicas desde la app para tí y tu grupo familiar.
+        <br>
+        <br>
+        Fácil, rápido, seguro y con descuentos a nivel nacional e internacional.
+      </h3>
+    </ion-slide>
+    <ion-slide>
+      <h2>PROVEEDOR DE SERVICIOS MÉDICOS</h2>
+      <img style="width: 160px;" src="assets/img/slides/prevenir_express_slideshow_3.png" alt="">
+      <h3>
+        Tener una cuenta de proveedor te permite impulsar tus servicios profesionales con descuentos en consultas,
+        tratamientos y procedimientos a los usuarios que soliciten la cita por la <strong>app</strong>.
+      </h3>
+      <h3 style="margin-bottom: 48px;">
+        <strong> DESDE TU COMPUTADOR ADMINISTRARÁS:</strong>
+        <br>
+        Sucursales, médicos, consultorios, horarios, descuentos, publicaciones, imágenes, videos, historias clínicas y mucho más.
+        <br>
+        ¡Ingresa yá!...
+        <a style="color: #fff; text-decoration: none; font-size: 0.8em;" href="https://www.descuentosmedicos.com"><strong>www.descuentosmedicos.com</strong></a>
+      </h3>
+    </ion-slide>
+    <ion-slide class="end__slide">
+      <h2>EMPECEMOS</h2>
+      <br>
+      <img src="assets/img/slides/prevenir_express_slideshow_4.png" alt="">
+
+      <div class="links__container">
+        <ion-button [routerLink]="['/auth/register']">Registrarse</ion-button>
+        <span>¿Ya tienes una cuenta? <a [routerLink]="['/auth/login']">Iniciar sesión</a></span>
+        <div class="not__view__more">
+          <ion-checkbox #slider_check color="tertiary" name="disableSlider" id="disableSlider" (ionChange)="disableSlideShow(slider_check)"></ion-checkbox>
+          <label for="disableSlider">Nó volver a mostrar</label>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+<!-- <ion-footer>
+  <span class="next__sliders">siguiente ></span>
+</ion-footer> -->

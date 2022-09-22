@@ -1,0 +1,90 @@
+:host {
+    // display: inline-block;
+}
+
+.finder {
+    width: calc(100% - 1px);
+    height: 50px;
+    position: absolute;
+    color: #ffffff;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    height: auto;
+    .ionClear{
+        color: #ffffff;
+    }
+
+    .search__input {
+        --background: linear-gradient(210.55deg, #353A40 -3.02%, #2f3438 93.08%);
+        font-size: 20px;
+        color: #ffffff !important;
+        padding: 0;
+        --placeholder-color: #ffffff;
+        --cancel-button-color: linear-gradient(210.55deg, #353A40 -3.02%, #2f3438 93.08%);
+        --icon-color: #ffffff;
+        --placeholder-font-weight: bold;
+        --placeholder-opacity:100%;
+        --clear-button-color: #ffffff;
+    }
+
+    .search__icon {
+        display: inline-block;
+        position: absolute;
+        font-size: 2rem;
+        color: #ffffff;
+        right: 10px;
+        margin: 0;
+        top: 14px;
+    }
+
+    .box__history {
+        transition: all 0.4s ease-in;
+        border-radius: 0 0 4px 4px;
+        width: calc(100% - 58px);
+        background: linear-gradient(210.55deg, #353A40 -3.02%, #2f3438 93.08%);
+        position: absolute;
+        overflow-y: scroll;
+        z-index: 10000;
+        max-height: 0;
+        top: 40px;
+        left: 0;
+
+        &.show {
+            max-height: 217px;
+            padding-top: 16px;
+        }
+
+        .placeholder {
+            border-bottom: 1px solid #ffffff;
+            font-size: 1em;
+            display: block;
+            padding: 8px;
+
+            fa-icon {
+                position: absolute;
+                right: 16px;
+                color: #ffffff;
+            }
+        }
+
+        &__item {
+            position: relative;
+            padding: 10px 4px;
+            list-style: none;
+            overflow: hidden;
+            color: #ffffff;
+            margin: 0 6px;
+
+            &:not(&:last-child) {
+                border-bottom: 1px solid #ffffff;
+                color: #ffffff;
+
+            }
+            
+            &.ripple-parent {
+            }
+        }
+
+    }
+}

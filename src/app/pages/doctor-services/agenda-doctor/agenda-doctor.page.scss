@@ -1,0 +1,96 @@
+ion-content {
+    margin: 0 12px;
+}
+
+.service__card {
+    background: linear-gradient(210.55deg, #353A40 -3.02%, #121416 93.08%);
+    box-shadow: 36px 12px 64px rgba(2, 3, 3, 0.7), -12px -20px 56px rgba(232, 237, 243, 0.05), inset -16px -6px 80px rgba(248, 249, 249, 0.03);
+    margin: 12px 12px 0;
+    border-radius: 30px;
+    position: relative;
+    color: #fff;
+    padding: 20px;
+    .title {
+        font-weight: bold;
+        color: #fff;
+        margin: 0;
+    }
+
+    .collapsed__icon {
+        position: absolute;
+        color: #fff;
+        font-size: 2em;
+        right: 16px;
+        top: 40%;
+    }
+
+    .provider {}
+}
+
+.schedules__container {
+    transition: all .25s ease-in;
+    overflow: hidden;
+    max-height: 0;
+    margin: 0 5%;
+    padding: 0;
+    width: 90%;
+    text-align: center;
+    color: #fff;
+    &.visible {
+        transition: all .35s .25s ease-out;
+        max-height: 2500px;
+        padding: 16px 0;
+    }
+
+    // border: 1px solid white;
+
+    .schedule__card {
+        background: linear-gradient(210.55deg, #353A40 -3.02%, #121416 93.08%);
+        /* box-shadow: 0px 8px 48px rgb(0 171 120 / 80%), inset -16px -6px 80px rgb(0 113 255 / 3%); */
+        border-radius: 30px;
+        margin: 12px;
+        margin-top: 0;
+        padding: 12px;
+        color: #fff;
+
+        .title {
+            font-weight: bold;
+            color: #FEFEFE;
+            margin: 0;
+            font-size: 1.1rem;
+
+        }
+
+        .provider {
+            font-size: 0.8rem;
+
+        }
+    }
+
+    .separator {
+        background: #fff;
+        margin-bottom: 0;
+        width: 80%;
+    }
+}
+.action__buttons {
+    display: flex;
+    justify-content: center;
+    .icon {
+        margin-left: 28px;
+        font-size: 36px;
+
+        &.history {
+            color: #4bc27e;
+            // color: #2ecc71;
+        }
+
+        &.calendar {
+            color: #b65b51;
+            // color: #e74c3c;
+        }
+    }
+}
+.espacio {
+    margin-top: 20%;
+}

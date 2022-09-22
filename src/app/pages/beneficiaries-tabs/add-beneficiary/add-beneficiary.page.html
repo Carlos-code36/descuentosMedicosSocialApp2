@@ -1,0 +1,289 @@
+<!-- Header -->
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate title="Nuevo Beneficiario" [buttonsRight]="false" [defaultBack]="'home'">
+  </app-header>
+</ion-header>
+
+<!-- Body content -->
+<ion-content class="container">
+
+  <!-- <h2 class="text__white">Agregar beneficiario</h2> -->
+  <div class="profile__photo">
+    <img [src]="'undefined_pet.png' | image" *ngIf="!imageViewerProfile && isPet" alt="profile_photo"
+      (click)="showPhotoAvatar()">
+    <img [src]="'avatarundefined.png' | image" *ngIf="!imageViewerProfile && !isPet" alt="profile_photo"
+      (click)="showPhotoAvatar()">
+    <img [src]="imageViewerProfile" *ngIf="imageViewerProfile" alt="profile_photo_upload"
+      (click)="showPhotoAvatar(imageFileProfile)">
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="loadImage()" >
+      <ion-fab-button class="change__photo__button">
+        <fa-icon icon="camera"></fa-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+  <p class="text__white">Los campos marcados con (<strong style="color: red;">*</strong>) son requeridos</p>
+
+  <h5 class="text__white">Datos Básicos</h5>
+
+  <!-- ************************************************************************************************* -->
+  <!-- **************************************** Person Formulary *************************************** -->
+  <!-- ************************************************************************************************* -->
+  <form [formGroup]="formNewBeneficiary" (ngSubmit)="saveBeneficiary()" *ngIf="!isPet">
+    <ion-list>
+      
+      <ion-item >
+        <fa-icon icon="id-card"></fa-icon><span class="required">*&nbsp;</span>
+        <ion-input placeholder="Número de documento" formControlName="numeroDocumento" type="tel" minlength="7"
+          maxlength="10" (ionChange)="verifyDocument($event.target)" debounce="1000" validate></ion-input>
+
+        <div class="loading_container">
+          <div class="loading__input"></div>
+          <ion-icon *ngIf="documentRegistered!=undefined" class="checking" [class.fail]="documentRegistered"
+            [name]="documentRegistered?'close-circle-outline':'checkmark-circle-outline'" slot="end"></ion-icon>
+        </div>
+      </ion-item>
+
+      <!-- <ion-item (click)="showDatePicker()">
+        <fa-icon icon="birthday-cake"></fa-icon>&nbsp;<span class="required">*&nbsp;</span>
+        <label *ngIf="formNewBeneficiary.get('fechaNacimiento').value">
+          {{ formNewBeneficiary.get('fechaNacimiento').value | date:'longDate' }}
+        </label>
+        <label class="not__data" *ngIf="!formNewBeneficiary.get('fechaNacimiento').value">
+          &nbsp;Fecha de nacimiento
+        </label>
+        <ion-input type="hidden" formControlName="fechaNacimiento" placeholder="fecha nacimiento"
+          (ionChange)="verifyAge()"></ion-input>
+      </ion-item> -->
+      <div class="error-container" *ngIf="documentRegistered">
+        <span>
+          <!-- <strong>* </strong> -->
+          El documento ya tiene una cuenta asociada.
+        </span>
+        <br>
+        <span>
+          <!-- <strong>* </strong> -->
+          Deseas pedir permiso para agregarlo?
+        </span>
+        <span style="font-size: 26px">
+          <a [href]="'https://wa.me/573174785093/?text=Hola%20mi%20nombre%20es%20'+_globals.USERNAME+',%20me%20comunico%20desde%20la%20app%20*Descuentos%20Medicos*%20por%20asesoria'">
+            contactenos
+            <ion-icon class="icon whatsapp" name="logo-whatsapp"></ion-icon>
+          </a>
+        </span>
+        <!-- <ion-button shape="round" type="submit"  (click)="pedirPermiso()" >
+          contactenos
+        </ion-button> -->
+      </div>
+
+      <div *ngIf="formNewBeneficiary.get('numeroDocumento').value && !documentRegistered">
+        <ion-item (click)="showDatePicker()">
+        <fa-icon icon="birthday-cake"></fa-icon>&nbsp;<span class="required">*&nbsp;</span>
+        <label *ngIf="formNewBeneficiary.get('fechaNacimiento').value">
+          {{ formNewBeneficiary.get('fechaNacimiento').value | date:'longDate' }}
+        </label>
+        <label class="not__data" *ngIf="!formNewBeneficiary.get('fechaNacimiento').value">
+          &nbsp;Fecha de nacimiento
+        </label>
+        <ion-input type="hidden" formControlName="fechaNacimiento" placeholder="fecha nacimiento"
+          (ionChange)="verifyAge()"></ion-input>
+      </ion-item>
+      
+        <ion-item>
+          <fa-icon icon="id-card"></fa-icon><span class="required">*&nbsp;</span>
+          <ion-select placeholder="Tipo Documento" formControlName="idtipoDocumentos" validate>
+            <ion-select-option *ngFor="let typeDoc of this._globals.DOCUMENTYPES" [value]="typeDoc.idtipoDocumentos">
+              {{ typeDoc.nombre }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item *ngIf="formNewBeneficiary.get('idtipoDocumentos').value != 7">
+          <fa-icon icon="id-card"></fa-icon><span class="required">*&nbsp;</span>
+          <ion-input placeholder="Número de documento" formControlName="numeroDocumento" type="tel" minlength="7"
+            maxlength="10" (ionChange)="verifyDocument($event.target)" debounce="1000" validate></ion-input>
+
+          <div class="loading_container">
+            <div class="loading__input"></div>
+            <ion-icon *ngIf="documentRegistered!=undefined" class="checking" [class.fail]="documentRegistered"
+              [name]="documentRegistered?'close-circle-outline':'checkmark-circle-outline'" slot="end"></ion-icon>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon><span class="required">*&nbsp;</span>
+          <ion-input value="un dato" type="text" placeholder="Nombres" formControlName="nombres" validate>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon><span class="required">*&nbsp;</span>
+          <ion-input type="text" placeholder="Apellidos" formControlName="apellidos" validate></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="isAdult">
+          <fa-icon icon="phone-alt"></fa-icon><span class="required">*&nbsp;</span>
+          <ion-input placeholder="Teléfono" type="tel" formControlName="telefono" validate></ion-input>
+        </ion-item>
+
+        <!-- <div class="error-container" *ngIf="documentRegistered">
+          <span>
+            <strong>* </strong>
+            El documento ya tiene una cuenta asociada.
+          </span>
+        </div> -->
+
+        <ion-item>
+          <fa-icon icon="dna"></fa-icon><span class="required">*&nbsp;</span>
+          <ion-select placeholder="Parentesco" formControlName="idParentescos" validate>
+            <ion-select-option *ngFor="let rela of this._globals.RELATIONSHIPS" [value]="rela.idParentescos">
+              {{ rela.nombreParentesco }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <fa-icon icon="venus-mars"></fa-icon><span class="required">*&nbsp;</span>
+          <ion-select placeholder="Género *" formControlName="genero" validate>
+            <ion-select-option value="masculino">Masculino</ion-select-option>
+            <ion-select-option value="femenino">Femenino</ion-select-option>
+            <ion-select-option value="otro">Otro</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item class="input__filter" *ngIf="isAdult">
+          <fa-icon icon="map-marked-alt"></fa-icon><span class="required">*&nbsp;</span>
+          <ion-input #inputDrop type="text" formControlName="namedepmunicipio" placeholder="Departamento o municipio"
+            (ionFocus)="focusDropdownSearch(inputDrop)" (ionBlur)="blurDropdownSearch()"
+            (keyup)="searchDeptMun($event.target)"></ion-input>
+          <ion-input type="hidden" formControlName="idmunicipio"></ion-input>
+
+          <div class="group__filter" *ngIf="departmentsAndTowns">
+            <div class="filter__item" *ngFor="let depmun of departmentsAndTowns"
+              [attr.data-depmun-id]="depmun.idmunicipio" (click)="selectDeptMun($event.target)">
+              {{ depmun.nombreMunicipio }} - {{ depmun.nombreDepartamento }}</div>
+          </div>
+        </ion-item>
+        <br>
+
+        <div class="cardCollapsable" *ngIf="isAdult">
+          <h5>Datos adicionales</h5>
+          <ion-item *ngIf="isAdult">
+            <ion-icon name="mail" slot="start"></ion-icon>
+            <ion-input placeholder="Correo electrónico" formControlName="correo" type="email"
+              (ionChange)="verifyEmail($event.target)" debounce="1000" validate></ion-input>
+
+            <div class="loading_container">
+              <div class="loading__input"></div>
+              <ion-icon *ngIf="emailRegistered!=undefined" class="checking" [class.fail]="emailRegistered"
+                [name]="emailRegistered?'close-circle-outline':'checkmark-circle-outline'" slot="end"></ion-icon>
+            </div>
+          </ion-item>
+
+          <div class="error-container" *ngIf="emailRegistered">
+            <span>
+              <strong>* </strong>
+              El correo ya se encuentra registrado.
+            </span>
+          </div>
+
+          <ion-item>
+            <fa-icon icon="home"></fa-icon>
+            <ion-input placeholder="Dirección" type="text" formControlName="direccion"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <fa-icon icon="map-marker-alt"></fa-icon>
+            <ion-input placeholder="Bárrio o vereda" type="text" formControlName="barrio"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <fa-icon icon="ring"></fa-icon>
+            <ion-select placeholder="Estado civíl" formControlName="idestadosCivil">
+              <ion-select-option *ngFor="let typeStatus of this._globals.CIVILSTATUS"
+                [value]="typeStatus.idestadosCivil">
+                {{ typeStatus.nombre }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <fa-icon icon="hammer"></fa-icon>
+            <ion-input placeholder="Ocupación" type="text" formControlName="ocupacion"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <fa-icon icon="hospital"></fa-icon>
+            <ion-input placeholder="Eps" type="text" formControlName="eps"></ion-input>
+          </ion-item>
+        </div>
+      </div>
+    </ion-list>
+
+    <ion-button shape="round" expand="block" type="submit" [disabled]="formNewBeneficiary.invalid">
+      Registrar beneficiario
+    </ion-button>
+  </form>
+
+
+  <!-- ************************************************************************************************* -->
+  <!-- ***************************************** Pet Formulary ***************************************** -->
+  <!-- ************************************************************************************************* -->
+  <form [formGroup]="formNewPet" (ngSubmit)="saveBeneficiary()" *ngIf="isPet">
+    <ion-list>
+      <ion-item (click)="showDatePicker(true)">
+        <fa-icon icon="birthday-cake"></fa-icon>&nbsp;<span class="required">*&nbsp;</span>
+        <label *ngIf="formNewPet.get('fechaNacimiento').value">
+          {{ formNewPet.get('fechaNacimiento').value | date:'longDate' }}
+        </label>
+        <label class="not__data" *ngIf="!formNewPet.get('fechaNacimiento').value">
+          &nbsp;Fecha de nacimiento
+        </label>
+        <ion-input type="hidden" formControlName="fechaNacimiento" placeholder="fecha nacimiento"></ion-input>
+      </ion-item>
+
+      <div *ngIf="formNewPet.get('fechaNacimiento').value">
+        <ion-item>
+          <ion-icon name="paw" slot="start"></ion-icon><span class="required">*&nbsp;</span>
+          <ion-input value="un dato" type="text" placeholder="Nombres de mascota" formControlName="nombreMascota" validate>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="paw" slot="start"></ion-icon><span class="required">*&nbsp;</span>
+          <ion-input type="text" placeholder="Apellidos de mascota" formControlName="apellidosMascota" validate></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <fa-icon icon="dog"></fa-icon><span class="required">*&nbsp;</span>
+          <ion-input type="text" placeholder="Especie Ej: Perro" formControlName="especie" validate></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <fa-icon icon="dna"></fa-icon><span class="required">&nbsp;*&nbsp;</span>
+          <ion-input type="text" placeholder="Raza Ej: Chihuahua" formControlName="raza" validate></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="color-fill"></ion-icon><span class="required">*&nbsp;</span>
+          <ion-input type="text" placeholder="Color" formControlName="color" validate></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="male-female"></ion-icon><span class="required">*&nbsp;</span>
+          <ion-label>{{ formNewPet.controls['sexo'].value?'Macho':'Hembra' }}</ion-label>
+          <ion-toggle formControlName="sexo"></ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <fa-icon icon="syringe"></fa-icon><span class="required">*&nbsp;</span>
+          <ion-label>{{ formNewPet.controls['esterilizado'].value?'Esterilizado':'Sin esterilizar' }}</ion-label>
+          <ion-toggle formControlName="esterilizado"></ion-toggle>
+        </ion-item>
+      </div>
+    </ion-list>
+
+    <ion-button shape="round" expand="block" type="submit" [disabled]="formNewPet.invalid">
+      Registrar peludito
+    </ion-button>
+  </form>
+
+</ion-content>

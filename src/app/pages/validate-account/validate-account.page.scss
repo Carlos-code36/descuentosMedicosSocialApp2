@@ -1,0 +1,133 @@
+.logo__app {
+    text-align: center;
+    margin: 32px 0;
+
+    img {
+        // display: block;
+        margin: 8px auto;
+
+        &:first-child {
+            margin-right: 12px;
+            width: 90px;
+        }
+
+        &:last-child {
+            width: 160px;
+        }
+    }
+}
+
+form {
+    .box__validation {
+        display: grid;
+        gap: 0px 10px;
+        grid-template-columns: repeat(7, 1fr);
+
+        &__item {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            font-size: 2em;
+            color: #BCCEE1;
+            font-weight: bold;
+            border-radius: 4px;
+            background: #ecf0f133;
+
+            &::placeholder {
+                color: #BCCEE1;
+            }
+        }
+    }
+
+    ion-list,
+    ion-input {
+        background: transparent;
+        color: #BCCEE1;
+    }
+
+    ion-item {
+        --background: transparent;
+        border-bottom: 1px solid #BCCEE1;
+
+        ion-label {
+            color: #7B7B7B;
+            font-size: 1.2em;
+
+            ion-icon {
+                color: #BCCEE1 !important;
+                background-color: transparent;
+                font-size: 1.3em;
+            }
+        }
+    }
+
+    ion-button {
+        left: 50%;
+        font-size: 1.4em;
+        margin-top: 12px;
+        position: relative;
+        transform: translateX(-50%);
+    }
+}
+
+.container {
+    padding: 0 32px;
+    color: #BCCEE1;
+
+    .welcome {
+        font-weight: bold;
+
+        .name__user {
+            color: #3880ff;
+        }
+    }
+
+    .box__verification {}
+
+    .resend__code {
+        color: #BCCEE1;
+    }
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.group__buttons {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+
+    ion-button {
+        --border-width: 3px;
+    }
+}
+
+.icon__input {
+    color: #34495E !important;
+    background-color: transparent;
+}
+
+.input {
+    margin-left: 20px;
+}
+
+ion-list {
+    margin-bottom: 32px;
+}
+
+[fill="outline"] {
+    border-width: 5px;
+}
+
+.item-inner {
+    flex-direction: row-reverse !important;
+}
+
+.title {
+    margin-bottom: 16px;
+}

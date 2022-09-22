@@ -1,0 +1,38 @@
+<!-- Template card Persons  -->
+<div class="container person ion-activatable ripple-parent" (click)="editBeneficiary(person)" *ngIf="person" >
+  <img [src]="person['fotos'] | image">
+  <div class="beneficiary__info">
+    <span>{{ person['nombres'].getFirstWord() | titlecase }} {{ person['apellidos'].getFirstWord() | titlecase }}</span>
+    <span class="subtitle">Identificación</span>
+    <span class="data">{{ person['idtipodocumentos'] | documentShort }}. {{ person['numerodocumentouser'] }}</span>
+    <!--
+    <span class="subtitle">Nacimiento</span>
+    <span class="data">{{ person['fechaNacimiento'].formatDate() }}</span>
+    <span class="subtitle" *ngIf="person['telefono']">N° contacto</span>
+    <span class="data" *ngIf="person['telefono']">{{ person['telefono'] }}</span>
+  -->
+  <!-- <div class="ion-activatable">
+    <ion-button color="transparent" (click)="deletBeneficiary()">
+      <ion-icon class="button" name="trash"></ion-icon>
+    </ion-button>
+  </div> -->
+  
+  </div>
+  <ion-ripple-effect></ion-ripple-effect>
+</div>
+
+<div class="container person ion-activatable ripple-parent" (click)="editBeneficiary(pet)" *ngIf="pet" >
+  <img [src]="pet['avatar'] | image">
+  <div class="beneficiary__info">
+    <span>{{ pet['nombreMascota'].getFirstWord() | titlecase }} {{ pet['apellidosMascota'].getFirstWord() | titlecase }}</span>
+    <span class="subtitle">Información</span>
+    <span class="data">{{ pet['especie'] }} - {{ pet['raza'] }}</span>
+    <!--
+    <span class="subtitle">Nacimiento</span>
+    <span class="data">{{ person['fechaNacimiento'].formatDate() }}</span>
+    <span class="subtitle" *ngIf="person['telefono']">N° contacto</span>
+    <span class="data" *ngIf="person['telefono']">{{ person['telefono'] }}</span>
+    -->
+  </div>
+  <ion-ripple-effect></ion-ripple-effect>
+</div>

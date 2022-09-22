@@ -1,0 +1,43 @@
+
+
+
+<div class="filter__container">
+ <span class="filter__title" (click)="viewFilterBox=!viewFilterBox">
+    Filtrar&nbsp;
+    <fa-icon icon="filter"></fa-icon>
+  </span> 
+  
+  <span class="contact_icon">
+    <a [href]="'https://wa.me/573174785093/?text=Hola%20mi%20nombre%20es%20'+_globals.USERNAME+',%20me%20comunico%20desde%20la%20app%20*Descuentos%20Medicos*%20por%20asesoria'">
+      <ion-icon class="icon whatsapp" name="logo-whatsapp"></ion-icon>
+    </a>
+  </span>
+  <div class="filter__box" [class.show]="viewFilterBox">
+    <h3 class="filter__title">Filtros</h3>
+
+    <ng-content></ng-content>
+
+    <div class="filter__checks">
+      <ng-container *ngFor="let filter of listFilters">
+        <div class="filter__item" *ngIf="!filter.includes('$')">
+          <ion-checkbox class="check" [attr.data-argumentSearch]="filter" (click)="setArguments(filter)"
+            [checked]="_filtersSelected?.includes(filter)">
+          </ion-checkbox>
+          <ion-label class="check__label">{{ filter.split(':')[0] | separeWords }}</ion-label>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- <div class="clear__filters">
+      <span class="ion-activatable ripple-parent" (click)="resetFilters()">
+        Limpiar filtros&nbsp;&nbsp;
+        <fa-icon icon="trash"></fa-icon>
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+      </span>
+    </div> -->
+
+    <div class="apply__btn" (click)="applyFilters()">
+      Cerrar & aplicar
+    </div>
+  </div>
+</div>

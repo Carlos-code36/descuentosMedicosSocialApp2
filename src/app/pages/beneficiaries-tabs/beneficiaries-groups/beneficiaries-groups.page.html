@@ -1,0 +1,36 @@
+<!-- Header Content  -->
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="true" [buttonsRight]="false" title="Beneficiarios">
+     
+  </app-header>
+</ion-header>
+
+<!-- Body Content  -->
+<ion-content class="container">
+  <div class="list__groups" *ngIf="groups_beneficiaries.length > 0">
+    <ng-container *ngFor="let group of groups_beneficiaries">
+      <card-beneficiary cardType="groups" [type]="typeGroup" [group]="group" *ngIf="group['activo']"></card-beneficiary>
+    </ng-container>
+  </div>
+
+  <div class="not__items" *ngIf="groups_beneficiaries.length == 0">
+    <span>Aún no tienes ningun {{ typeGroup.includes('persons') ? 'beneficiario' : 'peludito' }} agregado a tu cuenta.</span>
+  </div>
+
+  <!-- <ion-button color="warning" shape="round" expand="block" [routerLink]="['/beneficiaries/create/person/0']">
+    <fa-icon icon="users" style="font-size: 1.5em;"></fa-icon>&nbsp;
+    CREAR NUEVO GRUPO
+  </ion-button> -->
+
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/beneficiaries/create/person/0']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addGroup()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

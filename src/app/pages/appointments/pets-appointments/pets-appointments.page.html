@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+    <app-header #headerTemplate [showMenu]="false" [showSettings]="false" [buttonsRight]="false" title="Citas peluditos"
+      defaultBack="/home/menu">
+    </app-header>
+</ion-header>
+<ion-content>
+    <ion-button fill="outline"
+        [routerLink]="['/appointments/appoinments-history/'+this._globals.USER_OBJECT['idMembers']+'/pet']">
+        <fa-icon slot="start" icon="history"></fa-icon>
+        Ver Historial
+    </ion-button>
+    <div class="no__data" *ngIf="petAppointments?.length == 0">
+        <span>No tienes citas próximas programadas</span>
+    </div>
+
+    <div class="appointments__cards" *ngIf="petAppointments">
+        <ng-container *ngFor="let item of petAppointments">
+            <div class="appoinment__box ion-activatable ripple-parent">
+                <div class="appoinment__data">
+                    <span class="text name name__user">{{ item['nombreMascota'] | titlecase }} {{
+                        item['apellidosMascota'] | titlecase }}</span>
+                    <br><br><br>
+                    <span class="text name name__service">{{ item['nombreServicio'] | titlecase }}</span><br>
+                    <span class="date__long" *ngIf="item['fecha']">{{ item['fecha'] | date:'fullDate' }}</span>
+                    <span class="date__long" *ngIf="item['fechaCita']">{{ item['fechaCita'] | date:'fullDate' }}</span>
+                </div>
+
+                <div class="time__data">
+                    <ion-icon name="time-outline"></ion-icon>
+                    <h3 class="text time" *ngIf="item['hora']">{{ item['hora'].getNormalHour() | uppercase}}</h3>
+                    <h3 class="text time" *ngIf="item['horaCita']">{{ item['horaCita'].getNormalHour() | uppercase}}
+                    </h3>
+                </div>
+
+                <div class="appoinment__data">
+                    <span class="text name name__branch">{{ item['nombreSucursal'] |titlecase}}</span><br>
+                    <span class="text">
+                        Doc. {{ item['nombresMedico'].getFirstWord() | titlecase }} {{
+                        item['apellidosMedico'].getFirstWord() | titlecase }}
+                    </span>
+                    <br>
+                    <span class="text">{{ item['direccionSucursal'] }}, {{ item['barrioSucursal'] }}</span><br>
+                    <span class="text">Tels: {{ item['telefonoSucursal'] || 'No registra' }}{{ item['celularSucursal'] ?
+                        " - " + item?.celularSucursal : '' }}</span>
+                </div>
+
+                <div class="action__buttons">
+                    <fa-icon class="icon history ion-activatable ripple-parent" icon="history"
+                        (click)="reprogramAppointment(item)">
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </fa-icon>
+                    <fa-icon class="icon calendar ion-activatable ripple-parent" icon="calendar-times"
+                        (click)="cancelAppointment(item)">
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </fa-icon>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</ion-content>

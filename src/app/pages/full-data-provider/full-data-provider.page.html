@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="false" [buttonsRight]="false" title="Información proveedor"></app-header>
+</ion-header>
+
+<ion-content *ngIf="providerData">
+  <img class="profile" [src]="providerData?.fotos | image">
+
+  <div class="view__profile__data">
+    <div class="item__info">
+      <ion-label>Nombre {{ providerData?.tipoEmpresa | titlecase }}</ion-label>
+      <ion-label>{{ providerData?.nombre }} </ion-label>
+    </div>
+    <div class="item__info">
+      <ion-label>NIT</ion-label>
+      <ion-label>{{ providerData?.numeroDocumento }} </ion-label>
+    </div>
+    <div class="item__info">
+      <ion-label>Teléfonos</ion-label>
+      <ion-label>{{ providerData?.telefono + ' - ' || '' }}{{ providerData?.telefonoFijo || '' }} </ion-label>
+    </div>
+    <div class="item__info">
+      <ion-label>Ubicación</ion-label>
+      <ion-label>{{ providerData?.direccion | titlecase }}, {{ providerData?.barrio | titlecase }}</ion-label><br>
+      <ion-label *ngIf="providerData?.indicacionesDirecion" > {{ providerData?.indicacionesDirecion | capitalCase }}</ion-label><br>
+      <ion-label>{{ providerData?.idmunicipio | departmentAndTown }} </ion-label>
+    </div>
+    <div class="item__info">
+      <ion-label>Correo electrónico</ion-label>
+      <ion-label>{{ providerData?.correo }} </ion-label>
+    </div>
+    <!-- <div class="item__info"
+      *ngIf="(providerData.linkFacebook || providerData.linkInstagram || providerData.linkLinkedin || providerData.linkPaginaWeb || providerData.linkWhatsapp || providerData.linkYouTube ) != null">
+      <ion-label>Redes sociales</ion-label>
+      <div class="social__networks">        
+        <a *ngIf="providerData.linkWhatsapp"  [href]="providerData.linkWhatsapp">
+          <ion-icon class="icon whatsapp" name="logo-whatsapp"></ion-icon>
+        </a>
+        <a *ngIf="providerData.linkFacebook"  [href]="providerData.linkFacebook">
+          <ion-icon class="icon facebook" name="logo-facebook"></ion-icon>
+        </a>
+        <a *ngIf="providerData.linkInstagram"  [href]="providerData.linkInstagram">
+          <ion-icon class="icon instagram" name="logo-instagram"></ion-icon>
+        </a>
+        <a *ngIf="providerData.linkLinkedin"  [href]="providerData.linkLinkedin">
+          <ion-icon class="icon linkedin" name="logo-linkedin"></ion-icon>
+        </a>
+        <a *ngIf="providerData.linkYouTube"  [href]="providerData.linkYouTube">
+          <ion-icon class="icon youTube" name="logo-youTube"></ion-icon>
+        </a>
+        <a *ngIf="providerData.linkPaginaWeb"  [href]="providerData.linkPaginaWeb">
+          <ion-icon class="icon web" name="globe-outline"></ion-icon>
+        </a>
+      </div>
+    </div> -->
+  </div>
+</ion-content>

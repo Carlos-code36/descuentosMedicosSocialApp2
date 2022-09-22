@@ -1,0 +1,51 @@
+:host {
+    display: grid;
+    grid-template-rows: 200px 88px;
+}
+
+.background__photo {
+    border-bottom: 2px solid #ECF0F1;
+    position: relative;
+    overflow: hidden;
+    z-index: 10000;
+    height: 200px;
+    margin: 0;
+
+}
+
+.profile__photo {
+    // transition: all 0.3s ease;
+    position: relative;
+    z-index: 10000;
+    height: 34vw;
+    width: 34vw;
+    left: 18px;
+    top: -15vw;
+
+    img {
+        border: 3px solid #ECF0F1;
+        border-radius: 50%;
+        min-height: 34vw;
+        min-width: 34vw;
+    }
+}
+
+.profile__info {
+    text-transform: capitalize;
+    position: relative;
+    color: #ECF0F1;
+    z-index: 10000;
+    width: 60%;
+    top: -80px;
+    left: 40%;
+
+    span {
+        display: block;
+        font-weight: 500;
+
+        &.names {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+    }
+}

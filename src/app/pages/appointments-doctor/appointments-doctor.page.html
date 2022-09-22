@@ -1,0 +1,22 @@
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="true" [buttonsRight]="false" title="Citas Activas">
+     
+  </app-header>
+</ion-header>
+
+<ion-content *ngIf="service">
+  <!-- <div class="schedule-card ion-activatable ripple-parent" *ngFor="let schedule of service['schedules']">
+    <div class="ion-activatable">
+
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </div>
+    <h2 class="title">{{ schedule.nombres }} </h2>
+    <h4>
+      <strong>Fecha cita: </strong>{{ schedule.fecha | date }}
+    </h4>
+    <h4>
+      <strong>Hora cita: </strong>{{ schedule.hora }}
+    </h4>
+    <ion-ripple-effect></ion-ripple-effect>
+  </div> -->
+</ion-content>

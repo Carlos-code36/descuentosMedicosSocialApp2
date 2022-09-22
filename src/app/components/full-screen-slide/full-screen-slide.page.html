@@ -1,0 +1,24 @@
+<ion-content>
+  <ion-label id="photoPosition">{{ position + 1 }} de {{ imageList.length }} </ion-label>
+  <div id="closeButton" (click)="close()">
+    <fa-icon icon="times"></fa-icon>
+  </div>
+  <ion-slides #slides id="mainSlide" pager="false" mode="ios" [options]="mainSlideOpts" (ionSlideDidChange)="slided()">
+    <ion-slide *ngFor="let photo of imageList; index as position">
+      <ion-img [src]="photo.path | image"></ion-img>
+      <div class="action__buttons">
+        <ion-icon icon="trash" class="icon delete" (click)="deleteImage(photo)"></ion-icon>
+        <ion-icon icon="checkmark-outline" class="icon select" [class.disabled]="photo.favorita==1"
+          (click)="setDefaultImage(photo)"></ion-icon>
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-slides #slideThumbnails id="imageList" pager="false" mode="ios" [options]="slideOpts">
+    <ng-container *ngFor="let photo of imageList; index as i">
+      <ion-slide (click)="setView(i)">
+        <ion-img [src]="photo.path | image" [ngClass]="{'on__view': position == i}"></ion-img>
+      </ion-slide>
+    </ng-container>
+  </ion-slides>
+</ion-content>

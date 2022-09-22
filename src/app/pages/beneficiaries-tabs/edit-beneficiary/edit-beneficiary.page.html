@@ -1,0 +1,151 @@
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="false" [buttonsRight]="false" title="Editar Beneficiario" defaultBack="beneficiaries-tabs/beneficiaries"
+  [noBack]="(formEditBeneficiary?.touched || !modified || !!avatarFile || !!coverpageFile) && formEditBeneficiary?.valid" (onBack)="goToBack()"></app-header>
+</ion-header>
+
+<ion-content>
+  <avatar-user [user]="member" [pet]="false" [doctor]="false" [admin]="true" [modeEdit]="true"
+    (loadAvatar)="setAvatarFile($event)" (loadCoverpage)="setCoverpageFile($event)"></avatar-user>
+  <div class="edit__profile__data">
+    <span>Campos requeridos (<span class="required">*</span>)</span>
+
+
+    <form [formGroup]="formEditBeneficiary" *ngIf="formEditBeneficiary" (ngSubmit)="updateBeneficiary()">
+      <ion-list>
+        <ion-item>
+          <fa-icon icon="address-card"></fa-icon>
+          <ion-label>
+            {{ getTypeDocumentString(this.member['idtipoDocumentos']) }}.{{ this.member['numeroDocumento'] }}
+          </ion-label>
+        </ion-item>
+
+        <ion-item (click)="showDatePicker()">
+          <fa-icon icon="birthday-cake"></fa-icon>&nbsp;<span class="required">*&nbsp;</span>
+          <label *ngIf="formEditBeneficiary.get('fechaNacimiento').value">
+            {{ formEditBeneficiary.get('fechaNacimiento').value | date:'longDate' }}
+          </label>
+          <label class="not__data" *ngIf="!formEditBeneficiary.get('fechaNacimiento').value">
+            &nbsp;Fecha de nacimiento
+          </label>
+          <ion-input type="hidden" formControlName="fechaNacimiento" placeholder="fecha nacimiento"
+            (ionChange)="verifyAge()"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon><span class="required exclusive">*&nbsp;</span>
+          <ion-input type="text" placeholder="Nombres" formControlName="nombres" validate></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon><span class="required exclusive">*&nbsp;</span>
+          <ion-input type="text" placeholder="Apellidos" formControlName="apellidos" validate></ion-input>
+        </ion-item>
+
+        <div class="with_date" *ngIf="formEditBeneficiary.get('fechaNacimiento').value">
+          <div class="error-container" *ngIf="emailRegistered">
+            <span>
+              <strong>* </strong>
+              El correo ya se encuentra registrado.
+            </span>
+          </div>
+
+          <ion-item>
+            <fa-icon icon="phone-alt"></fa-icon><span class="required">*&nbsp;</span>
+            <ion-input placeholder="Teléfono" type="tel" formControlName="telefono" validate></ion-input>
+          </ion-item>
+
+          <div class="error-container" *ngIf="documentRegistered">
+            <span>
+              <strong>* </strong>
+              El documento ya tiene una cuenta asociada.
+            </span>
+          </div>
+
+          <!-- <ion-item>
+            <fa-icon icon="dna"></fa-icon><span class="required">*&nbsp;</span>
+            <ion-select placeholder="Parentesco" formControlName="idParentescos" validate [value]="member['idparentescos']" >
+              <ion-select-option *ngFor="let rela of this._globals.RELATIONSHIPS" [value]="rela.idParentescos">
+                {{ rela.nombreParentesco }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item> -->
+
+          <ion-item>
+            <fa-icon icon="venus-mars"></fa-icon><span class="required">*&nbsp;</span>
+            <ion-select placeholder="Género *" formControlName="genero" validate>
+              <ion-select-option value="masculino">Masculino</ion-select-option>
+              <ion-select-option value="femenino">Femenino</ion-select-option>
+              <ion-select-option value="otro">Otro</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="input__filter">
+            <fa-icon icon="map-marked-alt"></fa-icon><span class="required">*&nbsp;</span>
+            <ion-input #inputDrop type="text" formControlName="namedepmunicipio" placeholder="Departamento o municipio"
+              (ionFocus)="focusDropdownSearch(inputDrop)" (ionBlur)="blurDropdownSearch()"
+              (keyup)="searchDeptMun($event.target)"></ion-input>
+            <ion-input type="hidden" formControlName="idmunicipio"></ion-input>
+
+            <div class="group__filter" *ngIf="departmentsAndTowns">
+              <div class="filter__item" *ngFor="let depmun of departmentsAndTowns"
+                [attr.data-depmun-id]="depmun.idmunicipio" (click)="selectDeptMun($event.target)">
+                {{ depmun.nombreMunicipio }} - {{ depmun.nombreDepartamento }}
+              </div>
+            </div>
+          </ion-item>
+          <br>
+
+          <ng-container *ngIf="isAdult">
+            <h5>Datos adicionales</h5>
+
+            <ion-item *ngIf="isAdult">
+              <ion-icon name="mail" slot="start"></ion-icon>
+              <ion-input placeholder="Correo electrónico" formControlName="correo" type="email"
+                (ionChange)="verifyEmail($event.target)" debounce="1000" validate></ion-input>
+              <div class="loading_container">
+                <div class="loading__input"></div>
+                <ion-icon *ngIf="emailRegistered!=undefined" class="checking" [class.fail]="emailRegistered"
+                  [name]="emailRegistered?'close-circle-outline':'checkmark-circle-outline'" slot="end"></ion-icon>
+              </div>
+            </ion-item>
+
+            <ion-item>
+              <fa-icon icon="home"></fa-icon>
+              <ion-input placeholder="Dirección" type="text" formControlName="direccion"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <fa-icon icon="map-marker-alt"></fa-icon>
+              <ion-input placeholder="Bárrio o vereda" type="text" formControlName="barrio"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <fa-icon icon="hospital"></fa-icon>
+              <ion-input placeholder="Eps" type="text" formControlName="eps"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <fa-icon icon="ring"></fa-icon>
+              <ion-select placeholder="Estado civíl" formControlName="idestadosCivil">
+                <ion-select-option *ngFor="let typeStatus of this._globals.CIVILSTATUS"
+                  [value]="typeStatus.idestadosCivil">
+                  {{ typeStatus.nombre }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <fa-icon icon="hammer"></fa-icon>
+              <ion-input placeholder="Ocupación" type="text" formControlName="ocupacion"></ion-input>
+            </ion-item>
+          </ng-container>
+        </div>
+      </ion-list>
+
+      <ion-button shape="round" expand="block" type="submit"
+        [disabled]="!(!!avatarFile || !!coverpageFile || formEditBeneficiary.touched || !modified) || formEditBeneficiary.invalid">
+        <!-- ((formEditBeneficiary.untouched && modified) || formEditBeneficiary.invalid) && !avatarFile && !coverpageFile -->
+        Actualizar beneficiario
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

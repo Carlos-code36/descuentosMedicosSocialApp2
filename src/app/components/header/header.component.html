@@ -1,0 +1,48 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <!-- <ng-content select="ion-back-button"></ng-content> -->
+    <ion-button fill="clear" (click)="goToBack()" *ngIf="back">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+
+  <ng-content select=".searchbar"></ng-content>
+
+  <ion-buttons slot="end" class="ion-activatable ripple-parent" *ngIf="buttonsRight && !onlyBack">
+    <!-- Menu Icon -->
+    <ion-menu-button auto-hide="true"
+      *ngIf="showSearch == false && showFilterPage == false &&showSearchPage == false && showEdit == false && showSettings == false && showMenu">
+    </ion-menu-button>
+
+    <!-- Filter Icon -->
+    <fa-icon class="iconRight" slot="icon-only" icon="filter" *ngIf="showFilterPage == true" (click)="showFilter()"
+      [ngClass]="{'hideSearch':hideSearch}"></fa-icon>
+
+    <!-- Search Icon -->
+    <ion-icon class="iconRight" slot="icon-only" name="search" *ngIf="showSearch == true" (click)="showSearchBar()"
+      [ngClass]="{'hideSearch':hideSearch}"></ion-icon>
+
+    <!-- Search Icon New Page -->
+    <ion-icon class="iconRight" slot="icon-only" name="search" *ngIf="showSearchPage == true"
+      (click)="showSearchBar(true)" [ngClass]="{'hideSearch':hideSearch}"></ion-icon>
+
+    <!-- Edition Icon -->
+    <ion-icon class="iconRight" slot="icon-only" name="create-outline" *ngIf="showEdit == true" (click)="onEditEvent()">
+    </ion-icon>
+
+    <!-- Settings Icon -->
+    <ion-icon class="iconRight" slot="icon-only" name="build-outline" *ngIf="showSettings == true"
+      (click)="onSettingsEvent()"></ion-icon>
+
+    <!-- Ripple Button Component -->
+    <ion-ripple-effect></ion-ripple-effect>
+  </ion-buttons>
+
+  <ion-title class="ion-text-capitalize" [ngClass]="{'hideTitle': hideTitle || !showTitle}" *ngIf="!onlyBack"
+    [ngStyle]="{left: buttonsRight ? '-48px': '0px'}">
+    {{ title }}
+  </ion-title>
+</ion-toolbar>
+
+<ng-content>
+</ng-content>

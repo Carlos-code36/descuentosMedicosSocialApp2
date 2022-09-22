@@ -1,0 +1,111 @@
+<ion-header>
+  <app-header title="Búsqueda" [showTitle]="false" [showMenu]="false" [back]="true">
+    <div class="finder">
+      <ion-searchbar #inputSearch class="search__input" placeholder="Buscar servicios..." debounce="500"
+        showCancelButton="focus" spellcheck="true" enterkeyhint="search" animated="true" mode="ios"
+        (keyup)="changeValueSearch()" (ionCancel)="resetSearch()" (ionFocus)="focusSearch(true)"
+        (ionBlur)="focusSearch(false)" (ionClear)="focusSearch(false)">
+      </ion-searchbar>
+      <div class="box__history show" [class.show]="showBoxFinder && _globals.HISTORYSEARCH">
+        <span class="placeholder">Historial de Búsqueda
+          <fa-icon icon="trash" (click)="clearHistorySearch()"></fa-icon>
+        </span>
+        <li class="box__history__item ion-activatable" *ngFor="let item of _globals.HISTORYSEARCH"
+          (click)="changeValueSearch(item)">
+          {{ item }}
+          <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        </li>
+      </div>
+    </div>
+  </app-header>
+</ion-header>
+
+<ion-content>
+  <div class="filter__container" [class.visible]="showBoxFilter">
+    <span class="filter__title" (click)="showFilters()">
+      Filtrar&nbsp;
+      <fa-icon icon="filter"></fa-icon>
+    </span>
+    <div class="filter">
+      <div class="filter__departments vw-90">
+        <div class="input__filter">
+          <fa-icon icon="map-marked-alt"></fa-icon>
+          <ion-input #selectDepartment type="text" placeholder="Departamento o municipio"
+            (ionFocus)="focusDropdownSearch()" (ionBlur)="blurDropdownSearch()" (keyup)="searchDeptMun()"></ion-input>
+        </div>
+
+        <div class="group__filter" *ngIf="departmentsAndTowns">
+          <div class="filter__item" *ngFor="let depmun of departmentsAndTowns"
+            [attr.data-depmun-name]="depmun.nombreMunicipio + ' - ' + depmun.nombreDepartamento"
+            [attr.data-depmun-id]="depmun.idmunicipio" (click)="selectDeptMun($event.target)">
+            {{ depmun.nombreMunicipio }} - {{ depmun.nombreDepartamento }}
+          </div>
+        </div>
+      </div>
+
+      <div class="filter__checks">
+        <div class="filter__item">
+          <ion-checkbox class="check"></ion-checkbox>
+          <ion-label class="check__label">Servicios</ion-label>
+        </div>
+        <div class="filter__item">
+          <ion-checkbox class="check"></ion-checkbox>
+          <ion-label class="check__label">Médico</ion-label>
+        </div>
+
+        <div class="filter__item">
+          <ion-checkbox class="check"></ion-checkbox>
+          <ion-label class="check__label">Especialidad</ion-label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="founds__publications" *ngIf="filteredPublications">
+    <ng-container *ngFor="let publication of filteredPublications">
+      <div class="publication ion-activatable ripple-parent"
+        (click)="detailPublication($event, publication.idServicios)">
+        <div class="image__container">
+          <img [src]="publication.fotos[0].path | imageServices">
+        </div>
+        <div class="information__container">
+          <h5 class="title__publication">{{ publication.nombreServicio | uppercase }}</h5>
+          <div class="calification__publication">
+            <fa-icon icon="star"></fa-icon>
+            <fa-icon icon="star"></fa-icon>
+            <fa-icon icon="star"></fa-icon>
+            <fa-icon icon="star"></fa-icon>
+            <fa-icon icon="star"></fa-icon>
+          </div>
+          <h5>
+            <fa-icon class="tag__icon" icon="tag"></fa-icon> {{ publication.descuentoCita }}% descuento en citas
+          </h5>
+        </div>
+        <div class="specialty__publication">
+          <p><strong>Especialidad: </strong> {{ publication.nombreEspecialidad }}</p>
+        </div>
+        <div class="description__publication">
+          <p>{{ publication.descripcion | titlecase }}</p>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </ng-container>
+  </div>
+</ion-content>
+
+<!-- <ion-icon class="search__icon" name="filter" slot="end"></ion-icon> -->
+<!-- <div class="filter">
+    <div class="filter__item">
+      <ion-checkbox class="check"></ion-checkbox>
+      <ion-label class="check__label">Servicios</ion-label>
+    </div>
+    <div class="filter__item">
+      <ion-checkbox class="check"></ion-checkbox>
+      <ion-label class="check__label">Médico</ion-label>
+    </div>
+
+    <div class="filter__item">
+      <ion-checkbox class="check"></ion-checkbox>
+      <ion-label class="check__label">Especialidad</ion-label>
+    </div>
+  </div> -->

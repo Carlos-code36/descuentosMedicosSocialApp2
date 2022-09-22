@@ -1,0 +1,149 @@
+.container {
+    .list__cards {
+        margin-bottom: 90px;
+        margin: 12px;
+    }
+
+    .not__items {
+        text-align: center;
+        position: absolute;
+        font-size: 1.4em;
+        color: #fff;
+        padding: 0 8px;
+        width: 100%;
+        top: 10%;
+
+        img {
+            margin-bottom: 24px;
+            width: 180px;
+        }
+
+        span {
+            display: block;
+            width: 100%;
+            top: 290px;
+        }
+    }
+
+    ion-fab {
+        bottom: 15%;
+
+        img {
+            width: 36px;
+        }
+    }
+
+    // ion-slides {
+    //     overflow: visible;
+    //     height: 230px;
+    //     top: 24px;
+    // }
+
+    // .beneficiary_item {
+    //     // margin-right: 120px !important;
+    //     transition: height 0.2s ease-in-out;
+    //     box-shadow: 0px 5px 2px 0px rgb(0 0 0 / 25%);
+    //     // border: 2px solid #BCCEE1;
+    //     background: #263544;
+    //     border-radius: 15px;
+    //     width: 300px;
+
+    //     &.swiper-slide-prev,
+    //     &.swiper-slide-next {
+    //         height: 86% !important;
+    //         // top: 5% !important;
+    //     }
+
+    //     .profile {
+    //         place-items: center;
+    //         position: absolute;
+    //         // height: 310px;
+    //         top: 0;
+
+    //         img {
+    //             border-radius: 50%;
+    //             object-fit: cover;
+    //             margin-top: 12px;
+    //             height: 140px;
+    //             width: 140px;
+    //         }
+
+    //         .profile__names {
+    //             text-transform: uppercase;
+    //             font-weight: bold;
+    //             color: #bccee1;
+    //         }
+    //     }
+
+    // }
+
+    // .data_container {
+    //     background: #263544;
+    //     border-radius: 15px;
+    //     color: #BCCEE1;
+    //     margin: 48px 4vw;
+    //     padding: 32px;
+    //     width: 92vw;
+
+    //     .skeleton__container {
+    //         ion-thumbnail {
+    //             display: inline-flex;
+    //             height: 36px;
+    //             width: 12%;
+    //         }
+
+    //         ion-skeleton-text {
+    //             display: inline-block;
+    //             width: 86%;
+
+    //             &.skeleton__text {
+    //                 position: relative;
+    //                 height: 20px;
+    //                 top: 16px;
+    //             }
+    //         }
+    //     }
+
+    //     .item__info {
+    //         margin-bottom: 12px;
+    //     }
+
+    //     fa-icon {
+    //         font-size: 1.6em;
+    //         margin-right: 12px;
+    //     }
+    // }
+
+    // .group__beneficiary {
+    //     grid-template-columns: repeat(3, 1fr);
+    //     grid-gap: 18px;
+    //     display: grid;
+    //     padding: 8px;
+
+    //     .group__item {
+    //         padding: 8px;
+    //         display: grid;
+    //         color: #ffffff;
+    //         text-align: center;
+    //         border-radius: 5px;
+    //         background: #2AA5DC;
+    //         justify-items: center;
+    //         box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    //         .quantity {
+    //             position: absolute;
+    //         }
+
+    //         img {
+    //             max-width: 60px;
+    //         }
+    //     }
+    // }
+
+
+    // ion-button {
+    //     position: fixed;
+    //     z-index: 100;
+    //     width: 95%;
+    // }
+}

@@ -1,0 +1,53 @@
+* {
+    color: var(--text-color);
+}
+
+.modal__ {
+    &header {
+        position: absolute;
+        height: 48px;
+        width: 100%;
+
+        .title {
+            text-transform: uppercase;
+            position: absolute;
+            text-align: left;
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 16px;
+            width: 100%;
+            margin: 0;
+        }
+
+        .close {
+            position: absolute;
+            font-size: 1.2em;
+            right: 5px;
+            top: 5px;
+            z-index: 1000;
+        }
+    }
+
+    &body {
+        height: calc(100% - 48px);
+        position: absolute;
+        width: 100%;
+        top: 50px;
+
+        img {
+            transform: translateX(-50%);
+            position: relative;
+            margin: 24px 0 0;
+            width: 80%;
+            left: 50%;
+        }
+
+        span{
+            position: absolute;
+            bottom: 8px;
+            font-size: large;
+            font-weight: bold;
+            margin-left: 21px;
+        }
+    }
+}

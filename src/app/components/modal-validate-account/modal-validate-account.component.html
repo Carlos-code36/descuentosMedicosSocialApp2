@@ -1,0 +1,69 @@
+<div class="header">
+  <span>Validación {{ newAccount ? 'cuenta' : title }}</span>
+</div>
+
+<div class="message__container" [innerHTML]="message"></div>
+
+<div class="data__container">
+  <form [formGroup]="formValidation">
+    <ion-list>
+      <ion-item lines="none">
+        <!-- <div class="box__validation">
+          <input #inp_1 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+          <input #inp_2 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+          <input #inp_3 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+          <input #inp_4 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+          <input #inp_5 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+          <input #inp_6 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+          <input #inp_7 class="box__validation__item" type="number" placeholder="0" minlength="1" maxlength="1" size="1" (change)="setValidation($event)" >
+        </div> -->
+        <ion-label position="floating">
+          <fa-icon icon="hashtag"></fa-icon>
+          Código de validación
+        </ion-label>
+        <ion-input class="input" formControlName="validationCode" type="tel" maxlength="7">
+        </ion-input>
+      </ion-item>
+
+      <span class="resend" *ngIf="(newAccount || inactiveAccount) || typeValidation == 'correo'" (click)="resendCode('correo')">
+        Reenviar código a correo
+      </span>
+      <span class="resend" *ngIf="(newAccount || inactiveAccount) || typeValidation == 'telefono'" (click)="resendCode('telefono')">
+        Enviar código a telefono
+      </span>
+      <span class="resend" *ngIf="(newAccount || inactiveAccount) || typeValidation == 'whatsapp'" (click)="resendCode('whatsapp')">
+        Enviar código a whatsapp
+      </span>
+
+      <ng-container *ngIf="formValidation.get('validationCode').errors && formValidation.get('validationCode').touched">
+        <div tyle="display: flex;">
+          <p style="color: red; font-size: 13px;" class="ion-text-capitalize"
+            *ngIf="formValidation.get('validationCode').hasError('required')">* Este campo es requerido</p>
+          <p style="color: red; font-size: 13px;" class="ion-text-capitalize"
+            *ngIf="formValidation.get('validationCode').hasError('minlength')">Cantidad minima de caracteres (7)</p>
+        </div>
+      </ng-container>
+      <br>
+    </ion-list>
+  </form>
+</div>
+<div class="butttons__send">
+  <ion-button fill="clear" (click)="closeModal()">
+    Volver
+  </ion-button>
+  <ion-button fill="clear" (click)="confirm()" [disabled]="formValidation.invalid">
+    validar
+  </ion-button>
+</div>
+<!-- <div class="container">
+  <div class="modal__header">
+    <span class="modal__close" (click)="close()">X</span>
+    <span class="modal__title">Validación de cuenta</span>
+  </div>
+  <div class="modal__content">
+    <input type="text" placeholder="123456789">
+    <a href="javascript:void(0)">Reenviar código</a>
+  </div>
+  <div class="modal__footer">
+  </div>
+</div> -->

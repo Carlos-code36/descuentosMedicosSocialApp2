@@ -1,0 +1,15 @@
+.info__beneficiary {
+    position: absolute;
+    color: #ECF0F1;
+    margin-top: 16px;
+    left: 32px;
+
+    .item__info {
+        margin-bottom: 16px;
+    }
+
+    fa-icon {
+        font-size: 1.6em;
+        margin-right: 12px;
+    }
+}

@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border">
+  <app-header #headerTemplate [showMenu]="false" [buttonsRight]="false" title="Beneficiario">
+     
+  </app-header>
+</ion-header>
+
+<ion-content *ngIf="beneficiary">
+  <avatar-user [beneficiary]="beneficiary" [admin]="false"></avatar-user>
+  <div class="info__beneficiary">
+    <div class="item__info">
+      <fa-icon icon="birthday-cake"></fa-icon>
+      <ion-label>{{ beneficiary['fechaNacimiento'] | date }}</ion-label>
+    </div>
+    <div class="item__info">
+      <fa-icon icon="address-card"></fa-icon>
+      <ion-label>{{ getTypeDocumentString(beneficiary['idtipoDocumentos']) }}. {{ beneficiary['numeroDocumento'] }}
+      </ion-label>
+    </div>
+    <div class="item__info" *ngIf="beneficiary['direccion'] || beneficiary['barrio']">
+      <fa-icon icon="map-marker-alt"></fa-icon>
+      <ion-label>{{ beneficiary['direccion'] }}, {{ beneficiary['barrio'] }} </ion-label>
+    </div>
+    <div class="item__info">
+      <fa-icon icon="map-marked"></fa-icon>
+      <ion-label>{{ getDepartmentsAndTownsString(beneficiary['idmunicipio']) }} </ion-label>
+    </div>
+    <div class="item__info" *ngIf="beneficiary['ocupacion']">
+      <fa-icon icon="hammer"></fa-icon>
+      <ion-label>{{ beneficiary['ocupacion'] }} </ion-label>
+    </div>
+    <div class="item__info" *ngIf="beneficiary['eps']">
+      <fa-icon icon="briefcase-medical"></fa-icon>
+      <ion-label>{{ beneficiary['eps'] }} </ion-label>
+    </div>
+  </div>
+</ion-content>

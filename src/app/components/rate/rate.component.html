@@ -1,0 +1,5 @@
+<div class="qualify">
+  <ng-container *ngFor="let star of stars_fill; let i = index">
+    <img [src]="star ? 'assets/icon/star_fill.svg' : 'assets/icon/star_outline.svg'" class="rate" icon="star" (click)="setRate(i+1)" />
+  </ng-container>
+</div>

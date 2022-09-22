@@ -1,0 +1,76 @@
+<ion-header class="ion-no-border">
+    <app-header [showFilterPage]="true" (onFilter)="showFilters()" title="Historial Citas"></app-header>
+</ion-header>
+
+<ion-content>
+    <div #filters class="simple__filter">
+        <div class="background__blur"></div>
+        <div class="filter">
+            <span class="filter__title">Filtrar historial</span>
+            <div class="filter__item">
+                <ion-label class="item__label">Exitosas</ion-label>
+                <ion-checkbox slot="end" [(ngModel)]="filterSuccessfully"></ion-checkbox>
+            </div>
+            <div class="filter__item">
+                <ion-label class="item__label">Canceladas</ion-label>
+                <ion-checkbox slot="end" [(ngModel)]="filterCanceled"></ion-checkbox>
+            </div>
+            <div class="filter__item">
+                <ion-label class="item__label">Sín asistencia</ion-label>
+                <ion-checkbox slot="end" [(ngModel)]="filterNoAttend"></ion-checkbox>
+            </div>
+
+            <ion-button class="btn" expand="full" (click)="applyFilters()">Aplicar</ion-button>
+        </div>
+    </div>
+
+    <div class="no__data" *ngIf="appoinmentsHistory?.length == 0">
+        <span>No tienes citas </span>
+    </div>
+
+    <div class="appointments__cards" *ngIf="appoinmentsHistory">
+
+        <ng-container *ngFor="let item of appoinmentsHistory">
+            <div class="appoinment__box ion-activatable ripple-parent">
+                <div class="appoinment__data">
+                    <span class="text name name__user" *ngIf="!isPet"  >{{ item['nombres'] | titlecase }} {{ item['apellidos'] | titlecase }}</span>
+                    <span class="text name name__user" *ngIf="isPet"  >{{ item['nombreMascota'] | titlecase }} {{ item['apellidosMascota'] | titlecase }}</span>
+                    <br><br><br>
+                    <span class="text name name__service">{{ item['nombreSubservicio'] | titlecase }}</span><br>
+                    <span class="date__long" *ngIf="item['fecha']">{{ item['fecha'] | date:'fullDate' }}</span>
+                    <span class="date__long" *ngIf="item['fechaCita']">{{ item['fechaCita'] | date:'fullDate' }}</span>
+                </div>
+
+                <div class="time__data">
+                    <ion-icon name="time-outline"></ion-icon>
+                    <h3 class="text time" *ngIf="item['hora']">{{ item['hora'].getNormalHour() | uppercase}}</h3>
+                    <h3 class="text time" *ngIf="item['horaCita']">{{ item['horaCita'].getNormalHour() | uppercase}}
+                    </h3>
+                </div>
+
+                <div class="appoinment__data">
+                    <span class="text name name__branch">{{ item['nombreSucursal'] |titlecase}}</span><br>
+                    <span class="text">Doc. {{ item['nombresMedico'] | titlecase }} {{ item['apellidosMedico'] |
+                        titlecase }}</span><br>
+                    <span class="text">
+                        {{ item['direccionSucursal'] }} {{ item['barrioSucursal'] ? ', '+item['barrioSucursal'] : '' }}
+                    </span><br>
+                    <span class="text">
+                        Tels: {{ item['telefonoSucursal'] || 'No registra' }}{{ item['celularSucursal'] ? " - " +
+                        item?.celularSucursal : '' }}
+                    </span>
+                </div>
+
+                <div class="appoinment__footer">
+                    <span>{{ item['motivo'] || 'Cita exitosa' }}</span>
+                    <individual-rate *ngIf="item.calificada == 1" [score]="item.calificacion"></individual-rate>
+                    <a class="quality" (click)="rateAppointment(item)" [ngClass]="{disable: item['cancelada'] != 0}" *ngIf="item.calificada == 0 && !isPet">
+                        calificar
+                        <fa-icon icon="star-half-alt"></fa-icon>
+                    </a>
+                </div>
+                <ion-ripple-effect></ion-ripple-effect>
+            </div>
+        </ng-container>
+    </div>
+</ion-content>
